@@ -1,10 +1,14 @@
 'use strict';
 
 var React = require('react/addons');
-var ReactTransitionGroup = React.addons.TransitionGroup;
+var Router = require('react-router');
+var Auth = require('../helpers/Auth');
 
-// Export React so the devtools can find it
-(window !== window.top ? window.top : window).React = React;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+var Link = Router.Link;
+
+var MainNav = require('./MainNav');
 
 // CSS
 require('../../styles/normalize.css');
@@ -12,10 +16,17 @@ require('../../styles/bootstrap.min.css');
 require('../../styles/bootstrap-theme.min.css');
 require('../../styles/main.css');
 
+
+
 var KeeperApp = React.createClass({
     render: function() {
         return (
-            <div className='main'></div>
+            <div id="AppMain" ref="AppMain">
+                <MainNav />
+                <div className="container-fluid">
+                    <RouteHandler />
+                </div>
+            </div>
         );
     }
 });

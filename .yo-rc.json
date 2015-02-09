@@ -1,5 +1,5 @@
 {
   "generator-react-webpack": {
-    "styles-language": "sass"
+    "styles-language": "css"
   }
 }
