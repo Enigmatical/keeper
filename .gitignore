@@ -34,3 +34,6 @@ dist
 .idea
 /npm-debug.log
 /keeper.iml
+/src/config.codekit
+/src/styles/.sass-cache
+/src/.codekit-cache
