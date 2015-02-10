@@ -1,6 +1,8 @@
 var Firebase = require("firebase");
 var Q = require("q");
 
+var UserModel = require('../models/UserModel');
+
 
 
 var Auth = {
@@ -13,6 +15,8 @@ var Auth = {
             }
         }
     },
+
+    User: null,
 
     getRef: function() {
         return new Firebase("https://flickering-fire-7815.firebaseio.com");
@@ -68,15 +72,20 @@ var Auth = {
     },
 
     onAuth: function(authData) {
-        var ref = new Firebase("https://flickering-fire-7815.firebaseio.com");
-        ref.child("users").child(authData.uid).set({
-            uid: authData.uid,
-            name: authData.facebook.displayName,
-            provider: authData.provider
-        });
+        if (authData) {
+            var User = new UserModel();
+            User.id = authData.uid;
+            User.props.name = authData.facebook.displayName;
+            User.props.provider = authData.provider;
+
+            User.set();
+            Auth.User = User;
+        }
     },
 
     onChange: function() {}
 };
+
+Auth.getRef().onAuth(Auth.onAuth); //Not a fan of this, could do a better job tying to Firebase.onAuth event, need something to set Auth.User
 
 module.exports = Auth;
