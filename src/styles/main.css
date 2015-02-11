@@ -2,3 +2,7 @@
   float: none;
   margin-left: auto;
   margin-right: auto; }
+
+.modal-backdrop {
+  height: 100%;
+  z-index: 1000; }
