@@ -1,3 +1,5 @@
+'use strict';
+
 var Firebase = require("firebase");
 var Q = require("q");
 
@@ -73,10 +75,11 @@ var Auth = {
 
     onAuth: function(authData) {
         if (authData) {
-            var User = new UserModel();
+            var User = new UserModel().create({
+                name: authData.facebook.displayName,
+                provider: authData.provider
+            });
             User.id = authData.uid;
-            User.props.name = authData.facebook.displayName;
-            User.props.provider = authData.provider;
 
             User.set();
             Auth.User = User;
