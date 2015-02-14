@@ -2,6 +2,7 @@
 
 var React = require('react/addons');
 var Router = require('react-router');
+
 var Auth = require('../helpers/Auth');
 
 var CampaignModel = require('../models/CampaignModel');
@@ -10,11 +11,9 @@ var CampaignBreadcrumb = require('./CampaignBreadcrumb');
 var ActFormModal = require('./ActFormModal');
 var ActCard = require('./ActCard');
 
-require('../../styles/ManageCampaignPage.css');
 
 
-
-var ManageCampaignPage = React.createClass({
+var ActManagePage = React.createClass({
     mixins: [Auth, Router.State],
 
     getInitialState: function() {
@@ -80,6 +79,6 @@ var ManageCampaignPage = React.createClass({
     }
 });
 
-module.exports = ManageCampaignPage;
+module.exports = ActManagePage;
 
 

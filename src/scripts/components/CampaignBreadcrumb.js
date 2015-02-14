@@ -14,12 +14,12 @@ var CampaignBreadcrumb = React.createClass({
             trail = <li className="active">{this.props.campaign.attrs.title}</li>;
         }
         else {
-            trail = <MenuItemLink to="campaign" params={{campaignId: this.props.campaign.id}}>{this.props.campaign.attrs.title}</MenuItemLink>
+            trail = <MenuItemLink to="manage-acts" params={{campaignId: this.props.campaign.id}}>{this.props.campaign.attrs.title}</MenuItemLink>
         }
 
         return (
             <ol className="breadcrumb">
-                <MenuItemLink to="campaigns">Campaigns</MenuItemLink>
+                <MenuItemLink to="manage-campaigns">Campaigns</MenuItemLink>
                 {trail}
             </ol>
             );
