@@ -35,7 +35,7 @@ var CampaignCard = React.createClass({
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
                         <Button bsStyle="success" bsSize="small"><Glyphicon glyph="play" /> Run</Button>
-                        <ButtonLink bsStyle="primary" bsSize="small" to="campaign" params={{campaignId: this.props.campaign.id, campaign: this.props.campaign}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-acts" params={{campaignId: this.props.campaign.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <CampaignFormModal campaign={this.props.campaign} editMode={true} onUpdate={this.props.onUpdate} />

@@ -1,15 +1,16 @@
 'use strict';
 
 var React = require('react/addons');
+
 var Auth = require('../helpers/Auth');
+
 var CampaignFormModal = require('./CampaignFormModal');
+
 var CampaignCard = require('./CampaignCard');
 
-require('../../styles/CampaignsPage.css');
 
 
-
-var CampaignsPage = React.createClass({
+var CampaignManagePage = React.createClass({
     mixins: [Auth],
 
     getInitialState: function() {
@@ -57,6 +58,6 @@ var CampaignsPage = React.createClass({
     }
 });
 
-module.exports = CampaignsPage;
+module.exports = CampaignManagePage;
 
 

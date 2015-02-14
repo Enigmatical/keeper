@@ -37,7 +37,7 @@ var ActCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <ButtonLink bsStyle="primary" bsSize="small" to="act" params={{campaignId: this.props.campaign.id, actId: this.props.act.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-quests" params={{campaignId: this.props.campaign.id, actId: this.props.act.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <ActFormModal campaign={this.props.campaign} act={this.props.act} editMode={true} onUpdate={this.props.onUpdate} />
