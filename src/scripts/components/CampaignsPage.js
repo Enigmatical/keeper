@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var Auth = require('../helpers/Auth');
-var AddCampaignModal = require('./AddCampaignModal');
+var CampaignFormModal = require('./CampaignFormModal');
 var CampaignCard = require('./CampaignCard');
 
 require('../../styles/CampaignsPage.css');
@@ -39,7 +39,7 @@ var CampaignsPage = React.createClass({
                     <div className="col-md-12">
                         <h1 className="page-header">
                             Campaigns
-                            <AddCampaignModal className="pull-right" editMode={false} onUpdate={self.getCampaigns} />
+                            <CampaignFormModal className="pull-right" editMode={false} onUpdate={self.getCampaigns} />
                         </h1>
                     </div>
                 </div>

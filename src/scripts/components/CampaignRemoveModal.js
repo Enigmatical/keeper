@@ -8,11 +8,9 @@ var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-require('../../styles/RemoveCampaignModal.css');
 
 
-
-var RemoveCampaignModal = React.createClass({
+var CampaignRemoveModal = React.createClass({
     mixins: [OverlayMixin],
 
     getInitialState: function() {
@@ -80,6 +78,6 @@ var RemoveCampaignModal = React.createClass({
     }
 });
 
-module.exports = RemoveCampaignModal;
+module.exports = CampaignRemoveModal;
 
 

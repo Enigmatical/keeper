@@ -1,8 +1,10 @@
 'use strict';
 
 var React = require('react/addons');
-var Auth = require('../helpers/Auth');
 var _ = require('lodash');
+
+var Auth = require('../helpers/Auth');
+var CampaignModel = require('../models/CampaignModel');
 
 var OverlayMixin = require('react-bootstrap').OverlayMixin;
 var Modal = require('react-bootstrap').Modal;
@@ -10,13 +12,10 @@ var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 var Input = require('react-bootstrap').Input;
 
-var CampaignModel = require('../models/CampaignModel');
-
-require('../../styles/AddCampaignModal.css');
 
 
 
-var AddCampaignModal = React.createClass({
+var CampaignFormModal = React.createClass({
     mixins: [OverlayMixin],
 
     getInitialState: function() {
@@ -106,6 +105,6 @@ var AddCampaignModal = React.createClass({
     }
 });
 
-module.exports = AddCampaignModal;
+module.exports = CampaignFormModal;
 
 

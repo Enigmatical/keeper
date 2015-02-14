@@ -10,8 +10,8 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var AddCampaignModal = require('./AddCampaignModal');
-var RemoveCampaignModal = require('./RemoveCampaignModal');
+var CampaignFormModal = require('./CampaignFormModal');
+var CampaignRemoveModal = require('./CampaignRemoveModal');
 
 require('../../styles/ItemCard.css');
 
@@ -38,8 +38,8 @@ var CampaignCard = React.createClass({
                         <ButtonLink bsStyle="primary" bsSize="small" to="campaign" params={{campaignId: this.props.campaign.id, campaign: this.props.campaign}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <AddCampaignModal campaign={this.props.campaign} editMode={true} onUpdate={this.props.onUpdate} />
-                        <RemoveCampaignModal campaign={this.props.campaign} onUpdate={this.props.onUpdate} />
+                        <CampaignFormModal campaign={this.props.campaign} editMode={true} onUpdate={this.props.onUpdate} />
+                        <CampaignRemoveModal campaign={this.props.campaign} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

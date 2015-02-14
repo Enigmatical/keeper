@@ -1,8 +1,10 @@
 'use strict';
 
 var React = require('react/addons');
-var Auth = require('../helpers/Auth');
 var _ = require('lodash');
+
+var Auth = require('../helpers/Auth');
+var ActModel = require('../models/ActModel');
 
 var OverlayMixin = require('react-bootstrap').OverlayMixin;
 var Modal = require('react-bootstrap').Modal;
@@ -10,13 +12,9 @@ var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 var Input = require('react-bootstrap').Input;
 
-var ActModel = require('../models/ActModel');
-
-require('../../styles/AddActModal.css');
 
 
-
-var AddActModal = React.createClass({
+var ActFormModal = React.createClass({
     mixins: [OverlayMixin],
 
     getInitialState: function() {
@@ -107,4 +105,4 @@ var AddActModal = React.createClass({
     }
 });
 
-module.exports = AddActModal;
+module.exports = ActFormModal;
