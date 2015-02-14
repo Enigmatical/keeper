@@ -7,7 +7,7 @@ var Auth = require('../helpers/Auth');
 var CampaignModel = require('../models/CampaignModel');
 
 var CampaignBreadcrumb = require('./CampaignBreadcrumb');
-var AddActModal = require('./AddActModal');
+var ActFormModal = require('./ActFormModal');
 var ActCard = require('./ActCard');
 
 require('../../styles/ManageCampaignPage.css');
@@ -56,7 +56,7 @@ var ManageCampaignPage = React.createClass({
                         <div className="col-md-12">
                             <h1 className="page-header">
                                 {self.state.campaign.attrs.title} <small>{self.state.campaign.attrs.subtitle}</small>
-                                <AddActModal className="pull-right" editMode={false} campaign={self.state.campaign} onUpdate={self.getActs} />
+                                <ActFormModal className="pull-right" editMode={false} campaign={self.state.campaign} onUpdate={self.getActs} />
                             </h1>
                         </div>
                     </div>

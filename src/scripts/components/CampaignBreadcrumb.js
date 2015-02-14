@@ -19,6 +19,7 @@ var CampaignBreadcrumb = React.createClass({
 
         return (
             <ol className="breadcrumb">
+                <MenuItemLink to="campaigns">Campaigns</MenuItemLink>
                 {trail}
             </ol>
             );
