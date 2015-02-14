@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
+
 require('../../styles/BestiaryPage.css');
 
 

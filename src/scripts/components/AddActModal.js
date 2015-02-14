@@ -10,13 +10,13 @@ var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 var Input = require('react-bootstrap').Input;
 
-var CampaignModel = require('../models/CampaignModel');
+var ActModel = require('../models/ActModel');
 
-require('../../styles/AddCampaignModal.css');
+require('../../styles/AddActModal.css');
 
 
 
-var AddCampaignModal = React.createClass({
+var AddActModal = React.createClass({
     mixins: [OverlayMixin],
 
     getInitialState: function() {
@@ -36,16 +36,16 @@ var AddCampaignModal = React.createClass({
             var name = input.getAttribute('name');
             data[name] = input.value;
         });
-        data.user_id = Auth.User.id;
+        data.campaign_id = this.props.campaign.id;
 
-        var campaign = new CampaignModel();
+        var act = new ActModel();
 
         /* [EDIT MODE] */
-        if (this.props.editMode && _.isObject(this.props.campaign)) {
-            campaign.id = this.props.campaign.id;
+        if (this.props.editMode && _.isObject(this.props.act)) {
+            act.id = this.props.act.id;
         }
 
-        campaign.create(data).save();
+        act.create(data).save();
 
         if (_.isFunction(this.props.onUpdate)) {
             this.props.onUpdate();
@@ -61,7 +61,7 @@ var AddCampaignModal = React.createClass({
     },
 
     render: function () {
-        var button = (<Button bsStyle="success" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="plus" /> Add Campaign</Button>);
+        var button = (<Button bsStyle="success" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="plus" /> Add Act</Button>);
 
         /* [EDIT MODE] */
         if (this.props.editMode) {
@@ -74,12 +74,12 @@ var AddCampaignModal = React.createClass({
     },
 
     renderOverlay: function() {
-        var modal_title = 'Add Campaign';
+        var modal_title = 'Add Act';
         var modal_button = (<Button bsStyle="success" type="submit">Save</Button>);
 
         /* [EDIT MODE] */
         if (this.props.editMode) {
-            modal_title = 'Edit Campaign';
+            modal_title = 'Edit Act';
             modal_button = (<Button bsStyle="info" type="submit">Edit</Button>);
         }
 
@@ -91,10 +91,11 @@ var AddCampaignModal = React.createClass({
             <Modal title={modal_title} onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
-                        <Input type="text" name="title" className="input" placeholder="Title" defaultValue={_.isObject(this.props.campaign) ? this.props.campaign.attrs.title : ''} />
-                        <Input type="text" name="subtitle" className="input" placeholder="Sub-Title (Optional)" defaultValue={_.isObject(this.props.campaign) ? this.props.campaign.attrs.subtitle : ''} />
-                        <Input type="textarea" rows="5" name="summary" className="input" placeholder="Summary" defaultValue={_.isObject(this.props.campaign) ? this.props.campaign.attrs.summary : ''} />
-                        <Input type="text" name="order" className="input" placeholder="Sort Order" defaultValue={_.isObject(this.props.campaign) ? this.props.campaign.attrs.order : ''} />
+                        <Input type="text" name="title" className="input" placeholder="Title" defaultValue={_.isObject(this.props.act) ? this.props.act.attrs.title : ''} />
+                        <Input type="text" name="category" className="input" placeholder="Category" defaultValue={_.isObject(this.props.act) ? this.props.act.attrs.category : ''} />
+                        <Input type="textarea" rows="5" name="story" className="input" placeholder="Story" defaultValue={_.isObject(this.props.act) ? this.props.act.attrs.story : ''} />
+                        <Input type="textarea" rows="5" name="goal" className="input" placeholder="Goal" defaultValue={_.isObject(this.props.act) ? this.props.act.attrs.goal : ''} />
+                        <Input type="text" name="order" className="input" placeholder="Sort Order" defaultValue={_.isObject(this.props.act) ? this.props.act.attrs.order : ''} />
                     </div>
                     <div className="modal-footer">
                         {modal_button}
@@ -106,6 +107,4 @@ var AddCampaignModal = React.createClass({
     }
 });
 
-module.exports = AddCampaignModal;
-
-
+module.exports = AddActModal;

@@ -1,0 +1,27 @@
+.item-card {
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  margin-bottom: 15px; }
+  .item-card .card-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #EEE;
+    background: #F5F5F5; }
+    .item-card .card-header p {
+      font-size: 16px;
+      line-height: 1.1;
+      font-weight: 500;
+      margin-bottom: 0; }
+  .item-card .card-body {
+    padding: 10px 15px; }
+    .item-card .card-body .body-header {
+      font-size: 12px;
+      font-weight: 700;
+      color: #959595;
+      letter-spacing: 1px; }
+    .item-card .card-body .body-content {
+      max-height: 59.976px;
+      overflow: hidden; }
+  .item-card .card-footer {
+    padding: 10px 15px;
+    border-top: 1px solid #EEE;
+    overflow: hidden; }

@@ -7,7 +7,8 @@ var Q = require('q');
 
 function BaseModel(args) {
     this.id = null;
-    this.fb_ref = this.connect(args[0]);
+
+    this.fb_ref = this.connect(args);
 }
 
 BaseModel.prototype.connect = function(ref) {
@@ -30,40 +31,60 @@ BaseModel.prototype.info = function() {
 
 BaseModel.prototype.save = function() {
     var self = this;
+    var deferred = Q.defer();
 
     if (self.id) {
-        this.set();
+        self.set(deferred);
     }
     else {
-        this.push();
+        self.push(deferred);
     }
 
-    return self;
+    return deferred.promise;
 };
 
-BaseModel.prototype.set = function() {
+BaseModel.prototype.set = function(deferred) {
+    if (deferred === undefined) {
+        deferred = Q.defer();
+    }
+
     var self = this;
     if (self.id) {
         self.fb_ref.child(self.id).set(self.attrs, function(error) {
             if (error) {
                 console.error('[Firebase] Write Failed: ' + error);
+                deferred.reject(error);
+            }
+            else {
+                deferred.resolve(self);
             }
         });
     } else {
         console.error('[Firebase] set() called with null this.id');
+        deferred.reject();
     }
+
+    return deferred.promise;
 };
 
-BaseModel.prototype.push = function() {
+BaseModel.prototype.push = function(deferred) {
+    if (deferred === undefined) {
+        deferred = Q.defer();
+    }
+
     var self = this;
     var new_fb_ref = self.fb_ref.push(self.attrs, function(error) {
         if (error) {
             console.error('[Firebase] Write Failed: ' + error);
+            deferred.reject(error);
         }
         else {
             self.id = new_fb_ref.key();
+            deferred.resolve(self);
         }
     });
+
+    return deferred.promise;
 };
 
 BaseModel.prototype.get = function(id) {
@@ -74,9 +95,9 @@ BaseModel.prototype.get = function(id) {
         var deferred = Q.defer();
 
         self.fb_ref.child(id).once('value', function(snapshot) {
-            return deferred.resolve(snapshot);
+            deferred.resolve(snapshot);
         }, function(errorObj) {
-            return deferred.reject(errorObj);
+            deferred.reject(errorObj);
         });
 
         return deferred.promise;
@@ -90,13 +111,81 @@ BaseModel.prototype.get = function(id) {
                 self.attrs = data;
             }
 
-            return deferred.resolve(self);
+            deferred.resolve(self);
         }, function(errorObj) {
             console.error('[Firebase] Read Failed: ' + errorObj.code);
-            return deferred.reject();
+            deferred.reject();
         });
 
     return deferred.promise;
+};
+
+BaseModel.prototype.getRelated = function(RelatedModel, link_key, sort_key) {
+    var deferred = Q.defer();
+
+    var self = this;
+
+    new RelatedModel().fb_ref
+        .orderByChild(link_key)
+        .equalTo(self.id)
+        .once('value', function(snapshot) {
+            if (snapshot !== null) {
+                var records = [];
+                snapshot.forEach(function(child) {
+                    var record = new RelatedModel().create(child.val());
+                    record.id = child.key();
+                    records.push(record);
+                });
+                self.sortModels(records, sort_key);
+                deferred.resolve(records);
+            }
+            else {
+                deferred.reject();
+            }
+        });
+
+    return deferred.promise;
+};
+
+BaseModel.prototype.remove = function() {
+    var self = this;
+    var deferred = Q.defer();
+
+    self.fb_ref.child(self.id).remove(function(error) {
+        if (error) {
+            console.error('[Firebase] Remove Failed: ' + error);
+            deferred.reject();
+        }
+        else {
+            deferred.resolve();
+        }
+    });
+
+    return deferred.promise;
+};
+
+BaseModel.prototype.sortModels = function(array, key) {
+    var compare = function(a, b) {
+        var a_val = a.attrs[key];
+        var b_val = b.attrs[key];
+
+        if (_.isNumber(parseInt(a_val)) && _.isNumber(parseInt(b_val))) {
+            a_val = parseInt(a_val);
+            b_val = parseInt(b_val);
+        }
+
+        if (a_val < b_val) {
+            return -1;
+        }
+        if (a_val > b_val) {
+            return 1;
+        }
+        return 0;
+    };
+
+    array = array.sort(compare);
+
+    return array;
 };
 
 module.exports = BaseModel;
