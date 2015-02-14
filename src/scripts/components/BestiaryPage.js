@@ -2,8 +2,6 @@
 
 var React = require('react/addons');
 
-require('../../styles/BestiaryPage.css');
-
 
 
 var BestiaryPage = React.createClass({
