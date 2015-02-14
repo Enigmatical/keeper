@@ -10,10 +10,13 @@ var Link = Router.Link;
 
 var MainNav = require('./MainNav');
 
-// CSS
-require('../../styles/normalize.css');
-require('../../styles/bootstrap.min.css');
-require('../../styles/bootstrap-theme.min.css');
+/* CSS */
+// Bootstrap
+require('../../styles/vendor/normalize.css');
+require('../../styles/vendor/bootstrap.min.css');
+require('../../styles/vendor/bootstrap-theme.min.css');
+
+// Main
 require('../../styles/main.css');
 
 
