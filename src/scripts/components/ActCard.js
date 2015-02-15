@@ -40,7 +40,7 @@ var ActCard = React.createClass({
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-quests" params={{campaignId: this.props.campaign.id, actId: this.props.act.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <ActFormModal campaign={this.props.campaign} act={this.props.act} editMode={true} onUpdate={this.props.onUpdate} />
+                        <ActFormModal campaign={this.props.campaign} act={this.props.act} editId={this.props.act.id} onUpdate={this.props.onUpdate} />
                         <ActRemoveModal act={this.props.act} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

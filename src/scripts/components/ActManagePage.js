@@ -55,7 +55,7 @@ var ActManagePage = React.createClass({
                         <div className="col-md-12">
                             <h1 className="page-header">
                                 {self.state.campaign.attrs.title} <small>{self.state.campaign.attrs.subtitle}</small>
-                                <ActFormModal className="pull-right" editMode={false} campaign={self.state.campaign} onUpdate={self.getActs} />
+                                <ActFormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getActs} />
                             </h1>
                         </div>
                     </div>
