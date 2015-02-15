@@ -35,7 +35,7 @@ var CampaignManagePage = React.createClass({
         var self = this;
 
         return (
-            <div id="campaigns-page" className="page-content">
+            <div id="campaign-manage-page" className="page-content">
                 <div className="row">
                     <div className="col-md-12">
                         <h1 className="page-header">

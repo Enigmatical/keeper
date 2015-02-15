@@ -10,23 +10,23 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var ActFormModal = require('./ActFormModal');
-var ActRemoveModal = require('./ActRemoveModal');
+var QuestFormModal = require('./QuestFormModal');
+var QuestRemoveModal = require('./QuestRemoveModal');
 
 require('../../styles/ItemCard.css');
 
 
 
-var ActCard = React.createClass({
+var QuestCard = React.createClass({
     render: function () {
-        var story = Markdown.toHTML(this.props.act.attrs.story);
-        var goal = Markdown.toHTML(this.props.act.attrs.goal);
+        var story = Markdown.toHTML(this.props.quest.attrs.story);
+        var goal = Markdown.toHTML(this.props.quest.attrs.goal);
 
         return (
             <div className="item-card act-card">
                 <div className="card-header">
                     <p>
-                        {this.props.act.attrs.title}&nbsp;&nbsp;<small className="text-muted">{this.props.act.attrs.category}</small>
+                        {this.props.quest.attrs.title}
                     </p>
                 </div>
                 <div className="card-body">
@@ -37,11 +37,11 @@ var ActCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-quests" params={{campaignId: this.props.campaign.id, actId: this.props.act.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-tasks" params={{campaignId: this.props.campaign.id, actId: this.props.act.id, questId:this.props.quest.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <ActFormModal campaign={this.props.campaign} act={this.props.act} onUpdate={this.props.onUpdate} />
-                        <ActRemoveModal act={this.props.act} onUpdate={this.props.onUpdate} />
+                        <QuestFormModal act={this.props.act} quest={this.props.quest} onUpdate={this.props.onUpdate} />
+                        <QuestRemoveModal quest={this.props.quest} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>
@@ -49,6 +49,6 @@ var ActCard = React.createClass({
     }
 });
 
-module.exports = ActCard;
+module.exports = QuestCard;
 
 

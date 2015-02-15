@@ -1,10 +1,8 @@
 'use strict';
 
-var Q = require('q');
-var _ = require('lodash');
-
 var BaseModel = require('../models/BaseModel');
 var ActModel = require('../models/ActModel');
+
 
 
 function CampaignModel() {

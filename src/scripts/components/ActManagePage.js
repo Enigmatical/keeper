@@ -26,8 +26,9 @@ var ActManagePage = React.createClass({
     componentWillMount: function() {
         var self = this;
 
-        var campaign_id = self.getParams().campaignId;
-        new CampaignModel().get(campaign_id)
+        var campaignId = self.getParams().campaignId;
+
+        new CampaignModel().get(campaignId)
             .then(function(campaign) {
                 self.setState({campaign: campaign});
                 self.getActs();
@@ -49,12 +50,12 @@ var ActManagePage = React.createClass({
 
         if (_.isObject(self.state.campaign)) {
             return (
-                <div id="campaign-page" className="page-content">
+                <div id="act-manage-page" className="page-content">
                     <CampaignBreadcrumb campaign={this.state.campaign} />
                     <div className="row">
                         <div className="col-md-12">
                             <h1 className="page-header">
-                                {self.state.campaign.attrs.title} <small>{self.state.campaign.attrs.subtitle}</small>
+                                {self.state.campaign.attrs.title}&nbsp;&nbsp;<small>{self.state.campaign.attrs.subtitle}</small>
                                 <ActFormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getActs} />
                             </h1>
                         </div>
@@ -73,7 +74,7 @@ var ActManagePage = React.createClass({
         }
         else {
             return (
-                <div id="campaign-page" className="page-content"></div>
+                <div id="act-manage-page" className="page-content"></div>
                 );
         }
     }
