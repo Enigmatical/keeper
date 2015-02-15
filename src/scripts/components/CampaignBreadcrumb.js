@@ -9,18 +9,33 @@ var MenuItemLink = require('react-router-bootstrap').MenuItemLink;
 
 var CampaignBreadcrumb = React.createClass({
     render: function () {
-        var trail;
+        var campaignCrumb,
+            actCrumb,
+            questCrumb = <span />;
+
+        // Campaign
         if (_.isObject(this.props.campaign) && !_.isObject(this.props.act)) {
-            trail = <li className="active">{this.props.campaign.attrs.title}</li>;
+            campaignCrumb = <li className="active">{this.props.campaign.attrs.title}</li>;
         }
-        else {
-            trail = <MenuItemLink to="manage-acts" params={{campaignId: this.props.campaign.id}}>{this.props.campaign.attrs.title}</MenuItemLink>
+        else  {
+            campaignCrumb = <MenuItemLink to="manage-acts" params={{campaignId: this.props.campaign.id}}>{this.props.campaign.attrs.title}</MenuItemLink>
+
+            // Act
+            if (_.isObject(this.props.act) && !_.isObject(this.props.quest)) {
+                actCrumb = <li className="active">{this.props.act.attrs.title}</li>;
+            }
+            else {
+                actCrumb = <MenuItemLink to="manage-quests" params={{campaignId: this.props.campaign.id, actId: this.props.act.id}}>{this.props.act.attrs.title}</MenuItemLink>
+            }
         }
+
 
         return (
             <ol className="breadcrumb">
                 <MenuItemLink to="manage-campaigns">Campaigns</MenuItemLink>
-                {trail}
+                {campaignCrumb}
+                {actCrumb}
+                {questCrumb}
             </ol>
             );
     }

@@ -86,7 +86,7 @@ var ModelFormModal = React.createClass({
         }
 
         return (
-            <Modal title={modalTitle} onRequestHide={this.handleToggle} large>
+            <Modal title={modalTitle} bsSize="large" onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
                         {this.props.inputs}
