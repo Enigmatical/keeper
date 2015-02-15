@@ -40,7 +40,7 @@ var CampaignManagePage = React.createClass({
                     <div className="col-md-12">
                         <h1 className="page-header">
                             Campaigns
-                            <CampaignFormModal className="pull-right" editMode={false} onUpdate={self.getCampaigns} />
+                            <CampaignFormModal className="pull-right" onUpdate={self.getCampaigns} />
                         </h1>
                     </div>
                 </div>

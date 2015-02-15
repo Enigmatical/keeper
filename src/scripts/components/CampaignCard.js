@@ -38,7 +38,7 @@ var CampaignCard = React.createClass({
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-acts" params={{campaignId: this.props.campaign.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <CampaignFormModal campaign={this.props.campaign} editMode={true} onUpdate={this.props.onUpdate} />
+                        <CampaignFormModal campaign={this.props.campaign} onUpdate={this.props.onUpdate} />
                         <CampaignRemoveModal campaign={this.props.campaign} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
