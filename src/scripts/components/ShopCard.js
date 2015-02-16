@@ -1,16 +1,15 @@
 'use strict';
 
 var React = require('react/addons');
-var Markdown = require('markdown').markdown;
 
-var MenuItem = require('react-bootstrap').MenuItem;
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var ShopFormModal = require('./ShopFormModal');
-var ShopRemoveModal = require('./ShopRemoveModal');
+var FormModal = require('./ShopFormModal');
+var RemoveModal = require('./ShopRemoveModal');
+var AttrBlock = require('./ModelAttrBlock');
 
 require('../../styles/ItemCard.css');
 
@@ -18,32 +17,31 @@ require('../../styles/ItemCard.css');
 
 var ShopCard = React.createClass({
     render: function () {
-        var flavor = Markdown.toHTML(this.props.shop.attrs.flavor);
-        var appearance = Markdown.toHTML(this.props.shop.attrs.appearance);
-        var history = Markdown.toHTML(this.props.shop.attrs.history);
+        var location = this.props.location;
+        var shop = this.props.shop;
 
         return (
             <div className="item-card shop-card">
                 <div className="card-header">
-                    <p>
-                        {this.props.shop.attrs.name}&nbsp;&nbsp;<small className="text-muted">{this.props.shop.attrs.category}</small>
+                    <p className="pull-left">
+                        {shop.attrs.name}
+                    </p>
+                    <p className="pull-right">
+                        <small className="text-muted">{shop.attrs.type}, {shop.attrs.quality}</small>
                     </p>
                 </div>
                 <div className="card-body">
-                    <p className="body-header">Flavor</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: flavor}} />
-                    <p className="body-header">Appearance</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: appearance}} />
-                    <p className="body-header">History</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: history}} />
+                    <AttrBlock name="Shopkeeper" attr={shop.attrs.shopkeeper} />
+                    <AttrBlock name="Flavor" attr={shop.attrs.flavor} markdown />
+                    <AttrBlock name="Details" attr={shop.attrs.details} markdown />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <span />
+                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <ShopFormModal location={this.props.location} shop={this.props.shop} onUpdate={this.props.onUpdate} />
-                        <ShopRemoveModal shop={this.props.shop} onUpdate={this.props.onUpdate} />
+                        <FormModal location={location} shop={shop} onUpdate={this.props.onUpdate} />
+                        <RemoveModal shop={shop} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

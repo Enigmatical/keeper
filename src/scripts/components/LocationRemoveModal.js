@@ -9,8 +9,14 @@ var Modal = require('./ModelRemoveModal');
 
 var LocationRemoveModal = React.createClass({
     render: function () {
-        var message = (
-            <div>
+        return (
+            <Modal
+            titlePart="Location"
+            target={this.props.location}
+
+            className={this.props.className}
+            onUpdate={this.props.onUpdate}
+            >
                 <p className="text-danger">
                 This will also <strong>remove</strong> all associated:
                     <ul className="text-danger">
@@ -18,20 +24,7 @@ var LocationRemoveModal = React.createClass({
                         <li>Shops</li>
                     </ul>
                 </p>
-            </div>
-            );
-
-        return (
-            <Modal
-            titlePart="Location"
-            target={this.props.location}
-            targetTitle={this.props.location.attrs.title}
-
-            message={message}
-
-            className={this.props.className}
-            onUpdate={this.props.onUpdate}
-            />
+            </Modal>
             );
     }
 });

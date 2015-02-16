@@ -9,9 +9,10 @@ var CampaignModel = require('../models/CampaignModel');
 var ActModel = require('../models/ActModel');
 var QuestModel = require('../models/QuestModel');
 
-var MainBreadcrumb = require('./MainBreadcrumb');
-var TaskFormModal = require('./TaskFormModal');
-var TaskCard = require('./TaskCard');
+var Breadcrumb = require('./MainBreadcrumb');
+var PageHeader = require('./ModelPageHeader');
+var FormModal = require('./TaskFormModal');
+var Card = require('./TaskCard');
 
 
 
@@ -63,38 +64,36 @@ var TaskManagePage = React.createClass({
 
     render: function () {
         var self = this;
+        var campaign = self.state.campaign;
+        var act = self.state.act;
+        var quest = self.state.quest;
 
-        if (_.isObject(self.state.quest)) {
+        if (_.isObject(quest)) {
             return (
                 <div id="task-manage-page" className="page-content">
-                    <MainBreadcrumb crumbs={[
+                    <Breadcrumb crumbs={[
                         {
-                            text: self.state.campaign.attrs.title,
+                            text: campaign.attrs.name,
                             link: 'manage-acts',
-                            params: {campaignId: self.state.campaign.id}
+                            params: {campaignId: campaign.id}
                         },
                         {
-                            text: self.state.act.attrs.title,
+                            text: act.attrs.name,
                             link: 'manage-quests',
-                            params: {campaignId: self.state.campaign.id, actId: self.state.act.id}
+                            params: {campaignId: campaign.id, actId: act.id}
                         },
                         {
-                            text: self.state.quest.attrs.title
+                            text: quest.attrs.name
                         }
                     ]} />
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h1 className="page-header">
-                                {self.state.quest.attrs.title}
-                                <TaskFormModal className="pull-right" quest={self.state.quest} onUpdate={self.getTasks} />
-                            </h1>
-                        </div>
-                    </div>
+                    <PageHeader pageName={quest.attrs.name} pageType="Tasks">
+                        <FormModal quest={quest} onUpdate={self.getTasks} />
+                    </PageHeader>
                     <div className="row">
                         {self.state.tasks.map(function(task){
                             return (
                                 <div key={task.id} className="col-md-6">
-                                    <TaskCard campaign={self.state.campaign} act={self.state.act} quest={self.state.quest} task={task} onUpdate={self.getTasks} />
+                                    <Card campaign={campaign} act={act} quest={quest} task={task} onUpdate={self.getTasks} />
                                 </div>
                                 );
                         })}

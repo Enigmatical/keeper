@@ -58,10 +58,8 @@ var ModelRemoveModal = React.createClass({
             <Modal title={modalTitle} onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
-                        <h4>{this.props.targetTitle}</h4>
                         <p className="bg-danger text-danger"><strong>This will be removed permanently.</strong></p>
-
-                        {this.props.message}
+                        {this.props.children}
                     </div>
                     <div className="modal-footer">
                         <Button bsStyle="danger" type="submit">Yes</Button>

@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var TaskModel = require('../models/TaskModel');
+var Model = require('../models/TaskModel');
 
 var Modal = require('./ModelFormModal');
 var Input = require('./ModelFormInput');
@@ -12,16 +12,26 @@ var Input = require('./ModelFormInput');
 
 var TaskFormModal = React.createClass({
     render: function () {
-
         var task = _.isObject(this.props.task) ? this.props.task : undefined;
         var attrs = _.isObject(task) ? task.attrs : {};
 
-        var inputs = (
-            <div>
+        return (
+            <Modal
+                titlePart="Task"
+                model={Model}
+
+                target={task}
+                related={this.props.quest}
+                relatedKey="quest_id"
+
+                className={this.props.className}
+                onUpdate={this.props.onUpdate}
+            >
                 <Input
                     type="text"
-                    name="objective"
-                    defaultValue={attrs.objective}
+                    name="name"
+                    placeholder="Objective"
+                    defaultValue={attrs.name}
                 />
                 <Input
                     type="textarea"
@@ -29,28 +39,11 @@ var TaskFormModal = React.createClass({
                     defaultValue={attrs.details}
                 />
                 <Input
-                    type="text"
-                    name="order"
-                    placeholder="Sort Order"
-                    defaultValue={attrs.order}
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
                 />
-            </div>
-            );
-
-        return (
-            <Modal
-                titlePart="Task"
-                model={TaskModel}
-
-                target={task}
-                related={this.props.quest}
-                relatedKey="quest_id"
-
-                inputs={inputs}
-
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            />
+            </Modal>
             );
     }
 });

@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var LocationModel = require('../models/LocationModel');
+var Model = require('../models/LocationModel');
 
 var Modal = require('./ModelFormModal');
 var Input = require('./ModelFormInput');
@@ -12,12 +12,21 @@ var Input = require('./ModelFormInput');
 
 var LocationFormModal = React.createClass({
     render: function () {
-
         var location = _.isObject(this.props.location) ? this.props.location : undefined;
         var attrs = _.isObject(location) ? location.attrs : {};
 
-        var inputs = (
-            <div>
+        return (
+            <Modal
+                titlePart="Location"
+                model={Model}
+
+                target={location}
+                related={this.props.campaign}
+                relatedKey="campaign_id"
+
+                className={this.props.className}
+                onUpdate={this.props.onUpdate}
+            >
                 <Input
                     type="text"
                     name="name"
@@ -25,8 +34,13 @@ var LocationFormModal = React.createClass({
                 />
                 <Input
                     type="text"
-                    name="category"
-                    defaultValue={attrs.category}
+                    name="type"
+                    defaultValue={attrs.type}
+                />
+                <Input
+                    type="textarea"
+                    name="details"
+                    defaultValue={attrs.details}
                 />
                 <Input
                     type="textarea"
@@ -34,32 +48,12 @@ var LocationFormModal = React.createClass({
                     defaultValue={attrs.flavor}
                 />
                 <Input
-                    type="textarea"
-                    name="appearance"
-                    defaultValue={attrs.appearance}
+                    type="text"
+                    name="distance"
+                    placeholder="Map Point"
+                    defaultValue={attrs.distance}
                 />
-                <Input
-                    type="textarea"
-                    name="history"
-                    defaultValue={attrs.history}
-                />
-            </div>
-            );
-
-        return (
-            <Modal
-                titlePart="Location"
-                model={LocationModel}
-
-                target={location}
-                related={this.props.campaign}
-                relatedKey="campaign_id"
-
-                inputs={inputs}
-
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            />
+            </Modal>
             );
     }
 });

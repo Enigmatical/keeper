@@ -5,7 +5,7 @@ var _ = require('lodash');
 
 var Auth = require('../helpers/Auth');
 
-var CampaignModel = require('../models/CampaignModel');
+var Model = require('../models/CampaignModel');
 
 var Modal = require('./ModelFormModal');
 var Input = require('./ModelFormInput');
@@ -17,47 +17,36 @@ var CampaignFormModal = React.createClass({
         var campaign = _.isObject(this.props.campaign) ? this.props.campaign : undefined;
         var attrs = _.isObject(campaign) ? campaign.attrs : {};
 
-        var inputs = (
-            <div>
-                <Input
-                    type="text"
-                    name="title"
-                    defaultValue={attrs.title}
-                />
-                <Input
-                    type="text"
-                    name="subtitle"
-                    placeholder="Sub-Title"
-                    defaultValue={attrs.subtitle}
-                />
-                <Input
-                    type="textarea"
-                    name="summary"
-                    defaultValue={attrs.summary}
-                />
-                <Input
-                    type="text"
-                    name="order"
-                    placeholder="Sort Order"
-                    defaultValue={attrs.order}
-                />
-            </div>
-            );
-
         return (
             <Modal
                 titlePart="Campaign"
-                model={CampaignModel}
+                model={Model}
 
                 target={campaign}
                 related={Auth.User}
                 relatedKey="user_id"
 
-                inputs={inputs}
-
                 className={this.props.className}
                 onUpdate={this.props.onUpdate}
-            />
+            >
+                <Input
+                    type="text"
+                    name="name"
+                    defaultValue={attrs.name}
+                />
+
+                <Input
+                    type="textarea"
+                    name="details"
+                    defaultValue={attrs.details}
+                />
+
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
+                />
+            </Modal>
             );
     }
 });

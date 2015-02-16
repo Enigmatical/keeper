@@ -1,15 +1,15 @@
 'use strict';
 
 var React = require('react/addons');
-var Markdown = require('markdown').markdown;
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var LocationFormModal = require('./LocationFormModal');
-var LocationRemoveModal = require('./LocationRemoveModal');
+var FormModal = require('./LocationFormModal');
+var RemoveModal = require('./LocationRemoveModal');
+var AttrBlock = require('./ModelAttrBlock');
 
 require('../../styles/ItemCard.css');
 
@@ -17,32 +17,31 @@ require('../../styles/ItemCard.css');
 
 var LocationCard = React.createClass({
     render: function () {
-        var flavor = Markdown.toHTML(this.props.location.attrs.flavor);
-        var appearance = Markdown.toHTML(this.props.location.attrs.appearance);
-        var history = Markdown.toHTML(this.props.location.attrs.history);
+        var campaign = this.props.campaign;
+        var location = this.props.location;
 
         return (
             <div className="item-card location-card">
                 <div className="card-header">
-                    <p>
-                        {this.props.location.attrs.name}&nbsp;&nbsp;<small className="text-muted">{this.props.location.attrs.category}</small>
+                    <p className="pull-left">
+                        {location.attrs.name}
+                    </p>
+                    <p className="pull-right">
+                        <small className="text-muted">{location.attrs.type}</small>
                     </p>
                 </div>
                 <div className="card-body">
-                    <p className="body-header">Flavor</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: flavor}} />
-                    <p className="body-header">Appearance</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: appearance}} />
-                    <p className="body-header">History</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: history}} />
+                    <AttrBlock name="Flavor" attr={location.attrs.flavor} markdown />
+                    <AttrBlock name="Details" attr={location.attrs.details} markdown />
+                    <AttrBlock name="Map Point" attr={location.attrs.distance} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-areas" params={{campaignId: this.props.campaign.id, locationId: this.props.location.id}}><Glyphicon glyph="cog" /> Manage Areas &amp; Shops</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-areas" params={{campaignId: campaign.id, locationId: location.id}}><Glyphicon glyph="cog" /> Areas &amp; Shops</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <LocationFormModal campaign={this.props.campaign} location={this.props.location} onUpdate={this.props.onUpdate} />
-                        <LocationRemoveModal location={this.props.location} onUpdate={this.props.onUpdate} />
+                        <FormModal campaign={campaign} location={location} onUpdate={this.props.onUpdate} />
+                        <RemoveModal location={location} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

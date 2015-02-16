@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var ActModel = require('../models/ActModel');
+var Model = require('../models/ActModel');
 
 var Modal = require('./ModelFormModal');
 var Input = require('./ModelFormInput');
@@ -12,56 +12,43 @@ var Input = require('./ModelFormInput');
 
 var ActFormModal = React.createClass({
     render: function () {
-
     var act = _.isObject(this.props.act) ? this.props.act : undefined;
     var attrs = _.isObject(act) ? act.attrs : {};
 
-    var inputs = (
-        <div>
+    return (
+        <Modal
+            titlePart="Act"
+            model={Model}
+
+            target={act}
+            related={this.props.campaign}
+            relatedKey="campaign_id"
+
+            className={this.props.className}
+            onUpdate={this.props.onUpdate}
+        >
             <Input
                 type="text"
-                name="title"
-                defaultValue={attrs.title}
+                name="name"
+                defaultValue={attrs.name}
             />
             <Input
                 type="text"
-                name="category"
-                defaultValue={attrs.category}
+                name="type"
+                defaultValue={attrs.type}
             />
             <Input
                 type="textarea"
-                name="story"
-                defaultValue={attrs.story}
+                name="details"
+                defaultValue={attrs.details}
             />
             <Input
                 type="textarea"
-                name="goal"
-                defaultValue={attrs.goal}
+                name="flavor"
+                defaultValue={attrs.flavor}
             />
-            <Input
-                type="text"
-                name="order"
-                placeholder="Sort Order"
-                defaultValue={attrs.order}
-            />
-        </div>
+        </Modal>
         );
-
-        return (
-            <Modal
-                titlePart="Act"
-                model={ActModel}
-
-                target={act}
-                related={this.props.campaign}
-                relatedKey="campaign_id"
-
-                inputs={inputs}
-
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            />
-            );
     }
 });
 
