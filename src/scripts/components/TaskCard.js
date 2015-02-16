@@ -20,7 +20,7 @@ var TaskCard = React.createClass({
         var details = Markdown.toHTML(this.props.task.attrs.details);
 
         return (
-            <div className="item-card act-card">
+            <div className="item-card task-card">
                 <div className="card-header">
                     <p>
                         {this.props.task.attrs.objective}

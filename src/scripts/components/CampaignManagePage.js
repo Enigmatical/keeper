@@ -45,10 +45,10 @@ var CampaignManagePage = React.createClass({
                     </div>
                 </div>
                 <div className="row">
-                    {self.state.campaigns.map(function(campaign) {
+                    {self.state.campaigns.map(function(campaign, index) {
                         return (
                             <div key={campaign.id} className="col-md-6">
-                                <CampaignCard campaign={campaign} onUpdate={self.getCampaigns} />
+                                <CampaignCard index={index} campaign={campaign} onUpdate={self.getCampaigns} />
                             </div>
                             );
                     })}

@@ -22,8 +22,11 @@ var CampaignCard = React.createClass({
         return (
             <div className="item-card campaign-card">
                 <div className="card-header">
-                    <p>
+                    <p className="pull-left">
                         {this.props.campaign.attrs.title}&nbsp;&nbsp;<small className="text-muted">{this.props.campaign.attrs.subtitle}</small>
+                    </p>
+                    <p className="pull-right">
+                        <span />
                     </p>
                 </div>
                 <div className="card-body">
@@ -32,8 +35,9 @@ var CampaignCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <Button bsStyle="success" bsSize="small"><Glyphicon glyph="play" /> Run</Button>
-                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-acts" params={{campaignId: this.props.campaign.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
+                        <Button bsStyle="success" bsSize="small"><Glyphicon glyph="play" /> Run Campaign</Button>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-acts" params={{campaignId: this.props.campaign.id}}><Glyphicon glyph="cog" /> Manage Acts</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-locations" params={{campaignId: this.props.campaign.id}}><Glyphicon glyph="cog" /> Manage Locations</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <CampaignFormModal campaign={this.props.campaign} onUpdate={this.props.onUpdate} />

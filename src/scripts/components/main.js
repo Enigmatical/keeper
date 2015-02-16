@@ -7,6 +7,8 @@ var CampaignManagePage = require('./CampaignManagePage');
     var ActManagePage = require('./ActManagePage');
         var QuestManagePage = require('./QuestManagePage');
             var TaskManagePage = require('./TaskManagePage');
+    var LocationManagePage = require('./LocationManagePage');
+        var AreaManagePage = require('./AreaManagePage');
 
 var CharactersPage = require('./CharactersPage');
 var BestiaryPage = require('./BestiaryPage');
@@ -21,9 +23,11 @@ var Routes = (
     <Route handler={KeeperApp}>
         <DefaultRoute name="home" handler={HomePage}/>
         <Route name="manage-campaigns" path="/manage/campaigns" handler={CampaignManagePage}/>
-            <Route name="manage-acts" path="/manage/campaign/:campaignId" handler={ActManagePage}/>
-                <Route name="manage-quests" path="/manage/campaign/:campaignId/act/:actId" handler={QuestManagePage} />
-                    <Route name="manage-tasks" path="/manage/campaign/:campaignId/act/:actId/quest/:questId" handler={TaskManagePage} />
+            <Route name="manage-acts" path="/manage/campaign/:campaignId/acts" handler={ActManagePage}/>
+                <Route name="manage-quests" path="/manage/campaign/:campaignId/act/:actId/quests" handler={QuestManagePage} />
+                    <Route name="manage-tasks" path="/manage/campaign/:campaignId/act/:actId/quest/:questId/tasks" handler={TaskManagePage} />
+            <Route name="manage-locations" path="/manage/campaign/:campaignId/locations" handler={LocationManagePage}/>
+                <Route name="manage-areas" path="/manage/campaign/:campaignId/location/:locationId/areas" handler={AreaManagePage}/>
         <Route name="characters" path="/manage/characters" handler={CharactersPage}/>
         <Route name="bestiary" path="/manage/bestiary" handler={BestiaryPage}/>
         <Route name="tools" path="/tools" handler={ToolsPage}/>

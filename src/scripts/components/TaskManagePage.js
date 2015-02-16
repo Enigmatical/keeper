@@ -9,7 +9,7 @@ var CampaignModel = require('../models/CampaignModel');
 var ActModel = require('../models/ActModel');
 var QuestModel = require('../models/QuestModel');
 
-var CampaignBreadcrumb = require('./CampaignBreadcrumb');
+var MainBreadcrumb = require('./MainBreadcrumb');
 var TaskFormModal = require('./TaskFormModal');
 var TaskCard = require('./TaskCard');
 
@@ -67,7 +67,21 @@ var TaskManagePage = React.createClass({
         if (_.isObject(self.state.quest)) {
             return (
                 <div id="task-manage-page" className="page-content">
-                    <CampaignBreadcrumb campaign={this.state.campaign} act={this.state.act} quest={this.state.quest} />
+                    <MainBreadcrumb crumbs={[
+                        {
+                            text: self.state.campaign.attrs.title,
+                            link: 'manage-acts',
+                            params: {campaignId: self.state.campaign.id}
+                        },
+                        {
+                            text: self.state.act.attrs.title,
+                            link: 'manage-quests',
+                            params: {campaignId: self.state.campaign.id, actId: self.state.act.id}
+                        },
+                        {
+                            text: self.state.quest.attrs.title
+                        }
+                    ]} />
                     <div className="row">
                         <div className="col-md-12">
                             <h1 className="page-header">
@@ -97,8 +111,3 @@ var TaskManagePage = React.createClass({
 });
 
 module.exports = TaskManagePage;
-
-
-
-
-

@@ -22,7 +22,7 @@ var QuestCard = React.createClass({
         var goal = Markdown.toHTML(this.props.quest.attrs.goal);
 
         return (
-            <div className="item-card act-card">
+            <div className="item-card quest-card">
                 <div className="card-header">
                     <p>
                         {this.props.quest.attrs.title}
@@ -36,7 +36,7 @@ var QuestCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-tasks" params={{campaignId: this.props.campaign.id, actId: this.props.act.id, questId:this.props.quest.id}}><Glyphicon glyph="cog" /> Manage</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-tasks" params={{campaignId: this.props.campaign.id, actId: this.props.act.id, questId:this.props.quest.id}}><Glyphicon glyph="cog" /> Manage Tasks</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <QuestFormModal act={this.props.act} quest={this.props.quest} onUpdate={this.props.onUpdate} />
