@@ -12,7 +12,8 @@ var Auth = require('../helpers/Auth');
 var CampaignModel = require('../models/CampaignModel');
 var LocationModel = require('../models/LocationModel');
 
-var MainBreadcrumb = require('./MainBreadcrumb');
+var Breadcrumb = require('./MainBreadcrumb');
+var PageHeader = require('./ModelPageHeader');
 var AreaFormModal = require('./AreaFormModal');
 var AreaCard = require('./AreaCard');
 var ShopFormModal = require('./ShopFormModal');
@@ -46,29 +47,43 @@ var AreaManagePage = React.createClass({
                 new LocationModel().get(locationId)
                     .then(function(location) {
                         self.setState({location: location});
-                        self.getAreas();
-                        self.getShops();
+                        self.getAreas(false);
+                        self.getShops(false);
                     });
             });
     },
 
-    getAreas: function() {
+    getAreas: function(setTab) {
+        if (setTab === undefined) {
+            setTab = true;
+        }
+
         var self = this;
         var location = this.state.location;
 
         location.getAreas()
             .then(function(areas) {
-                self.setState({areas: areas, activeTab: 1});
+                self.setState({areas: areas});
+                if (setTab) {
+                    self.setState({activeTab: 1});
+                }
             });
     },
 
-    getShops: function() {
+    getShops: function(setTab) {
+        if (setTab === undefined) {
+            setTab = true;
+        }
+
         var self = this;
         var location = this.state.location;
 
         location.getShops()
             .then(function(shops) {
-                self.setState({shops: shops, activeTab: 2});
+                self.setState({shops: shops});
+                if (setTab) {
+                    self.setState({activeTab: 2});
+                }
             });
     },
 
@@ -78,39 +93,34 @@ var AreaManagePage = React.createClass({
 
     render: function () {
         var self = this;
+        var campaign = this.state.campaign;
+        var location = this.state.location;
 
-        if (_.isObject(self.state.location)) {
+        if (_.isObject(location)) {
             return (
                 <div id="area-manage-page" className="page-content">
-                    <MainBreadcrumb crumbs={[
+                    <Breadcrumb crumbs={[
                         {
-                            text: self.state.campaign.attrs.title,
+                            text: campaign.attrs.name,
                             link: 'manage-locations',
-                            params: {campaignId:self.state.campaign.id}
+                            params: {campaignId: campaign.id}
                         },
                         {
-                            text: self.state.location.attrs.name
+                            text: location.attrs.name
                         }
                     ]} />
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h1 className="page-header">
-                                {self.state.location.attrs.name}&nbsp;&nbsp;<small>{self.state.location.attrs.category}</small>
-                                <ButtonToolbar className="pull-right">
-                                    <AreaFormModal location={self.state.location} onUpdate={self.getAreas} />
-                                    <ShopFormModal location={self.state.location} onUpdate={self.getShops} />
-                                </ButtonToolbar>
-                            </h1>
-                        </div>
-                    </div>
-                    <div className="row">
+                    <PageHeader pageName={location.attrs.name} pageType="Areas & Shops">
+                        <AreaFormModal location={location} onUpdate={self.getAreas} />
+                        <ShopFormModal location={location} onUpdate={self.getShops} />
+                    </PageHeader>
+                   <div className="row">
                         <div className="col-md-12">
                             <TabbedArea activeKey={this.state.activeTab} onSelect={this.handleTabs}>
                                 <TabPane eventKey={1} tab="Areas">
                                     {self.state.areas.map(function(area) {
                                         return (
                                             <div key={area.id} className="col-md-6">
-                                                <AreaCard location={self.state.location} area={area} onUpdate={self.getAreas} />
+                                                <AreaCard location={location} area={area} onUpdate={self.getAreas} />
                                             </div>
                                             );
                                     })}
@@ -119,7 +129,7 @@ var AreaManagePage = React.createClass({
                                     {self.state.shops.map(function(shop) {
                                         return (
                                             <div key={shop.id} className="col-md-6">
-                                                <ShopCard location={self.state.location} shop={shop} onUpdate={self.getShops} />
+                                                <ShopCard location={location} shop={shop} onUpdate={self.getShops} />
                                             </div>
                                             );
                                     })}

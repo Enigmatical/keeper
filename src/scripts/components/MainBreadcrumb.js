@@ -11,17 +11,23 @@ var MainBreadcrumb = React.createClass({
     render: function () {
         var crumbs = {};
 
-        _.each(this.props.crumbs, function(crumb) {
-            if (crumb.link) {
-                crumbs['crumb-' + crumb.text] = <MenuItemLink to={crumb.link} params={crumb.params}>{crumb.text}</MenuItemLink>
-            } else {
-                crumbs['crumb-' + crumb.text] = <li className="active">{crumb.text}</li>
-            }
-        });
+        if (_.isArray(this.props.crumbs))
+        {
+            crumbs['crumb-campaigns'] = <MenuItemLink to="manage-campaigns">Campaigns</MenuItemLink>;
+            _.each(this.props.crumbs, function(crumb) {
+                if (crumb.link) {
+                    crumbs['crumb-' + _.camelCase(crumb.text)] = <MenuItemLink to={crumb.link} params={crumb.params}>{crumb.text}</MenuItemLink>
+                } else {
+                    crumbs['crumb-' + _.camelCase(crumb.text)] = <li className="active">{crumb.text}</li>
+                }
+            });
+        }
+        else {
+            crumbs['crumb-campaigns'] = <li className="active">Campaigns</li>
+        }
 
         return (
             <ol className="breadcrumb">
-                <MenuItemLink to="manage-campaigns">Campaigns</MenuItemLink>
                 {crumbs}
             </ol>
             );

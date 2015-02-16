@@ -13,11 +13,10 @@ function LocationModel() {
         campaign_id: null,
 
         name: null,
-        category: null,
-        distance: null,
+        type: null,
+        details: null,
         flavor: null,
-        appearance: null,
-        history: null
+        distance: null
     };
 
     this.getAreas = function() {

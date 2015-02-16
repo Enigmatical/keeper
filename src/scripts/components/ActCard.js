@@ -1,15 +1,15 @@
 'use strict';
 
 var React = require('react/addons');
-var Markdown = require('markdown').markdown;
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var ActFormModal = require('./ActFormModal');
-var ActRemoveModal = require('./ActRemoveModal');
+var FormModal = require('./ActFormModal');
+var RemoveModal = require('./ActRemoveModal');
+var AttrBlock = require('./ModelAttrBlock');
 
 require('../../styles/ItemCard.css');
 
@@ -17,29 +17,30 @@ require('../../styles/ItemCard.css');
 
 var ActCard = React.createClass({
     render: function () {
-        var story = Markdown.toHTML(this.props.act.attrs.story);
-        var goal = Markdown.toHTML(this.props.act.attrs.goal);
+        var campaign = this.props.campaign;
+        var act = this.props.act;
 
         return (
             <div className="item-card act-card">
                 <div className="card-header">
-                    <p>
-                        {this.props.act.attrs.title}&nbsp;&nbsp;<small className="text-muted">{this.props.act.attrs.category}</small>
+                    <p className="pull-left">
+                        {act.attrs.name}
+                    </p>
+                    <p className="pull-right">
+                        <small className="text-muted">{act.attrs.type}</small>
                     </p>
                 </div>
                 <div className="card-body">
-                    <p className="body-header">Story</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: story}} />
-                    <p className="body-header">Goal</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: goal}} />
+                    <AttrBlock name="Flavor" attr={act.attrs.flavor} markdown />
+                    <AttrBlock name="Details" attr={act.attrs.details} markdown />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-quests" params={{campaignId: this.props.campaign.id, actId: this.props.act.id}}><Glyphicon glyph="cog" /> Manage Quests</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-quests" params={{campaignId: campaign.id, actId: act.id}}><Glyphicon glyph="cog" /> Quests</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <ActFormModal campaign={this.props.campaign} act={this.props.act} onUpdate={this.props.onUpdate} />
-                        <ActRemoveModal act={this.props.act} onUpdate={this.props.onUpdate} />
+                        <FormModal campaign={campaign} act={act} onUpdate={this.props.onUpdate} />
+                        <RemoveModal act={act} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

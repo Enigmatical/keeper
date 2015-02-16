@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var ShopModel = require('../models/ShopModel');
+var Model = require('../models/ShopModel');
 
 var Modal = require('./ModelFormModal');
 var Input = require('./ModelFormInput');
@@ -12,12 +12,21 @@ var Input = require('./ModelFormInput');
 
 var ShopFormModal = React.createClass({
     render: function () {
-
         var shop = _.isObject(this.props.shop) ? this.props.shop : undefined;
         var attrs = _.isObject(shop) ? shop.attrs : {};
 
-        var inputs = (
-            <div>
+        return (
+            <Modal
+                titlePart="Shop"
+                model={Model}
+    
+                target={shop}
+                related={this.props.location}
+                relatedKey="location_id"
+    
+                className={this.props.className}
+                onUpdate={this.props.onUpdate}
+            >
                 <Input
                     type="text"
                     name="name"
@@ -30,8 +39,8 @@ var ShopFormModal = React.createClass({
                 />
                 <Input
                     type="text"
-                    name="category"
-                    defaultValue={attrs.category}
+                    name="quality"
+                    defaultValue={attrs.quality}
                 />
                 <Input
                     type="text"
@@ -45,31 +54,10 @@ var ShopFormModal = React.createClass({
                 />
                 <Input
                     type="textarea"
-                    name="appearance"
-                    defaultValue={attrs.appearance}
+                    name="details"
+                    defaultValue={attrs.details}
                 />
-                <Input
-                    type="textarea"
-                    name="history"
-                    defaultValue={attrs.history}
-                />
-            </div>
-            );
-
-        return (
-            <Modal
-                titlePart="Shop"
-                model={ShopModel}
-    
-                target={shop}
-                related={this.props.location}
-                relatedKey="location_id"
-    
-                inputs={inputs}
-    
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            />
+            </Modal>
             );
     }
 });

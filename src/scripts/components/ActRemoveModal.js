@@ -9,29 +9,22 @@ var Modal = require('./ModelRemoveModal');
 
 var ActRemoveModal = React.createClass({
     render: function () {
-        var message = (
-            <div>
+        return (
+            <Modal
+                titlePart="Campaign"
+                target={this.props.act}
+
+                className={this.props.className}
+                onUpdate={this.props.onUpdate}
+            >
                 <p className="text-danger">
-                This will also <strong>remove</strong> all associated:
+                    This will also <strong>remove</strong> all associated:
                     <ul className="text-danger">
                         <li>Quests</li>
                         <li>Tasks</li>
                     </ul>
                 </p>
-            </div>
-            );
-
-        return (
-            <Modal
-                titlePart="Campaign"
-                target={this.props.act}
-                targetTitle={this.props.act.attrs.title}
-
-                message={message}
-
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            />
+            </Modal>
             );
     }
 });

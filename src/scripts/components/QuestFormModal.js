@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var QuestModel = require('../models/QuestModel');
+var Model = require('../models/QuestModel');
 
 var Modal = require('./ModelFormModal');
 var Input = require('./ModelFormInput');
@@ -12,50 +12,60 @@ var Input = require('./ModelFormInput');
 
 var QuestFormModal = React.createClass({
     render: function () {
-
         var quest = _.isObject(this.props.quest) ? this.props.quest : undefined;
         var attrs = _.isObject(quest) ? quest.attrs : {};
-
-        var inputs = (
-            <div>
-                <Input
-                    type="text"
-                    name="title"
-                    defaultValue={attrs.title}
-                />
-                <Input
-                    type="textarea"
-                    name="story"
-                    defaultValue={attrs.story}
-                />
-                <Input
-                    type="textarea"
-                    name="goal"
-                    defaultValue={attrs.goal}
-                />
-                <Input
-                    type="text"
-                    name="order"
-                    placeholder="Sort Order"
-                    defaultValue={attrs.order}
-                />
-            </div>
-            );
 
         return (
             <Modal
                 titlePart="Quest"
-                model={QuestModel}
+                model={Model}
 
                 target={quest}
                 related={this.props.act}
                 relatedKey="act_id"
 
-                inputs={inputs}
-
                 className={this.props.className}
                 onUpdate={this.props.onUpdate}
-            />
+            >
+                <Input
+                    type="text"
+                    name="name"
+                    defaultValue={attrs.name}
+                />
+                <Input
+                    type="text"
+                    name="type"
+                    defaultValue={attrs.type}
+                />
+                <Input
+                    type="textarea"
+                    name="details"
+                    defaultValue={attrs.details}
+                />
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
+                />
+                <Input
+                    type="text"
+                    name="challenge"
+                    placeholder="Challenge Rating"
+                    defaultValue={attrs.challenge}
+                />
+                <Input
+                    type="text"
+                    name="rewardXp"
+                    placeholder="Reward XP"
+                    defaultValue={attrs.rewardXp}
+                />
+                <Input
+                    type="textarea"
+                    name="rewardOther"
+                    placeholder="Rewards"
+                    defaultValue={attrs.rewardOther}
+                />
+            </Modal>
             );
     }
 });

@@ -8,8 +8,9 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var TaskFormModal = require('./TaskFormModal');
-var TaskRemoveModal = require('./TaskRemoveModal');
+var FormModal = require('./TaskFormModal');
+var RemoveModal = require('./TaskRemoveModal');
+var AttrBlock = require('./ModelAttrBlock');
 
 require('../../styles/ItemCard.css');
 
@@ -17,25 +18,32 @@ require('../../styles/ItemCard.css');
 
 var TaskCard = React.createClass({
     render: function () {
-        var details = Markdown.toHTML(this.props.task.attrs.details);
+        var campaign = this.props.campaign;
+        var act = this.props.act;
+        var quest = this.props.quest;
+        var task = this.props.task;
 
         return (
             <div className="item-card task-card">
                 <div className="card-header">
-                    <p>
-                        {this.props.task.attrs.objective}
+                    <p className="pull-left">
+                        {task.attrs.name}
+                    </p>
+                    <p className="pull-right">
+                        <span />
                     </p>
                 </div>
                 <div className="card-body">
-                    <p className="body-header">Details</p>
-                    <div className="body-content" dangerouslySetInnerHTML={{__html: details}} />
+                    <AttrBlock name="Flavor" attr={task.attrs.flavor} markdown />
+                    <AttrBlock name="Details" attr={task.attrs.details} markdown />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
+                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <TaskFormModal quest={this.props.quest} task={this.props.task} onUpdate={this.props.onUpdate} />
-                        <TaskRemoveModal task={this.props.task} onUpdate={this.props.onUpdate} />
+                        <FormModal quest={quest} task={task} onUpdate={this.props.onUpdate} />
+                        <RemoveModal task={task} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

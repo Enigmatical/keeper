@@ -7,9 +7,10 @@ var Auth = require('../helpers/Auth');
 
 var CampaignModel = require('../models/CampaignModel');
 
-var MainBreadcrumb = require('./MainBreadcrumb');
-var LocationFormModal = require('./LocationFormModal');
-var LocationCard = require('./LocationCard');
+var Breadcrumb = require('./MainBreadcrumb');
+var PageHeader = require('./ModelPageHeader');
+var FormModal = require('./LocationFormModal');
+var Card = require('./LocationCard');
 
 
 
@@ -47,28 +48,24 @@ var LocationManagePage = React.createClass({
 
     render: function () {
         var self = this;
+        var campaign = self.state.campaign;
 
         if (_.isObject(self.state.campaign)) {
             return (
                 <div id="location-manage-page" className="page-content">
-                    <MainBreadcrumb crumbs={[
+                    <Breadcrumb crumbs={[
                         {
-                            text: self.state.campaign.attrs.title
+                            text: campaign.attrs.name
                         }
                     ]} />
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h1 className="page-header">
-                                {self.state.campaign.attrs.title}&nbsp;&nbsp;<small>{self.state.campaign.attrs.subtitle}</small>
-                                <LocationFormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getLocations} />
-                            </h1>
-                        </div>
-                    </div>
+                    <PageHeader pageName={campaign.attrs.name} pageType="Locations">
+                        <FormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getLocations} />
+                    </PageHeader>
                     <div className="row">
                         {self.state.locations.map(function(location) {
                             return (
                                 <div key={location.id} className="col-md-6">
-                                    <LocationCard campaign={self.state.campaign} location={location} onUpdate={self.getLocations} />
+                                    <Card campaign={campaign} location={location} onUpdate={self.getLocations} />
                                 </div>
                                 );
                         })}

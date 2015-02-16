@@ -19,17 +19,14 @@
 
   .card-body {
     padding: 10px 15px;
+    height: 14px*1.428*7;
+    overflow: auto;
 
     .body-header {
       font-size: 12px;
       font-weight: 700;
       color: #959595;
       letter-spacing: 1px;
-    }
-
-    .body-content {
-      max-height: 14px*1.428*3;
-      overflow: hidden;
     }
   }
 

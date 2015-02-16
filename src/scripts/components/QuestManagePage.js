@@ -8,9 +8,10 @@ var Auth = require('../helpers/Auth');
 var CampaignModel = require('../models/CampaignModel');
 var ActModel = require('../models/ActModel');
 
-var MainBreadcrumb = require('./MainBreadcrumb');
-var QuestFormModal = require('./QuestFormModal');
-var QuestCard = require('./QuestCard');
+var Breadcrumb = require('./MainBreadcrumb');
+var PageHeader = require('./ModelPageHeader');
+var FormModal = require('./QuestFormModal');
+var Card = require('./QuestCard');
 
 
 
@@ -55,33 +56,30 @@ var QuestManagePage = React.createClass({
 
     render: function () {
         var self = this;
+        var campaign = this.state.campaign;
+        var act = this.state.act;
 
-        if (_.isObject(self.state.act)) {
+        if (_.isObject(act)) {
             return (
                 <div id="quest-manage-page" className="page-content">
-                    <MainBreadcrumb crumbs={[
+                    <Breadcrumb crumbs={[
                         {
-                            text: self.state.campaign.attrs.title,
+                            text: campaign.attrs.name,
                             link: 'manage-acts',
-                            params: {campaignId: self.state.campaign.id}
+                            params: {campaignId: campaign.id}
                         },
                         {
-                            text: self.state.act.attrs.title
+                            text: act.attrs.name
                         }
                     ]} />
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h1 className="page-header">
-                                {self.state.act.attrs.title}&nbsp;&nbsp;<small>{self.state.act.attrs.category}</small>
-                                <QuestFormModal className="pull-right" act={self.state.act} onUpdate={self.getQuests} />
-                            </h1>
-                        </div>
-                    </div>
+                    <PageHeader pageName={act.attrs.name} pageType="Quests">
+                        <FormModal act={act} onUpdate={self.getQuests} />
+                    </PageHeader>
                     <div className="row">
                         {self.state.quests.map(function(quest){
                             return (
                                 <div key={quest.id} className="col-md-6">
-                                    <QuestCard campaign={self.state.campaign} act={self.state.act} quest={quest} onUpdate={self.getQuests} />
+                                    <Card campaign={campaign} act={act} quest={quest} onUpdate={self.getQuests} />
                                 </div>
                                 );
                         })}

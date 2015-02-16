@@ -7,9 +7,10 @@ var Auth = require('../helpers/Auth');
 
 var CampaignModel = require('../models/CampaignModel');
 
-var MainBreadcrumb = require('./MainBreadcrumb');
-var ActFormModal = require('./ActFormModal');
-var ActCard = require('./ActCard');
+var Breadcrumb = require('./MainBreadcrumb');
+var PageHeader = require('./ModelPageHeader');
+var FormModal = require('./ActFormModal');
+var Card = require('./ActCard');
 
 
 
@@ -47,28 +48,24 @@ var ActManagePage = React.createClass({
 
     render: function () {
         var self = this;
+        var campaign = self.state.campaign;
 
-        if (_.isObject(self.state.campaign)) {
+        if (_.isObject(campaign)) {
             return (
                 <div id="act-manage-page" className="page-content">
-                    <MainBreadcrumb crumbs={[
+                    <Breadcrumb crumbs={[
                         {
-                            text: self.state.campaign.attrs.title
+                            text: campaign.attrs.name
                         }
                     ]} />
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h1 className="page-header">
-                                {self.state.campaign.attrs.title}&nbsp;&nbsp;<small>{self.state.campaign.attrs.subtitle}</small>
-                                <ActFormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getActs} />
-                            </h1>
-                        </div>
-                    </div>
+                    <PageHeader pageName={campaign.attrs.name} pageType="Acts">
+                        <FormModal campaign={campaign} onUpdate={self.getActs} />
+                    </PageHeader>
                     <div className="row">
                         {self.state.acts.map(function(act) {
                             return (
                                 <div key={act.id} className="col-md-6">
-                                    <ActCard campaign={self.state.campaign} act={act} onUpdate={self.getActs} />
+                                    <Card campaign={campaign} act={act} onUpdate={self.getActs} />
                                 </div>
                                 );
                         })}

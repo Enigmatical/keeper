@@ -4,9 +4,10 @@ var React = require('react/addons');
 
 var Auth = require('../helpers/Auth');
 
-var CampaignFormModal = require('./CampaignFormModal');
-
-var CampaignCard = require('./CampaignCard');
+var Breadcrumb = require('./MainBreadcrumb');
+var PageHeader = require('./ModelPageHeader');
+var FormModal = require('./CampaignFormModal');
+var Card = require('./CampaignCard');
 
 
 
@@ -19,6 +20,10 @@ var CampaignManagePage = React.createClass({
         }
     },
 
+    componentWillMount: function() {
+        this.getCampaigns();
+    },
+
     getCampaigns: function() {
         var self = this;
 
@@ -27,28 +32,20 @@ var CampaignManagePage = React.createClass({
         });
     },
 
-    componentWillMount: function() {
-        this.getCampaigns();
-    },
-
     render: function () {
         var self = this;
 
         return (
             <div id="campaign-manage-page" className="page-content">
+                <Breadcrumb />
+                <PageHeader pageName="Campaigns">
+                    <FormModal onUpdate={self.getCampaigns} />
+                </PageHeader>
                 <div className="row">
-                    <div className="col-md-12">
-                        <h1 className="page-header">
-                            Campaigns
-                            <CampaignFormModal className="pull-right" onUpdate={self.getCampaigns} />
-                        </h1>
-                    </div>
-                </div>
-                <div className="row">
-                    {self.state.campaigns.map(function(campaign, index) {
+                    {self.state.campaigns.map(function(campaign) {
                         return (
                             <div key={campaign.id} className="col-md-6">
-                                <CampaignCard index={index} campaign={campaign} onUpdate={self.getCampaigns} />
+                                <Card campaign={campaign} onUpdate={self.getCampaigns} />
                             </div>
                             );
                     })}
