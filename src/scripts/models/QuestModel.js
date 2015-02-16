@@ -10,11 +10,15 @@ function QuestModel() {
 
     this.attrs = {
         act_id: null,
+        order: null,
 
-        title: null,
-        story: null,
-        goal: null,
-        order: null
+        name: null,
+        type: null,
+        details: null,
+        flavor: null,
+        rewardXp: null,
+        rewardOther: null,
+        challenge: null
     };
 
     this.getTasks = function() {

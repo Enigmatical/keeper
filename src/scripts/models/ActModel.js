@@ -10,12 +10,12 @@ function ActModel() {
 
     this.attrs = {
         campaign_id: null,
+        order: null,
 
-        title: null,
-        category: null,
-        story: null,
-        goal: null,
-        order: null
+        name: null,
+        type: null,
+        details: null,
+        flavor: null
     };
 
     this.getQuests = function() {

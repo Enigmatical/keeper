@@ -1,6 +1,7 @@
 'use strict';
 
 var BaseModel = require('../models/BaseModel');
+var EncounterModel = require('../models/EncounterModel');
 
 
 
@@ -9,11 +10,16 @@ function TaskModel() {
 
     this.attrs = {
         quest_id: null,
+        order: null,
 
-        objective: null,
+        name: null,
         details: null,
-        order: null
+        flavor: null
     };
+
+    this.getEncounters = function() {
+        return this.getRelated(EncounterModel, 'parent_id', 'order');
+    }
 }
 
 TaskModel.prototype = new Object(BaseModel.prototype);
