@@ -46,6 +46,7 @@ var MainNav = React.createClass({
         if (loggedIn) {
             leftNav = (
                 <Nav className="navbar-left">
+                    <NavItemLink to="home">Dungeon Keeper</NavItemLink>
                     <NavItemLink to="manage-campaigns">Campaigns</NavItemLink>
                     <NavItemLink to="characters">Characters</NavItemLink>
                     <NavItemLink to="bestiary">Bestiary</NavItemLink>
@@ -64,6 +65,7 @@ var MainNav = React.createClass({
         else {
             leftNav = (
                 <Nav className="navbar-left">
+                    <NavItemLink to="home">Dungeon Keeper</NavItemLink>
                     <li>
                         <Button bsStyle="primary" className="navbar-btn" onClick={this.handleLogin}>Login with Facebook</Button>
                     </li>
@@ -78,7 +80,6 @@ var MainNav = React.createClass({
 
         return (
             <Navbar className="navbar-static-top" fluid>
-                <Link to="home" className="navbar-brand">Dungeon Keeper</Link>
                 {leftNav}
                 {rightNav}
             </Navbar>

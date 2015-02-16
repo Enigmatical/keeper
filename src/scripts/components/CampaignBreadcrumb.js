@@ -26,6 +26,11 @@ var CampaignBreadcrumb = React.createClass({
             }
             else {
                 actCrumb = <MenuItemLink to="manage-quests" params={{campaignId: this.props.campaign.id, actId: this.props.act.id}}>{this.props.act.attrs.title}</MenuItemLink>
+
+                // Quest
+                if (_.isObject(this.props.quest)) {
+                    questCrumb = <li className="active">{this.props.quest.attrs.title}</li>;
+                }
             }
         }
 
