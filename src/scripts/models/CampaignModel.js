@@ -11,11 +11,11 @@ function CampaignModel() {
 
     this.attrs = {
         user_id: null,
+        order: null,
 
-        title: null,
-        subtitle: null,
-        summary: null,
-        order: null
+        name: null,
+        details: null,
+        flavor: null
     };
 
     this.getActs = function() {

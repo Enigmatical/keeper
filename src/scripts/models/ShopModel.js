@@ -1,6 +1,7 @@
 'use strict';
 
 var BaseModel = require('../models/BaseModel');
+var EncounterModel = require('../models/EncounterModel');
 
 
 
@@ -12,12 +13,15 @@ function ShopModel() {
 
         name: null,
         type: null,
-        category: null,
-        shopkeeper: null,
+        details: null,
         flavor: null,
-        appearance: null,
-        history: null
+        shopkeeper: null,
+        quality: null
     };
+
+    this.getEncounters = function() {
+        return this.getRelated(EncounterModel, 'parent_id', 'order');
+    }
 }
 
 ShopModel.prototype = new Object(BaseModel.prototype);
