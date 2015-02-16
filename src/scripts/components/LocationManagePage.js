@@ -8,18 +8,18 @@ var Auth = require('../helpers/Auth');
 var CampaignModel = require('../models/CampaignModel');
 
 var MainBreadcrumb = require('./MainBreadcrumb');
-var ActFormModal = require('./ActFormModal');
-var ActCard = require('./ActCard');
+var LocationFormModal = require('./LocationFormModal');
+var LocationCard = require('./LocationCard');
 
 
 
-var ActManagePage = React.createClass({
+var LocationManagePage = React.createClass({
     mixins: [Auth, Router.State],
 
     getInitialState: function() {
         return {
             campaign: null,
-            acts: []
+            locations: []
         }
     },
 
@@ -31,17 +31,17 @@ var ActManagePage = React.createClass({
         new CampaignModel().get(campaignId)
             .then(function(campaign) {
                 self.setState({campaign: campaign});
-                self.getActs();
+                self.getLocations();
             });
     },
 
-    getActs: function() {
+    getLocations: function() {
         var self = this;
         var campaign = this.state.campaign;
 
-        campaign.getActs()
-            .then(function(acts) {
-                self.setState({acts: acts});
+        campaign.getLocations()
+            .then(function(locations) {
+                self.setState({locations: locations});
             });
     },
 
@@ -50,7 +50,7 @@ var ActManagePage = React.createClass({
 
         if (_.isObject(self.state.campaign)) {
             return (
-                <div id="act-manage-page" className="page-content">
+                <div id="location-manage-page" className="page-content">
                     <MainBreadcrumb crumbs={[
                         {
                             text: self.state.campaign.attrs.title
@@ -60,15 +60,15 @@ var ActManagePage = React.createClass({
                         <div className="col-md-12">
                             <h1 className="page-header">
                                 {self.state.campaign.attrs.title}&nbsp;&nbsp;<small>{self.state.campaign.attrs.subtitle}</small>
-                                <ActFormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getActs} />
+                                <LocationFormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getLocations} />
                             </h1>
                         </div>
                     </div>
                     <div className="row">
-                        {self.state.acts.map(function(act) {
+                        {self.state.locations.map(function(location) {
                             return (
-                                <div key={act.id} className="col-md-6">
-                                    <ActCard campaign={self.state.campaign} act={act} onUpdate={self.getActs} />
+                                <div key={location.id} className="col-md-6">
+                                    <LocationCard campaign={self.state.campaign} location={location} onUpdate={self.getLocations} />
                                 </div>
                                 );
                         })}
@@ -78,12 +78,10 @@ var ActManagePage = React.createClass({
         }
         else {
             return (
-                <div id="act-manage-page" className="page-content"></div>
+                <div id="location-manage-page" className="page-content"></div>
                 );
         }
     }
 });
 
-module.exports = ActManagePage;
-
-
+module.exports = LocationManagePage;

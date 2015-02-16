@@ -8,7 +8,7 @@ var Auth = require('../helpers/Auth');
 var CampaignModel = require('../models/CampaignModel');
 var ActModel = require('../models/ActModel');
 
-var CampaignBreadcrumb = require('./CampaignBreadcrumb');
+var MainBreadcrumb = require('./MainBreadcrumb');
 var QuestFormModal = require('./QuestFormModal');
 var QuestCard = require('./QuestCard');
 
@@ -59,7 +59,16 @@ var QuestManagePage = React.createClass({
         if (_.isObject(self.state.act)) {
             return (
                 <div id="quest-manage-page" className="page-content">
-                    <CampaignBreadcrumb campaign={this.state.campaign} act={this.state.act} />
+                    <MainBreadcrumb crumbs={[
+                        {
+                            text: self.state.campaign.attrs.title,
+                            link: 'manage-acts',
+                            params: {campaignId: self.state.campaign.id}
+                        },
+                        {
+                            text: self.state.act.attrs.title
+                        }
+                    ]} />
                     <div className="row">
                         <div className="col-md-12">
                             <h1 className="page-header">

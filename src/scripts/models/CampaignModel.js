@@ -2,6 +2,7 @@
 
 var BaseModel = require('../models/BaseModel');
 var ActModel = require('../models/ActModel');
+var LocationModel = require('../models/LocationModel');
 
 
 
@@ -19,7 +20,11 @@ function CampaignModel() {
 
     this.getActs = function() {
         return this.getRelated(ActModel, 'campaign_id', 'order');
-    }
+    };
+
+    this.getLocations = function() {
+        return this.getRelated(LocationModel, 'campaign_id', 'order');
+    };
 }
 
 CampaignModel.prototype = new Object(BaseModel.prototype);
