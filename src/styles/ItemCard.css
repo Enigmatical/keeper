@@ -15,6 +15,7 @@
   .item-card .card-body {
     padding: 10px 15px;
     height: 139.944px;
+    font-size: 12px;
     overflow: auto; }
     .item-card .card-body .body-header {
       font-size: 12px;

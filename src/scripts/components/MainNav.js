@@ -47,7 +47,7 @@ var MainNav = React.createClass({
             leftNav = (
                 <Nav className="navbar-left">
                     <NavItemLink to="manage-campaigns">Campaigns</NavItemLink>
-                    <NavItemLink to="characters">Characters</NavItemLink>
+                    <NavItemLink to="manage-characters">Characters</NavItemLink>
                     <NavItemLink to="bestiary">Bestiary</NavItemLink>
                     <NavItemLink to="tools">Tools</NavItemLink>
                 </Nav>

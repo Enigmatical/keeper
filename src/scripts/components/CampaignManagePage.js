@@ -56,5 +56,3 @@ var CampaignManagePage = React.createClass({
 });
 
 module.exports = CampaignManagePage;
-
-

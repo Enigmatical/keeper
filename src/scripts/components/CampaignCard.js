@@ -50,5 +50,3 @@ var CampaignCard = React.createClass({
 });
 
 module.exports = CampaignCard;
-
-

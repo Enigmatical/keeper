@@ -49,9 +49,8 @@ var LocationFormModal = React.createClass({
                 />
                 <Input
                     type="text"
-                    name="distance"
-                    placeholder="Map Point"
-                    defaultValue={attrs.distance}
+                    name="coordinate"
+                    defaultValue={attrs.coordinate}
                 />
             </Modal>
             );

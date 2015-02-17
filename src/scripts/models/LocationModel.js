@@ -16,7 +16,7 @@ function LocationModel() {
         type: null,
         details: null,
         flavor: null,
-        distance: null
+        coordinate: null
     };
 
     this.getAreas = function() {
