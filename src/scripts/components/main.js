@@ -2,7 +2,9 @@ var React = require('react');
 var Router = require('react-router');
 
 var KeeperApp = require('./KeeperApp');
+
 var HomePage = require('./HomePage');
+
 var CampaignManagePage = require('./CampaignManagePage');
     var ActManagePage = require('./ActManagePage');
         var QuestManagePage = require('./QuestManagePage');
@@ -10,8 +12,10 @@ var CampaignManagePage = require('./CampaignManagePage');
     var LocationManagePage = require('./LocationManagePage');
         var AreaManagePage = require('./AreaManagePage');
 
-var CharactersPage = require('./CharactersPage');
+var CharacterManagePage = require('./CharacterManagePage');
+
 var BestiaryPage = require('./BestiaryPage');
+
 var ToolsPage = require('./ToolsPage');
 
 var content = document.getElementById('content');
@@ -28,7 +32,7 @@ var Routes = (
                     <Route name="manage-tasks" path="/manage/campaign/:campaignId/act/:actId/quest/:questId/tasks" handler={TaskManagePage} />
             <Route name="manage-locations" path="/manage/campaign/:campaignId/locations" handler={LocationManagePage}/>
                 <Route name="manage-areas" path="/manage/campaign/:campaignId/location/:locationId/areas" handler={AreaManagePage}/>
-        <Route name="characters" path="/manage/characters" handler={CharactersPage}/>
+        <Route name="manage-characters" path="/manage/characters" handler={CharacterManagePage}/>
         <Route name="bestiary" path="/manage/bestiary" handler={BestiaryPage}/>
         <Route name="tools" path="/tools" handler={ToolsPage}/>
     </Route>
