@@ -3,6 +3,8 @@
 var BaseModel = require('../models/BaseModel');
 var CampaignModel = require('../models/CampaignModel');
 var CharacterModel = require('../models/CharacterModel');
+var FoeModel = require('../models/FoeModel');
+var BattleModel = require('../models/BattleModel');
 
 
 
@@ -20,6 +22,14 @@ function UserModel() {
 
     this.getCharacters = function() {
         return this.getRelated(CharacterModel, 'user_id', 'name');
+    };
+
+    this.getFoes = function() {
+        return this.getRelated(FoeModel, 'user_id', 'name');
+    };
+
+    this.getBattles = function() {
+        return this.getRelated(BattleModel, 'user_id', 'name');
     };
 }
 

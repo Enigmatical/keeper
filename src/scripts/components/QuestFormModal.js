@@ -60,6 +60,12 @@ var QuestFormModal = React.createClass({
                     defaultValue={attrs.rewardXp}
                 />
                 <Input
+                    type="text"
+                    name="rewardCoin"
+                    placeholder="Reward Coin (gp)"
+                    defaultValue={attrs.rewardCoin}
+                />
+                <Input
                     type="textarea"
                     name="rewardOther"
                     placeholder="Rewards"
