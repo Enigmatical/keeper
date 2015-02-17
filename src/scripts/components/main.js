@@ -14,7 +14,7 @@ var CampaignManagePage = require('./CampaignManagePage');
 
 var CharacterManagePage = require('./CharacterManagePage');
 
-var BestiaryPage = require('./BestiaryPage');
+var FoeManagePage = require('./FoeManagePage');
 
 var ToolsPage = require('./ToolsPage');
 
@@ -33,7 +33,7 @@ var Routes = (
             <Route name="manage-locations" path="/manage/campaign/:campaignId/locations" handler={LocationManagePage}/>
                 <Route name="manage-areas" path="/manage/campaign/:campaignId/location/:locationId/areas" handler={AreaManagePage}/>
         <Route name="manage-characters" path="/manage/characters" handler={CharacterManagePage}/>
-        <Route name="bestiary" path="/manage/bestiary" handler={BestiaryPage}/>
+        <Route name="manage-foes" path="/manage/foes" handler={FoeManagePage}/>
         <Route name="tools" path="/tools" handler={ToolsPage}/>
     </Route>
     );

@@ -35,6 +35,7 @@ var QuestCard = React.createClass({
                     <AttrBlock name="Flavor" attr={quest.attrs.flavor} markdown />
                     <AttrBlock name="Challenge Rating" attr={quest.attrs.challenge} />
                     <AttrBlock name="Reward XP" attr={quest.attrs.rewardXp} />
+                    <AttrBlock name="Reward Coin (gp)" attr={quest.attrs.rewardCoin} />
                     <AttrBlock name="Rewards" attr={quest.attrs.rewardOther} markdown />
                 </div>
                 <div className="card-footer">

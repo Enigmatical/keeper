@@ -17,6 +17,7 @@ function QuestModel() {
         details: null,
         flavor: null,
         rewardXp: null,
+        rewardCoin: null,
         rewardOther: null,
         challenge: null
     };
