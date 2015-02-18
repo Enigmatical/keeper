@@ -35,12 +35,13 @@ var ModelFormInput = React.createClass({
         }
 
         if (this.props.type === 'select') {
-            var options = [<option key={'option-disabled'} value="" disabled>{inputProps['placeholder']}</option>];
+            var options = [<option key={'option-blank'} value="" disabled>Select One...</option>];
 
             _.each(this.props.options, function(option, index) {
                  options.push(<option key={'option-'+index} value={option.value}>{option.label}</option>);
             });
 
+            inputProps['addonBefore'] = inputProps['placeholder'];
             this.props.children = options;
         }
 

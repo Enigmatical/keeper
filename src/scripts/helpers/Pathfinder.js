@@ -1,170 +1,232 @@
 'use strict';
 
 var Pathfinder = {
-    challengeRatings: {
-        '1/8': {
-            xp:         50,
-            reward:     21
-        },
-        '1/6': {
-            xp:         65,
-            reward:     28
-        },
-        '1/4': {
-            xp:         100,
-            reward:     43
-        },
-        '1/3': {
-            xp:         135,
-            reward:     57
-        },
-        '1/2': {
-            xp:         200,
-            reward:     85
-        },
-        '1': {
-            xp:         400,
-            reward:     170
-        },
-        '2': {
-            xp:         600,
-            reward:     350
-        },
-        '3': {
-            xp:         800,
-            reward:     550
-        },
-        '4': {
-            xp:         1200,
-            reward:     750
-        },
-        '5': {
-            xp:         1600,
-            reward:     1000
-        },
-        '6': {
-            xp:         2400,
-            reward:     1350
-        },
-        '7': {
-            xp:         3200,
-            reward:     1750
-        },
-        '8': {
-            xp:         4800,
-            reward:     2200
-        },
-        '9': {
-            xp:         6400,
-            reward:     2850
-        },
-        '10': {
-            xp:         9600,
-            reward:     3650
-        },
-        '11': {
-            xp:         12800,
-            reward:     4650
-        },
-        '12': {
-            xp:         19200,
-            reward:     6000
-        },
-        '13': {
-            xp:         25600,
-            reward:     7750
-        },
-        '14': {
-            xp:         38400,
-            reward:     10000
-        },
-        '15': {
-            xp:         51200,
-            reward:     13000
-        },
-        '16': {
-            xp:         76800,
-            reward:     16500
-        },
-        '17': {
-            xp:         102400,
-            reward:     22000
-        },
-        '18': {
-            xp:         153600,
-            reward:     28000
-        },
-        '19': {
-            xp:         204800,
-            reward:     35000
-        },
-        '20': {
-            xp:         307200,
-            reward:     44000
-        },
-        '21': {
-            xp:         409600,
-            reward:     51000
-        },
-        '22': {
-            xp:         614400,
-            reward:     57000
-        },
-        '23': {
-            xp:         819200,
-            reward:     64000
-        },
-        '24': {
-            xp:         1228800,
-            reward:     70000
-        },
-        '25': {
-            xp:         1638400,
-            reward:     77000
+    helpers: {
+        buildOptions: function(items) {
+            var array = [];
+            var options = [];
+            if (_.isArray(items)) {
+                array = items;
+            }
+            else if (_.isObject(items)) {
+                for (var k in items) array.push(k);
+            }
+            else {
+                return options;
+            }
+
+            _.each(array, function(a) {
+                options.push({'label': _.startCase(a), 'value': a});
+            });
+
+            return options;
         }
     },
 
-    rewardModifiers: {
-        'none':         0,
-        'npc_gear':     0.25,
-        'incidental':   0.5,
-        'standard':     1.0,
-        'double':       2.0,
-        'triple':       3.0
+    statics: {
+        challengeRatings: {
+            '1/8': {
+                xp:         50,
+                reward:     21
+            },
+            '1/6': {
+                xp:         65,
+                reward:     28
+            },
+            '1/4': {
+                xp:         100,
+                reward:     43
+            },
+            '1/3': {
+                xp:         135,
+                reward:     57
+            },
+            '1/2': {
+                xp:         200,
+                reward:     85
+            },
+            '1': {
+                xp:         400,
+                reward:     170
+            },
+            '2': {
+                xp:         600,
+                reward:     350
+            },
+            '3': {
+                xp:         800,
+                reward:     550
+            },
+            '4': {
+                xp:         1200,
+                reward:     750
+            },
+            '5': {
+                xp:         1600,
+                reward:     1000
+            },
+            '6': {
+                xp:         2400,
+                reward:     1350
+            },
+            '7': {
+                xp:         3200,
+                reward:     1750
+            },
+            '8': {
+                xp:         4800,
+                reward:     2200
+            },
+            '9': {
+                xp:         6400,
+                reward:     2850
+            },
+            '10': {
+                xp:         9600,
+                reward:     3650
+            },
+            '11': {
+                xp:         12800,
+                reward:     4650
+            },
+            '12': {
+                xp:         19200,
+                reward:     6000
+            },
+            '13': {
+                xp:         25600,
+                reward:     7750
+            },
+            '14': {
+                xp:         38400,
+                reward:     10000
+            },
+            '15': {
+                xp:         51200,
+                reward:     13000
+            },
+            '16': {
+                xp:         76800,
+                reward:     16500
+            },
+            '17': {
+                xp:         102400,
+                reward:     22000
+            },
+            '18': {
+                xp:         153600,
+                reward:     28000
+            },
+            '19': {
+                xp:         204800,
+                reward:     35000
+            },
+            '20': {
+                xp:         307200,
+                reward:     44000
+            },
+            '21': {
+                xp:         409600,
+                reward:     51000
+            },
+            '22': {
+                xp:         614400,
+                reward:     57000
+            },
+            '23': {
+                xp:         819200,
+                reward:     64000
+            },
+            '24': {
+                xp:         1228800,
+                reward:     70000
+            },
+            '25': {
+                xp:         1638400,
+                reward:     77000
+            }
+        },
+
+        rewardModifiers: {
+            none:           0,
+            npcGear:        0.25,
+            incidental:     0.5,
+            standard:       1.0,
+            double:         2.0,
+            triple:         3.0
+        },
+
+        shopTypes: [
+            'blacksmith',
+            'apothecary',
+            'generalGoods',
+            'jeweler',
+            'tavern',
+            'bookstore',
+            'specialty'
+        ],
+
+        /* Based on Table: Available Magic Items found http://paizo.com/pathfinderRPG/prd/magicItems.html */
+        shopModifiers: {
+            trader: {
+                baseValue: 200,
+                minor: '1d6'
+            },
+            merchant: {
+                baseValue: 1000,
+                minor: '3d4',
+                medium: '1d6'
+            },
+            mogul: {
+                baseValue: 2000,
+                minor: '3d4',
+                medium: '2d4',
+                major: '1d4'
+            },
+            baron: {
+                baseValue: 8000,
+                minor: '4d4',
+                medium: '3d4',
+                major: '2d4'
+            },
+            tycoon: {
+                baseValue: 16000,
+                minor: '8d4',
+                medium: '4d4',
+                major: '3d4'
+            }
+        }
     },
 
-    getChallengeRatings: function() {
-        var keys = [];
-        for (var k in this.challengeRatings) keys.push(k);
-        return keys;
+
+    getChallengeRatingOptions: function() {
+        return this.helpers.buildOptions(this.statics.challengeRatings);
     },
 
-    getRewardModifiers: function() {
-        var keys = [];
-        for (var k in this.rewardModifiers) keys.push(k);
-        return keys;
+    getRewardModifierOptions: function() {
+        return this.helpers.buildOptions(this.statics.rewardModifiers);
     },
 
     getXp: function(cr) {
-        return this.challengeRatings[cr].xp;
+        return this.statics.challengeRatings[cr].xp;
     },
 
     getReward: function(cr) {
-        return this.challengeRatings[cr].reward;
+        return this.statics.challengeRatings[cr].reward;
     },
     
     getRewardModifier: function(mod) {
-        return this.rewardModifiers[mod];
+        return this.statics.rewardModifiers[mod];
     },
 
     getChallengeRatingByXp: function(xp) {
-        var last_cr = null;
+        var lastCr = null;
 
-        for(var cr in this.challengeRatings) {
+        for(var cr in this.statics.challengeRatings) {
             if (this.getXp(cr) >= xp) {
-                return last_cr;
+                return lastCr;
             }
-            last_cr = cr;
+            lastCr = cr;
         }
     },
 
@@ -177,6 +239,14 @@ var Pathfinder = {
         }
         
         return parseInt(total * modifier);
+    },
+
+    getShopTypeOptions: function() {
+        return this.helpers.buildOptions(this.statics.shopTypes);
+    },
+
+    getShopModifierOptions: function() {
+        return this.helpers.buildOptions(this.statics.shopModifiers);
     },
 
     getBattleAttrs: function(foes) {
