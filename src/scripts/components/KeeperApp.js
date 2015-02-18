@@ -16,9 +16,6 @@ require('../../styles/vendor/normalize.css');
 require('../../styles/vendor/bootstrap.min.css');
 require('../../styles/vendor/bootstrap-theme.min.css');
 
-//React-Select
-require('../../styles/vendor/react-select.css');
-
 // Main
 require('../../styles/main.css');
 
