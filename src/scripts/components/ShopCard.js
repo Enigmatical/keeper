@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
+var _ = require('lodash');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
@@ -27,7 +28,7 @@ var ShopCard = React.createClass({
                         {shop.attrs.name}
                     </p>
                     <p className="pull-right">
-                        <small className="text-muted">{shop.attrs.type}, {shop.attrs.quality}</small>
+                        <small className="text-muted">{_.startCase(shop.attrs.type)}, <strong>{_.startCase(shop.attrs.quality)}</strong></small>
                     </p>
                 </div>
                 <div className="card-body">
@@ -37,7 +38,8 @@ var ShopCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
+                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="link" /> Shopkeeper</Button>
+                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="link" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal location={location} shop={shop} onUpdate={this.props.onUpdate} />

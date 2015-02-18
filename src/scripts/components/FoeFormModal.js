@@ -30,32 +30,6 @@ var FoeFormModal = React.createClass({
         }
     },
 
-    getCrOptions: function() {
-        var options = [];
-
-        _.each(Pathfinder.getChallengeRatings(), function(rating) {
-            options.push({
-                'label': rating,
-                'value': rating
-            });
-        });
-
-        return options;
-    },
-
-    getRewardOptions: function() {
-        var options = [];
-
-        _.each(Pathfinder.getRewardModifiers(), function(mod) {
-            options.push({
-                'label': _.startCase(mod),
-                'value': mod
-            });
-        });
-
-        return options;
-    },
-
     handleRewards: function() {
         var challenge = this.refs.challenge.getDOMNode().querySelector('[name=challenge]').value;
         var quality = this.refs.quality.getDOMNode().querySelector('[name=quality]').value;
@@ -71,8 +45,8 @@ var FoeFormModal = React.createClass({
         var foe = _.isObject(this.props.foe) ? this.props.foe : undefined;
         var attrs = _.isObject(foe) ? foe.attrs : {};
 
-        var challengeOptions = this.getCrOptions();
-        var rewardOptions = this.getRewardOptions();
+        var challengeOptions = Pathfinder.getChallengeRatingOptions();
+        var rewardOptions = Pathfinder.getRewardModifierOptions();
 
         return (
             <Modal
@@ -138,7 +112,7 @@ var FoeFormModal = React.createClass({
                             ref="quality"
                             placeholder="Treasure"
                             options={rewardOptions}
-                            defaultValue={attrs.quality}
+                            defaultValue={attrs.quality || 'standard'}
                             onChange={this.handleRewards}
                         />
                     </div>
