@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var Modal = require('./ModelRemoveModal');
+var Modal = require('./ModelUnlinkModal');
 
 
 
@@ -11,8 +11,9 @@ var FoeRemoveModal = React.createClass({
         return (
             <Modal
                 titlePart="Foe"
-                target={this.props.foe}
 
+                target={this.props.target}
+                index={this.props.index}
                 className={this.props.className}
                 onUpdate={this.props.onUpdate}
             />

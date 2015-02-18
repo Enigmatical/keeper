@@ -10,14 +10,18 @@ var Input = require('react-bootstrap').Input;
 var ModelFormInput = React.createClass({
     render: function () {
         var inputProps = {
-            'data-form': 'input',
+            'className': 'form-input',
             'placeholder': _.startCase(this.props.name)
         };
+
+        if (this.props.placeholder) {
+            inputProps['placeholder'] = this.props.placeholder;
+        }
 
         if (this.props.type === 'textarea') {
             inputProps['rows'] = 5;
             if (this.props.markdown !== false) {
-                inputProps['data-form'] += ' markdown';
+                inputProps['className'] += ' markdown';
             }
         }
 
@@ -27,13 +31,25 @@ var ModelFormInput = React.createClass({
 
         if (this.props.required === true) {
             inputProps['placeholder'] += ' (Required)';
-            inputProps['data-form'] += ' required';
+            inputProps['className'] += ' required';
         }
 
-        return (
-            React.createElement(Input, React.__spread(inputProps, this.props),
+        if (this.props.type === 'select') {
+            var options = [<option key={'option-disabled'} value="" disabled>{inputProps['placeholder']}</option>];
+
+            _.each(this.props.options, function(option, index) {
+                 options.push(<option key={'option-'+index} value={option.value}>{option.label}</option>);
+            });
+
+            this.props.children = options;
+        }
+
+        var inputElement = React.createElement(Input, React.__spread(inputProps, this.props),
                 this.props.children
-            )
+            );
+
+        return (
+            inputElement
         );
 }
 });

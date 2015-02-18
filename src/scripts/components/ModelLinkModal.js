@@ -10,7 +10,7 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 
 
 
-var ModelRemoveModal = React.createClass({
+var ModelLinkModal = React.createClass({
     mixins: [OverlayMixin],
 
     getInitialState: function() {
@@ -20,50 +20,62 @@ var ModelRemoveModal = React.createClass({
     },
 
     handleSubmit: function(e) {
-        var self = this;
-
         e.preventDefault();
 
-        self.props.target.remove()
+        var self = this;
+        var data = {};
+        var form = e.target;
+        var inputs = form.querySelectorAll('[name]');
+
+        _.each(inputs, function(input) {
+            var name = input.getAttribute('name');
+            data[name] = input.value;
+        });
+
+        self.props.target.linkModel(data)
             .done(function() {
                 if (_.isFunction(self.props.onUpdate)) {
                     self.props.onUpdate();
                 }
             });
 
-        self.handleToggle();
+        this.handleToggle();
     },
 
     handleToggle: function() {
+        if (!this.state.isModalOpen === true) {
+            this.props.onOpen();
+        }
+
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
     },
 
     render: function () {
+        var button = (<Button bsStyle="warning" bsSize="small" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="link" /> {this.props.titlePart}</Button>);
+
         return (
-            <Button bsStyle="danger" bsSize="small" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="remove" /></Button>
+            button
             );
     },
 
     renderOverlay: function() {
-        var modalTitle = 'Remove ' + this.props.titlePart + '?';
+        var modalTitle = 'Link ' + this.props.titlePart;
 
         if (!this.state.isModalOpen) {
             return <span />;
         }
 
         return (
-
             <Modal title={modalTitle} onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
-                        <p className="bg-danger text-danger"><strong>This will be removed permanently.</strong></p>
                         {this.props.children}
                     </div>
                     <div className="modal-footer">
-                        <Button bsStyle="danger" type="submit">Yes</Button>
-                        <Button onClick={this.handleToggle}>No</Button>
+                        <Button bsStyle="warning" type="submit">Add</Button>
+                        <Button onClick={this.handleToggle}>Cancel</Button>
                     </div>
                 </form>
             </Modal>
@@ -71,6 +83,7 @@ var ModelRemoveModal = React.createClass({
     }
 });
 
-module.exports = ModelRemoveModal;
+module.exports = ModelLinkModal;
+
 
 

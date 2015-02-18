@@ -19,7 +19,7 @@
 
   .card-body {
     padding: 10px 15px;
-    height: 14px*1.428*7;
+    height: 14px*1.428*9;
     font-size: 12px;
     overflow: auto;
 
@@ -28,7 +28,20 @@
       font-weight: 700;
       color: #959595;
       letter-spacing: 1px;
+      margin-bottom: 3px;
     }
+
+    .body-content {
+      margin-bottom: 10px;
+      p {
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  .card-links {
+    padding: 5px 0px;
+    overflow: hidden;
   }
 
   .card-footer {
