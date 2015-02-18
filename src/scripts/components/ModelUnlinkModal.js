@@ -10,7 +10,7 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 
 
 
-var ModelRemoveModal = React.createClass({
+var ModelUnlinkModal = React.createClass({
     mixins: [OverlayMixin],
 
     getInitialState: function() {
@@ -24,7 +24,7 @@ var ModelRemoveModal = React.createClass({
 
         e.preventDefault();
 
-        self.props.target.remove()
+        self.props.target.unlinkModel(self.props.index)
             .done(function() {
                 if (_.isFunction(self.props.onUpdate)) {
                     self.props.onUpdate();
@@ -42,12 +42,12 @@ var ModelRemoveModal = React.createClass({
 
     render: function () {
         return (
-            <Button bsStyle="danger" bsSize="small" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="remove" /></Button>
+            <Button bsStyle="danger" bsSize="xsmall" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="link" /></Button>
             );
     },
 
     renderOverlay: function() {
-        var modalTitle = 'Remove ' + this.props.titlePart + '?';
+        var modalTitle = 'Unlink ' + this.props.titlePart + '?';
 
         if (!this.state.isModalOpen) {
             return <span />;
@@ -57,10 +57,6 @@ var ModelRemoveModal = React.createClass({
 
             <Modal title={modalTitle} onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="modal-body">
-                        <p className="bg-danger text-danger"><strong>This will be removed permanently.</strong></p>
-                        {this.props.children}
-                    </div>
                     <div className="modal-footer">
                         <Button bsStyle="danger" type="submit">Yes</Button>
                         <Button onClick={this.handleToggle}>No</Button>
@@ -71,6 +67,6 @@ var ModelRemoveModal = React.createClass({
     }
 });
 
-module.exports = ModelRemoveModal;
+module.exports = ModelUnlinkModal;
 
 

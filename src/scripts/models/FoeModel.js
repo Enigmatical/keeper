@@ -16,6 +16,7 @@ function FoeModel() {
         flavor: null,
         quick: null,
         details: null,
+        quality: null,
         rewardXp: null,
         rewardCoin: null,
         onHand: null,

@@ -14,14 +14,22 @@
       margin-bottom: 0; }
   .item-card .card-body {
     padding: 10px 15px;
-    height: 139.944px;
+    height: 179.928px;
     font-size: 12px;
     overflow: auto; }
     .item-card .card-body .body-header {
       font-size: 12px;
       font-weight: 700;
       color: #959595;
-      letter-spacing: 1px; }
+      letter-spacing: 1px;
+      margin-bottom: 3px; }
+    .item-card .card-body .body-content {
+      margin-bottom: 10px; }
+      .item-card .card-body .body-content p {
+        margin-bottom: 2px; }
+  .item-card .card-links {
+    padding: 5px 0px;
+    overflow: hidden; }
   .item-card .card-footer {
     padding: 10px 15px;
     border-top: 1px solid #EEE;

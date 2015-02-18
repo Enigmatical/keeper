@@ -2,11 +2,13 @@
 
 var Firebase = require('firebase');
 var Q = require('q');
+var _ = require('lodash');
 
 
 
 function BaseModel(args) {
     this.id = null;
+    this.links = {};
 
     this.fb_ref = this.connect(args);
 }
@@ -21,6 +23,14 @@ BaseModel.prototype.create = function(attributes) {
             this.attrs[key] = attributes[key];
         }
     }
+
+    return this;
+};
+
+BaseModel.prototype.merge = function(attributes) {
+    this.attrs = _.assign(this.attrs, attributes);
+
+    console.log(this.attrs);
 
     return this;
 };

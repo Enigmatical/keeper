@@ -34,7 +34,7 @@ var ModelFormModal = React.createClass({
 
         var data = {};
         var form = e.target;
-        var inputs = form.querySelectorAll('[data-form~=input]');
+        var inputs = form.querySelectorAll('[name]');
 
         _.each(inputs, function(input) {
             var name = input.getAttribute('name');
@@ -45,14 +45,15 @@ var ModelFormModal = React.createClass({
             data[this.props.relatedKey] = this.props.related.id;
         }
 
-        var model = new this.props.model();
+        var target = this.props.target;
 
         /* [EDIT MODE] */
-        if (_.isObject(this.props.target)) {
-            model.id = this.props.target.id;
+        if (_.isObject(target)) {
+            target.merge(data).save();
+        } else {
+            var model = new this.props.model();
+            model.create(data).save();
         }
-
-        model.create(data).save();
 
         if (_.isFunction(this.props.onUpdate)) {
             this.props.onUpdate();
