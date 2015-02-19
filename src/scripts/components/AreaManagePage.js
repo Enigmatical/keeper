@@ -4,6 +4,7 @@ var React = require('react/addons');
 var Router = require('react-router');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
+var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
@@ -18,6 +19,8 @@ var AreaFormModal = require('./AreaFormModal');
 var AreaCard = require('./AreaCard');
 var ShopFormModal = require('./ShopFormModal');
 var ShopCard = require('./ShopCard');
+var BountyFormModal = require('./BountyFormModal');
+var BountyCard = require('./BountyCard');
 
 
 
@@ -30,6 +33,7 @@ var AreaManagePage = React.createClass({
             location: null,
             areas: [],
             shops: [],
+            bounties: [],
             activeTab: 1
         }
     },
@@ -49,6 +53,7 @@ var AreaManagePage = React.createClass({
                         self.setState({location: location});
                         self.getAreas(false);
                         self.getShops(false);
+                        self.getBounties(false);
                     });
             });
     },
@@ -87,6 +92,23 @@ var AreaManagePage = React.createClass({
             });
     },
 
+    getBounties: function(setTab) {
+        if (setTab === undefined) {
+            setTab = true;
+        }
+
+        var self = this;
+        var location = this.state.location;
+
+        location.getBounties()
+            .done(function(bounties) {
+                self.setState({bounties: bounties});
+                if (setTab) {
+                    self.setState({activeTab: 3});
+                }
+            });
+    },
+
     handleTabs: function(selectedKey) {
         this.setState({activeTab: selectedKey});
     },
@@ -112,6 +134,7 @@ var AreaManagePage = React.createClass({
                     <PageHeader pageName={location.attrs.name} pageType="Areas & Shops">
                         <AreaFormModal location={location} onUpdate={self.getAreas} />
                         <ShopFormModal location={location} onUpdate={self.getShops} />
+                        <BountyFormModal location={location} onUpdate={self.getBounties} />
                     </PageHeader>
                    <div className="row">
                         <div className="col-md-12">
@@ -130,6 +153,15 @@ var AreaManagePage = React.createClass({
                                         return (
                                             <div key={shop.id} className="col-md-6">
                                                 <ShopCard location={location} shop={shop} onUpdate={self.getShops} />
+                                            </div>
+                                            );
+                                    })}
+                                </TabPane>
+                                <TabPane eventKey={3} tab="Bounties">
+                                    {self.state.bounties.map(function(bounty) {
+                                        return (
+                                            <div key={bounty.id} className="col-md-6">
+                                                <BountyCard location={location} bounty={bounty} onUpdate={self.getBounties} />
                                             </div>
                                             );
                                     })}

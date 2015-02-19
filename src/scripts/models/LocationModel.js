@@ -3,6 +3,7 @@
 var BaseModel = require('../models/BaseModel');
 var AreaModel = require('../models/AreaModel');
 var ShopModel = require('../models/ShopModel');
+var BountyModel = require('../models/BountyModel');
 
 
 
@@ -25,6 +26,10 @@ function LocationModel() {
 
     this.getShops = function() {
         return this.getRelated(ShopModel, 'location_id', 'name');
+    };
+
+    this.getBounties = function() {
+        return this.getRelated(BountyModel, 'location_id', 'rewardXp');
     };
 }
 
