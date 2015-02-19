@@ -9,6 +9,8 @@ var Model = require('../models/FoeModel');
 
 var Modal = require('./ModelLinkModal');
 var Input = require('./ModelFormInput');
+var Link = require('react-router').Link;
+var Glyphicon = require('react-bootstrap').Glyphicon;
 
 
 
@@ -41,7 +43,7 @@ var FoeLinkModal = React.createClass({
     render: function() {
         return (
             <Modal
-                titlePart="Foe"
+                titlePart={this.props.name || "Foe"}
 
                 target={this.props.target}
 

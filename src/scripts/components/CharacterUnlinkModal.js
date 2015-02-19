@@ -6,11 +6,11 @@ var Modal = require('./ModelUnlinkModal');
 
 
 
-var FoeRemoveModal = React.createClass({
+var CharacterRemoveModal = React.createClass({
     render: function () {
         return (
             <Modal
-                titlePart={this.props.name || "Foe"}
+                titlePart={this.props.name || "Character"}
 
                 target={this.props.target}
                 index={this.props.index}
@@ -21,6 +21,6 @@ var FoeRemoveModal = React.createClass({
     }
 });
 
-module.exports = FoeRemoveModal;
+module.exports = CharacterRemoveModal;
 
 

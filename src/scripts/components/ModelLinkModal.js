@@ -74,7 +74,7 @@ var ModelLinkModal = React.createClass({
                         {this.props.children}
                     </div>
                     <div className="modal-footer">
-                        <Button bsStyle="warning" type="submit">Add</Button>
+                        <Button bsStyle="warning" type="submit">Link</Button>
                         <Button onClick={this.handleToggle}>Cancel</Button>
                     </div>
                 </form>
