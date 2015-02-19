@@ -37,7 +37,7 @@ var LocationCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-areas" params={{campaignId: campaign.id, locationId: location.id}}><Glyphicon glyph="cog" /> Areas &amp; Shops</ButtonLink>
+                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-areas" params={{campaignId: campaign.id, locationId: location.id}}><Glyphicon glyph="cog" /> Areas, Shops, &amp; Bounties</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal campaign={campaign} location={location} onUpdate={this.props.onUpdate} />
