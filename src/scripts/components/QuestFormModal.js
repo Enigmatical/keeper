@@ -3,6 +3,8 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
+var Pathfinder = require('../helpers/Pathfinder');
+
 var Model = require('../models/QuestModel');
 
 var Modal = require('./ModelFormModal');
@@ -11,9 +13,23 @@ var Input = require('./ModelFormInput');
 
 
 var QuestFormModal = React.createClass({
+    handleRewards: function() {
+        var challenge = this.refs.challenge.getDOMNode().querySelector('[name=challenge]').value;
+        var quality = this.refs.quality.getDOMNode().querySelector('[name=quality]').value;
+
+        var rewardXp = Pathfinder.getXp(challenge);
+        var rewardCoin = Pathfinder.getTreasure(challenge, quality);
+
+        this.refs.rewardXp.getDOMNode().querySelector('[name=rewardXp]').setAttribute('value', rewardXp);
+        this.refs.rewardCoin.getDOMNode().querySelector('[name=rewardCoin]').setAttribute('value', rewardCoin);
+    },
+
     render: function () {
         var quest = _.isObject(this.props.quest) ? this.props.quest : undefined;
         var attrs = _.isObject(quest) ? quest.attrs : {};
+
+        var challengeOptions = Pathfinder.getChallengeRatingOptions();
+        var rewardOptions = Pathfinder.getRewardModifierOptions();
 
         return (
             <Modal
@@ -47,24 +63,57 @@ var QuestFormModal = React.createClass({
                     name="flavor"
                     defaultValue={attrs.flavor}
                 />
-                <Input
-                    type="text"
-                    name="challenge"
-                    placeholder="Challenge Rating"
-                    defaultValue={attrs.challenge}
-                />
-                <Input
-                    type="text"
-                    name="rewardXp"
-                    placeholder="Reward XP"
-                    defaultValue={attrs.rewardXp}
-                />
-                <Input
-                    type="text"
-                    name="rewardCoin"
-                    placeholder="Reward Coin (gp)"
-                    defaultValue={attrs.rewardCoin}
-                />
+
+                <div className="row">
+                    <div className="col-md-6">
+                        <Input
+                        type="select"
+                        name="challenge"
+                        ref="challenge"
+                        placeholder="Challenge Rating"
+                        options={challengeOptions}
+                        defaultValue={attrs.challenge}
+                        onChange={this.handleRewards}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <Input
+                        type="select"
+                        name="quality"
+                        ref="quality"
+                        placeholder="Treasure"
+                        options={rewardOptions}
+                        defaultValue={attrs.quality || 'standard'}
+                        onChange={this.handleRewards}
+                        />
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-6">
+                        <Input
+                        type="text"
+                        name="rewardXp"
+                        ref="rewardXp"
+                        placeholder="Reward XP"
+                        value={attrs.rewardXp}
+                        readOnly
+                        addonAfter="XP"
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <Input
+                        type="text"
+                        name="rewardCoin"
+                        ref="rewardCoin"
+                        placeholder="Reward Coin"
+                        value={attrs.rewardCoin}
+                        readOnly
+                        addonAfter="gp"
+                        />
+                    </div>
+                </div>
+
                 <Input
                     type="textarea"
                     name="rewardOther"

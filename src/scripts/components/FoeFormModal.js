@@ -14,22 +14,6 @@ var Input = require('./ModelFormInput');
 
 
 var FoeFormModal = React.createClass({
-    getInitialState: function() {
-        return {
-            rewardXp: 0,
-            rewardCoin: 0
-        }
-    },
-
-    componentWillMount: function() {
-        var foe = _.isObject(this.props.foe) ? this.props.foe : undefined;
-        var attrs = _.isObject(foe) ? foe.attrs : {};
-
-        if (foe) {
-            this.setState({rewardXp: attrs.rewardXp, rewardCoin: attrs.rewardCoin});
-        }
-    },
-
     handleRewards: function() {
         var challenge = this.refs.challenge.getDOMNode().querySelector('[name=challenge]').value;
         var quality = this.refs.quality.getDOMNode().querySelector('[name=quality]').value;
@@ -125,7 +109,7 @@ var FoeFormModal = React.createClass({
                             name="rewardXp"
                             ref="rewardXp"
                             placeholder="Reward XP"
-                            value={this.state.rewardXp}
+                            value={attrs.rewardXp}
                             readOnly
                             addonAfter="XP"
                         />
@@ -136,7 +120,7 @@ var FoeFormModal = React.createClass({
                             name="rewardCoin"
                             ref="rewardCoin"
                             placeholder="Reward Coin"
-                            value={this.state.rewardCoin}
+                            value={attrs.rewardCoin}
                             readOnly
                             addonAfter="gp"
                         />
