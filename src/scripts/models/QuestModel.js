@@ -16,10 +16,11 @@ function QuestModel() {
         type: null,
         details: null,
         flavor: null,
+        challenge: null,
+        quality: null,
         rewardXp: null,
         rewardCoin: null,
-        rewardOther: null,
-        challenge: null
+        rewardOther: null
     };
 
     this.getTasks = function() {

@@ -2,7 +2,7 @@
 
 var Pathfinder = {
     helpers: {
-        buildOptions: function(items) {
+        buildOptions: function(items, useStartCase) {
             var array = [];
             var options = [];
             if (_.isArray(items)) {
@@ -16,7 +16,12 @@ var Pathfinder = {
             }
 
             _.each(array, function(a) {
-                options.push({'label': _.startCase(a), 'value': a});
+                var label = a;
+                if (useStartCase) {
+                    label = _.startCase(a);
+                }
+
+                options.push({'label': label, 'value': a});
             });
 
             return options;
@@ -200,11 +205,19 @@ var Pathfinder = {
 
 
     getChallengeRatingOptions: function() {
-        return this.helpers.buildOptions(this.statics.challengeRatings);
+        return this.helpers.buildOptions(this.statics.challengeRatings, false);
     },
 
     getRewardModifierOptions: function() {
-        return this.helpers.buildOptions(this.statics.rewardModifiers);
+        return this.helpers.buildOptions(this.statics.rewardModifiers, true);
+    },
+
+    getShopTypeOptions: function() {
+        return this.helpers.buildOptions(this.statics.shopTypes, true);
+    },
+
+    getShopModifierOptions: function() {
+        return this.helpers.buildOptions(this.statics.shopModifiers, true);
     },
 
     getXp: function(cr) {
@@ -239,14 +252,6 @@ var Pathfinder = {
         }
         
         return parseInt(total * modifier);
-    },
-
-    getShopTypeOptions: function() {
-        return this.helpers.buildOptions(this.statics.shopTypes);
-    },
-
-    getShopModifierOptions: function() {
-        return this.helpers.buildOptions(this.statics.shopModifiers);
     },
 
     getBattleAttrs: function(foes) {
