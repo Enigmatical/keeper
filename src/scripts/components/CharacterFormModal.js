@@ -19,15 +19,15 @@ var CharacterFormModal = React.createClass({
 
         return (
             <Modal
-            titlePart="Character"
-            model={Model}
+                titlePart="Character"
+                model={Model}
 
-            target={character}
-            related={Auth.User}
-            relatedKey="user_id"
+                target={character}
+                related={Auth.User}
+                relatedKey="user_id"
 
-            className={this.props.className}
-            onUpdate={this.props.onUpdate}
+                className={this.props.className}
+                onUpdate={this.props.onUpdate}
             >
                 <Input
                     type="text"
