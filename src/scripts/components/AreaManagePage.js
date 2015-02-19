@@ -131,7 +131,7 @@ var AreaManagePage = React.createClass({
                             text: location.attrs.name
                         }
                     ]} />
-                    <PageHeader pageName={location.attrs.name} pageType="Areas & Shops">
+                    <PageHeader pageName={location.attrs.name} pageType="Areas, Shops, & Bounties">
                         <AreaFormModal location={location} onUpdate={self.getAreas} />
                         <ShopFormModal location={location} onUpdate={self.getShops} />
                         <BountyFormModal location={location} onUpdate={self.getBounties} />
