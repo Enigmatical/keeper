@@ -16,6 +16,7 @@ var ModelFormModal = React.createClass({
 
     getInitialState: function() {
         return {
+            name: false,
             hasOrder: false,
             isModalOpen: false
         };
@@ -23,6 +24,8 @@ var ModelFormModal = React.createClass({
 
     componentWillMount: function() {
         var model = new this.props.model();
+
+        this.setState({name: _.startCase(model.name)});
 
         if (model.attrs.hasOwnProperty('order')) {
             this.setState({hasOrder: true});
@@ -41,8 +44,9 @@ var ModelFormModal = React.createClass({
             data[name] = input.value;
         });
 
-        if (_.isObject(this.props.related)) {
-            data[this.props.relatedKey] = this.props.related.id;
+        var related = this.props.related;
+        if (_.isObject(related)) {
+            data[related.key] = related.on.id;
         }
 
         var target = this.props.target;
@@ -69,7 +73,7 @@ var ModelFormModal = React.createClass({
     },
 
     render: function () {
-        var button = (<Button bsStyle="success" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="plus" /> Add {this.props.titlePart}</Button>);
+        var button = (<Button bsStyle="success" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="plus" /> Add {this.state.name}</Button>);
 
         /* [EDIT MODE] */
         if (_.isObject(this.props.target)) {
@@ -82,13 +86,13 @@ var ModelFormModal = React.createClass({
     },
 
     renderOverlay: function() {
-        var modalTitle = 'Add ' + this.props.titlePart;
+        var modalTitle = 'Add ' + this.state.name;
         var modalButton = (<Button bsStyle="success" type="submit">Save</Button>);
         var orderInput;
 
         /* [EDIT MODE] */
         if (_.isObject(this.props.target)) {
-            modalTitle = 'Edit ' + this.props.titlePart;
+            modalTitle = 'Edit ' + this.state.name;
             modalButton = (<Button bsStyle="info" type="submit">Edit</Button>);
         }
 
@@ -108,7 +112,7 @@ var ModelFormModal = React.createClass({
             <Modal title={modalTitle} bsSize="large" onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
-                        {this.props.children}
+                        {this.props.inputs()}
                         {orderInput}
                     </div>
                     <div className="modal-footer">

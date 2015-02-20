@@ -8,47 +8,47 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('../Model/FormModal');
-var RemoveModal = require('../Model/RemoveModal');
-var AttrBlock = require('../Model/AttrBlock');
-
-var CharacterLinkModal = require('../Character/LinkModal');
-var CharacterLink = require('../Character/Link');
+var FormModal = require('./FormModal');
+var RemoveModal = require('./RemoveModal');
+var AttrBlock = require('./AttrBlock');
 
 require('../../../styles/ItemCard.css');
 
 
 
-var ShopCard = React.createClass({
+var ModelCard = React.createClass({
+    /*
     getShopkeepers: function() {
         var self = this;
         var shop = self.props.shop;
 
         if (shop.attrs.shopkeepers.length > 0) {
             return(
-                    <div>
-                        <p className="body-header">Shopkeepers</p>
-                        <div className="card-links">
+                <div>
+                    <p className="body-header">Shopkeepers</p>
+                    <div className="card-links">
                             {shop.attrs.shopkeepers.map(function(char, index) {
                                 return (
                                     <CharacterLink key={char.id+index} target={shop} link={char} index={index} onUpdate={self.props.onUpdate} />
                                     );
                             })}
-                        </div>
                     </div>
+                </div>
                 );
         }
         else {
             return (<span />);
         }
     },
+    */
 
     render: function () {
+        /*
         var self = this;
         var location = self.props.location;
         var shop = self.props.shop;
-
         var shopkeepers = self.getShopkeepers();
+        */
 
         return (
             <div className="item-card shop-card">
@@ -71,7 +71,7 @@ var ShopCard = React.createClass({
                         <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="link" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={shop} model={this.props.model} related={{key: 'location_id', on: location}} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <FormModal location={location} shop={shop} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={shop} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
@@ -80,6 +80,4 @@ var ShopCard = React.createClass({
     }
 });
 
-module.exports = ShopCard;
-
-
+module.exports = ModelCard;
