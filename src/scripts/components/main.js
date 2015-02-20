@@ -6,13 +6,13 @@ var KeeperApp = require('./KeeperApp');
 var HomePage = require('./HomePage');
 
 var CampaignManagePage = require('./CampaignManagePage');
-    var ActManagePage = require('./Acts/ManagePage');
+    var ActManagePage = require('./Act/ManagePage');
         var QuestManagePage = require('./QuestManagePage');
             var TaskManagePage = require('./TaskManagePage');
     var LocationManagePage = require('./LocationManagePage');
-        var AreaManagePage = require('./AreaManagePage');
+        var AreaManagePage = require('./Area/ManagePage');
 
-var CharacterManagePage = require('./CharacterManagePage');
+var CharacterManagePage = require('./Character/ManagePage');
 
 var FoeManagePage = require('./FoeManagePage');
 

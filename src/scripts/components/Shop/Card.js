@@ -8,14 +8,14 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('./ShopFormModal');
-var RemoveModal = require('./ShopRemoveModal');
-var AttrBlock = require('./ModelAttrBlock');
+var FormModal = require('./FormModal');
+var RemoveModal = require('./RemoveModal');
+var AttrBlock = require('../ModelAttrBlock');
 
-var CharacterLinkModal = require('./CharacterLinkModal');
-var CharacterLink = require('./CharacterLink');
+var CharacterLinkModal = require('../Character/LinkModal');
+var CharacterLink = require('../Character/Link');
 
-require('../../styles/ItemCard.css');
+require('../../../styles/ItemCard.css');
 
 
 
