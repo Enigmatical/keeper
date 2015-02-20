@@ -2,12 +2,12 @@
 
 var React = require('react/addons');
 
-var Auth = require('../helpers/Auth');
+var Auth = require('../../helpers/Auth');
 
-var Breadcrumb = require('./MainBreadcrumb');
-var PageHeader = require('./ModelPageHeader');
-var FormModal = require('./CampaignFormModal');
-var Card = require('./CampaignCard');
+var Breadcrumb = require('../MainBreadcrumb');
+var PageHeader = require('../ModelPageHeader');
+var FormModal = require('./FormModal');
+var Card = require('./Card');
 
 
 

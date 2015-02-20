@@ -7,11 +7,11 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('./CampaignFormModal');
-var RemoveModal = require('./CampaignRemoveModal');
-var AttrBlock = require('./ModelAttrBlock');
+var FormModal = require('./FormModal');
+var RemoveModal = require('./RemoveModal');
+var AttrBlock = require('../ModelAttrBlock');
 
-require('../../styles/ItemCard.css');
+require('../../../styles/ItemCard.css');
 
 
 

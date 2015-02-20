@@ -3,12 +3,12 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var Auth = require('../helpers/Auth');
+var Auth = require('../../helpers/Auth');
 
-var Model = require('../models/CampaignModel');
+var Model = require('../../models/CampaignModel');
 
-var Modal = require('./ModelFormModal');
-var Input = require('./ModelFormInput');
+var Modal = require('../ModelFormModal');
+var Input = require('../ModelFormInput');
 
 
 
