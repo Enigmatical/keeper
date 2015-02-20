@@ -3,10 +3,10 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var Model = require('../models/ActModel');
+var Model = require('../../models/ActModel');
 
-var Modal = require('./ModelFormModal');
-var Input = require('./ModelFormInput');
+var Modal = require('../ModelFormModal');
+var Input = require('../ModelFormInput');
 
 
 

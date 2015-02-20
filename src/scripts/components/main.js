@@ -6,7 +6,7 @@ var KeeperApp = require('./KeeperApp');
 var HomePage = require('./HomePage');
 
 var CampaignManagePage = require('./CampaignManagePage');
-    var ActManagePage = require('./ActManagePage');
+    var ActManagePage = require('./Acts/ManagePage');
         var QuestManagePage = require('./QuestManagePage');
             var TaskManagePage = require('./TaskManagePage');
     var LocationManagePage = require('./LocationManagePage');
