@@ -14,7 +14,7 @@ var CampaignManagePage = require('./CampaignManagePage');
 
 var CharacterManagePage = require('./Character/ManagePage');
 
-var FoeManagePage = require('./FoeManagePage');
+var FoeManagePage = require('./Foe/ManagePage');
 
 var ToolsPage = require('./ToolsPage');
 

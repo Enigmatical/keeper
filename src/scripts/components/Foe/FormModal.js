@@ -3,13 +3,13 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var Auth = require('../helpers/Auth');
-var Pathfinder = require('../helpers/Pathfinder');
+var Auth = require('../../helpers/Auth');
+var Pathfinder = require('../../helpers/Pathfinder');
 
-var Model = require('../models/FoeModel');
+var Model = require('../../models/FoeModel');
 
-var Modal = require('./ModelFormModal');
-var Input = require('./ModelFormInput');
+var Modal = require('../ModelFormModal');
+var Input = require('../ModelFormInput');
 
 
 

@@ -1,18 +1,17 @@
 'use strict';
 
 var React = require('react/addons');
-var _ = require('lodash');
 
-var Modal = require('./ModelRemoveModal');
-
+var Modal = require('../ModelRemoveModal');
 
 
-var BattleRemoveModal = React.createClass({
+
+var FoeRemoveModal = React.createClass({
     render: function () {
         return (
             <Modal
-                titlePart="Group"
-                target={this.props.battle}
+                titlePart="Foe"
+                target={this.props.foe}
 
                 className={this.props.className}
                 onUpdate={this.props.onUpdate}
@@ -21,5 +20,6 @@ var BattleRemoveModal = React.createClass({
     }
 });
 
-module.exports = BattleRemoveModal;
+module.exports = FoeRemoveModal;
+
 
