@@ -15,9 +15,7 @@ function EncounterModel() {
         details: null,
         flavor: null,
         challenge: null,
-        rewardXp: null,
-        rewardCoin: null,
-        rewardOther: null
+        rewardXp: null
     };
 }
 

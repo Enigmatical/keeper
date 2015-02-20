@@ -55,7 +55,7 @@ var ActManagePage = React.createClass({
                 <div id="act-manage-page" className="page-content">
                     <Breadcrumb crumbs={[
                         {
-                            text: campaign.attrs.name
+                            text: campaign.attrs.name + " (Acts)"
                         }
                     ]} />
                     <PageHeader pageName={campaign.attrs.name} pageType="Acts">

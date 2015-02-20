@@ -123,7 +123,7 @@ var AreaManagePage = React.createClass({
                 <div id="area-manage-page" className="page-content">
                     <Breadcrumb crumbs={[
                         {
-                            text: campaign.attrs.name,
+                            text: campaign.attrs.name + " (Locations)",
                             link: 'manage-locations',
                             params: {campaignId: campaign.id}
                         },

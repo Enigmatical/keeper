@@ -33,9 +33,6 @@ var BountyCard = React.createClass({
                 </div>
                 <div className="card-body">
                     <AttrBlock name="Flavor" attr={bounty.attrs.flavor} markdown />
-                    <AttrBlock name="Challenge Rating" attr={bounty.attrs.challenge} />
-                    <AttrBlock name="Reward XP" attr={bounty.attrs.rewardXp} />
-                    <AttrBlock name="Reward Coin (gp)" attr={bounty.attrs.rewardCoin} />
                     <AttrBlock name="Rewards" attr={bounty.attrs.rewardOther} markdown />
                 </div>
                 <div className="card-footer">

@@ -86,7 +86,7 @@ var FoeManagePage = React.createClass({
                                         );
                                 })}
                             </TabPane>
-                            <TabPane eventKey={2} tab="Battles">
+                            <TabPane eventKey={2} tab="Groups">
                                 {self.state.battles.map(function(battle) {
                                      return (
                                          <div key={battle.id} className="col-md-6">
