@@ -19,7 +19,7 @@ var BattleFormModal = React.createClass({
 
         return (
             <Modal
-                titlePart="Battle"
+                titlePart="Group"
                 model={Model}
 
                 target={battle}

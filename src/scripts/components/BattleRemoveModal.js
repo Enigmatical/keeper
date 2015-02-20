@@ -11,7 +11,7 @@ var BattleRemoveModal = React.createClass({
     render: function () {
         return (
             <Modal
-                titlePart="Battle"
+                titlePart="Group"
                 target={this.props.battle}
 
                 className={this.props.className}

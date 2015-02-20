@@ -64,7 +64,7 @@ var QuestManagePage = React.createClass({
                 <div id="quest-manage-page" className="page-content">
                     <Breadcrumb crumbs={[
                         {
-                            text: campaign.attrs.name,
+                            text: campaign.attrs.name + " (Acts)",
                             link: 'manage-acts',
                             params: {campaignId: campaign.id}
                         },

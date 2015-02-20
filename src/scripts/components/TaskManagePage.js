@@ -73,7 +73,7 @@ var TaskManagePage = React.createClass({
                 <div id="task-manage-page" className="page-content">
                     <Breadcrumb crumbs={[
                         {
-                            text: campaign.attrs.name,
+                            text: campaign.attrs.name + " (Acts)",
                             link: 'manage-acts',
                             params: {campaignId: campaign.id}
                         },

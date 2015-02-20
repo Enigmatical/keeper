@@ -28,14 +28,11 @@ var QuestCard = React.createClass({
                         {quest.attrs.name}
                     </p>
                     <p className="pull-right">
-                        {quest.attrs.type}
+                        <small className="text-muted">{quest.attrs.type}&nbsp;&nbsp;<strong>CR {quest.attrs.challenge}</strong></small>
                     </p>
                 </div>
                 <div className="card-body">
                     <AttrBlock name="Flavor" attr={quest.attrs.flavor} markdown />
-                    <AttrBlock name="Challenge Rating" attr={quest.attrs.challenge} />
-                    <AttrBlock name="Reward XP" attr={quest.attrs.rewardXp} />
-                    <AttrBlock name="Reward Coin (gp)" attr={quest.attrs.rewardCoin} />
                     <AttrBlock name="Rewards" attr={quest.attrs.rewardOther} markdown />
                 </div>
                 <div className="card-footer">

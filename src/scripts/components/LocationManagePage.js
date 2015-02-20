@@ -55,7 +55,7 @@ var LocationManagePage = React.createClass({
                 <div id="location-manage-page" className="page-content">
                     <Breadcrumb crumbs={[
                         {
-                            text: campaign.attrs.name
+                            text: campaign.attrs.name + " (Locations)"
                         }
                     ]} />
                     <PageHeader pageName={campaign.attrs.name} pageType="Locations">
