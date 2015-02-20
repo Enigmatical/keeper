@@ -4,8 +4,8 @@ var React = require('react/addons');
 
 var Auth = require('../../helpers/Auth');
 
-var Breadcrumb = require('../MainBreadcrumb');
-var PageHeader = require('../ModelPageHeader');
+var Breadcrumb = require('../Common/Breadcrumb');
+var PageHeader = require('../Model/PageHeader');
 var FormModal = require('./FormModal');
 var Card = require('./Card');
 

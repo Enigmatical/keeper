@@ -10,7 +10,7 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 var LinkModal = require('../Foe/LinkModal');
 var FormModal = require('./FormModal');
 var RemoveModal = require('./RemoveModal');
-var AttrBlock = require('../ModelAttrBlock');
+var AttrBlock = require('.././Model/AttrBlock');
 var Link = require('../Foe/Link');
 
 require('../../../styles/ItemCard.css');

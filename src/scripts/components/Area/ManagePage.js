@@ -13,8 +13,8 @@ var Auth = require('../../helpers/Auth');
 var CampaignModel = require('../../models/CampaignModel');
 var LocationModel = require('../../models/LocationModel');
 
-var Breadcrumb = require('../MainBreadcrumb');
-var PageHeader = require('../ModelPageHeader');
+var Breadcrumb = require('../Common/Breadcrumb');
+var PageHeader = require('../Model/PageHeader');
 var AreaFormModal = require('./FormModal');
 var AreaCard = require('./Card');
 var ShopFormModal = require('../Shop/FormModal');

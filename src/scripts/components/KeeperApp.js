@@ -8,7 +8,7 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 
-var MainNav = require('./MainNav');
+var Nav = require('./Common/Nav');
 
 /* CSS */
 // Bootstrap
@@ -25,7 +25,7 @@ var KeeperApp = React.createClass({
     render: function() {
         return (
             <div id="AppMain" ref="AppMain">
-                <MainNav />
+                <Nav />
                 <div className="container-fluid">
                     <RouteHandler />
                 </div>

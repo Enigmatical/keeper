@@ -9,7 +9,7 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('./FormModal');
 var RemoveModal = require('./RemoveModal');
-var AttrBlock = require('../ModelAttrBlock');
+var AttrBlock = require('../Model/AttrBlock');
 
 require('../../../styles/ItemCard.css');
 

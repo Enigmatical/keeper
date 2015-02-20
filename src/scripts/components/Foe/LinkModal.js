@@ -7,8 +7,8 @@ var Auth = require('../../helpers/Auth');
 
 var Model = require('../../models/FoeModel');
 
-var Modal = require('../ModelLinkModal');
-var Input = require('../ModelFormInput');
+var Modal = require('../Model/LinkModal');
+var Input = require('../Model/FormInput');
 var Link = require('react-router').Link;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
