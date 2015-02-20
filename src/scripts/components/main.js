@@ -7,9 +7,9 @@ var HomePage = require('./HomePage');
 
 var CampaignManagePage = require('./CampaignManagePage');
     var ActManagePage = require('./Act/ManagePage');
-        var QuestManagePage = require('./QuestManagePage');
-            var TaskManagePage = require('./TaskManagePage');
-    var LocationManagePage = require('./LocationManagePage');
+        var QuestManagePage = require('./Quest/ManagePage');
+            var TaskManagePage = require('./Task/ManagePage');
+    var LocationManagePage = require('./Location/ManagePage');
         var AreaManagePage = require('./Area/ManagePage');
 
 var CharacterManagePage = require('./Character/ManagePage');

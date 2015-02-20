@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var Modal = require('./ModelRemoveModal');
+var Modal = require('../ModelRemoveModal');
 
 
 
