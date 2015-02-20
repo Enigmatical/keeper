@@ -1,47 +1,49 @@
 'use strict';
 
 var React = require('react/addons');
+var Markdown = require('markdown').markdown;
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('./QuestFormModal');
-var RemoveModal = require('./QuestRemoveModal');
-var AttrBlock = require('./ModelAttrBlock');
+var FormModal = require('./FormModal');
+var RemoveModal = require('./RemoveModal');
+var AttrBlock = require('../ModelAttrBlock');
 
-require('../../styles/ItemCard.css');
+require('../../../styles/ItemCard.css');
 
 
 
-var QuestCard = React.createClass({
+var TaskCard = React.createClass({
     render: function () {
         var campaign = this.props.campaign;
         var act = this.props.act;
         var quest = this.props.quest;
+        var task = this.props.task;
 
         return (
-            <div className="item-card quest-card">
+            <div className="item-card task-card">
                 <div className="card-header">
                     <p className="pull-left">
-                        {quest.attrs.name}
+                        {task.attrs.name}
                     </p>
                     <p className="pull-right">
-                        <small className="text-muted">{quest.attrs.type}&nbsp;&nbsp;<strong>CR {quest.attrs.challenge}</strong></small>
+                        <span />
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={quest.attrs.flavor} markdown />
-                    <AttrBlock name="Rewards" attr={quest.attrs.rewardOther} markdown />
+                    <AttrBlock name="Flavor" attr={task.attrs.flavor} markdown />
+                    <AttrBlock name="Details" attr={task.attrs.details} markdown />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <ButtonLink bsStyle="primary" bsSize="small" to="manage-tasks" params={{campaignId: campaign.id, actId: act.id, questId: quest.id}}><Glyphicon glyph="cog" /> Tasks</ButtonLink>
+                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal act={act} quest={quest} onUpdate={this.props.onUpdate} />
-                        <RemoveModal quest={quest} onUpdate={this.props.onUpdate} />
+                        <FormModal quest={quest} task={task} onUpdate={this.props.onUpdate} />
+                        <RemoveModal task={task} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>
@@ -49,6 +51,6 @@ var QuestCard = React.createClass({
     }
 });
 
-module.exports = QuestCard;
+module.exports = TaskCard;
 
 
