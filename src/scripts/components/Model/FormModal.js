@@ -7,7 +7,7 @@ var OverlayMixin = require('react-bootstrap').OverlayMixin;
 var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
-var Input = require('./ModelFormInput');
+var Input = require('./FormInput');
 
 
 

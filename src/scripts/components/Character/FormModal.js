@@ -7,8 +7,8 @@ var Auth = require('../../helpers/Auth');
 
 var Model = require('../../models/CharacterModel');
 
-var Modal = require('../ModelFormModal');
-var Input = require('../ModelFormInput');
+var Modal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
 
 
 

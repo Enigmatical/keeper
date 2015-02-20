@@ -9,8 +9,8 @@ var CampaignModel = require('../../models/CampaignModel');
 var ActModel = require('../../models/ActModel');
 var QuestModel = require('../../models/QuestModel');
 
-var Breadcrumb = require('../MainBreadcrumb');
-var PageHeader = require('../ModelPageHeader');
+var Breadcrumb = require('../Common/Breadcrumb');
+var PageHeader = require('../Model/PageHeader');
 var FormModal = require('./FormModal');
 var Card = require('./Card');
 

@@ -7,7 +7,7 @@ var MenuItemLink = require('react-router-bootstrap').MenuItemLink;
 
 
 
-var MainBreadcrumb = React.createClass({
+var Breadcrumb = React.createClass({
     render: function () {
         var crumbs = {};
 
@@ -34,6 +34,6 @@ var MainBreadcrumb = React.createClass({
     }
 });
 
-module.exports = MainBreadcrumb;
+module.exports = Breadcrumb;
 
 

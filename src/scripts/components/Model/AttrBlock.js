@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var Markdown = require('./MarkdownBlock');
+var Markdown = require('../Common/MarkdownBlock');
 
 
 

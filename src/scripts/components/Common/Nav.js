@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
-var Auth = require('../helpers/Auth');
+var Auth = require('../../helpers/Auth');
 var Navigation = require('react-router').Navigation;
 
 var Navbar = require('react-bootstrap').Navbar;
@@ -11,7 +11,7 @@ var Button = require('react-bootstrap').Button;
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Link = require('react-router').Link;
 
-require('../../styles/MainNav.css');
+require('../../../styles/Nav.css');
 
 
 

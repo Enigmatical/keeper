@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 
-var Modal = require('../ModelRemoveModal');
+var Modal = require('../Model/RemoveModal');
 
 
 

@@ -7,8 +7,8 @@ var Auth = require('../../helpers/Auth');
 
 var CampaignModel = require('../../models/CampaignModel');
 
-var Breadcrumb = require('../MainBreadcrumb');
-var PageHeader = require('../ModelPageHeader');
+var Breadcrumb = require('../Common/Breadcrumb');
+var PageHeader = require('../Model/PageHeader');
 var FormModal = require('./FormModal');
 var Card = require('./Card');
 

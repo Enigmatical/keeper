@@ -8,7 +8,7 @@ var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
-var PageHeader = require('../ModelPageHeader');
+var PageHeader = require('../Model/PageHeader');
 var FoeFormModal = require('./FormModal');
 var FoeCard = require('./Card');
 var BattleFormModal = require('../Battle/FormModal');

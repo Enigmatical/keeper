@@ -7,8 +7,8 @@ var Pathfinder = require('../../helpers/Pathfinder');
 
 var Model = require('../../models/BountyModel');
 
-var Modal = require('../ModelFormModal');
-var Input = require('../ModelFormInput');
+var Modal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
 
 
 
