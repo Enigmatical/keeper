@@ -6,9 +6,9 @@ var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var UnlinkModal = require('./FoeUnlinkModal');
+var UnlinkModal = require('./UnlinkModal');
 
-require('../../styles/ItemLink.css');
+require('../../../styles/ItemLink.css');
 
 
 

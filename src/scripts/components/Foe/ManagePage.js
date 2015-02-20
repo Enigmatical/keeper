@@ -2,17 +2,17 @@
 
 var React = require('react/addons');
 
-var Auth = require('../helpers/Auth');
+var Auth = require('../../helpers/Auth');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
-var PageHeader = require('./ModelPageHeader');
-var FoeFormModal = require('./FoeFormModal');
-var FoeCard = require('./FoeCard');
-var BattleFormModal = require('./BattleFormModal');
-var BattleCard = require('./BattleCard');
+var PageHeader = require('../ModelPageHeader');
+var FoeFormModal = require('./FormModal');
+var FoeCard = require('./Card');
+var BattleFormModal = require('../Battle/FormModal');
+var BattleCard = require('../Battle/Card');
 
 
 var FoeManagePage = React.createClass({

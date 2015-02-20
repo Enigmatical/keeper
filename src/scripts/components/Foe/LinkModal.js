@@ -3,12 +3,12 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var Auth = require('../helpers/Auth');
+var Auth = require('../../helpers/Auth');
 
-var Model = require('../models/FoeModel');
+var Model = require('../../models/FoeModel');
 
-var Modal = require('./ModelLinkModal');
-var Input = require('./ModelFormInput');
+var Modal = require('../ModelLinkModal');
+var Input = require('../ModelFormInput');
 var Link = require('react-router').Link;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
