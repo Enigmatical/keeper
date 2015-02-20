@@ -8,19 +8,19 @@ var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
-var Auth = require('../helpers/Auth');
+var Auth = require('../../helpers/Auth');
 
-var CampaignModel = require('../models/CampaignModel');
-var LocationModel = require('../models/LocationModel');
+var CampaignModel = require('../../models/CampaignModel');
+var LocationModel = require('../../models/LocationModel');
 
-var Breadcrumb = require('./MainBreadcrumb');
-var PageHeader = require('./ModelPageHeader');
-var AreaFormModal = require('./AreaFormModal');
-var AreaCard = require('./AreaCard');
-var ShopFormModal = require('./ShopFormModal');
-var ShopCard = require('./ShopCard');
-var BountyFormModal = require('./BountyFormModal');
-var BountyCard = require('./BountyCard');
+var Breadcrumb = require('../MainBreadcrumb');
+var PageHeader = require('../ModelPageHeader');
+var AreaFormModal = require('./FormModal');
+var AreaCard = require('./Card');
+var ShopFormModal = require('../Shop/FormModal');
+var ShopCard = require('../Shop/Card');
+var BountyFormModal = require('../Bounty/FormModal');
+var BountyCard = require('../Bounty/Card');
 
 
 

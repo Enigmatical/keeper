@@ -3,16 +3,16 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var Modal = require('./ModelRemoveModal');
+var Modal = require('../ModelRemoveModal');
 
 
 
-var BountyRemoveModal = React.createClass({
+var CharacterRemoveModal = React.createClass({
     render: function () {
         return (
             <Modal
-                titlePart="Bounty"
-                target={this.props.bounty}
+                titlePart="Character"
+                target={this.props.character}
 
                 className={this.props.className}
                 onUpdate={this.props.onUpdate}
@@ -21,6 +21,6 @@ var BountyRemoveModal = React.createClass({
     }
 });
 
-module.exports = BountyRemoveModal;
+module.exports = CharacterRemoveModal;
 
 
