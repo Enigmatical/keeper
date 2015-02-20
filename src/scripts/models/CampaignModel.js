@@ -9,6 +9,8 @@ var LocationModel = require('../models/LocationModel');
 function CampaignModel() {
     BaseModel.apply(this, ['campaigns']);
 
+    this.name = 'campaign';
+
     this.attrs = {
         user_id: null,
         order: null,

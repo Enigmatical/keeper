@@ -47,7 +47,8 @@ var ModelRemoveModal = React.createClass({
     },
 
     renderOverlay: function() {
-        var modalTitle = 'Remove ' + this.props.titlePart + '?';
+        var targetName = _.startCase(this.props.target.name);
+        var modalTitle = 'Remove ' + targetName + '?';
 
         if (!this.state.isModalOpen) {
             return <span />;

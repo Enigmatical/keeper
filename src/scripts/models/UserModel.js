@@ -11,6 +11,8 @@ var BattleModel = require('../models/BattleModel');
 function UserModel() {
     BaseModel.apply(this, ['users']);
 
+    this.name = 'user';
+
     this.attrs = {
         name: null,
         provider: null

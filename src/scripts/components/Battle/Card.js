@@ -9,8 +9,8 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var LinkModal = require('../Foe/LinkModal');
 var FormModal = require('./FormModal');
-var RemoveModal = require('./RemoveModal');
-var AttrBlock = require('.././Model/AttrBlock');
+var RemoveModal = require('../Model/RemoveModal');
+var AttrBlock = require('../Model/AttrBlock');
 var Link = require('../Foe/Link');
 
 require('../../../styles/ItemCard.css');
@@ -51,7 +51,7 @@ var BattleCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal battle={battle} onUpdate={self.props.onUpdate} />
-                        <RemoveModal battle={battle} onUpdate={self.props.onUpdate} />
+                        <RemoveModal target={battle} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

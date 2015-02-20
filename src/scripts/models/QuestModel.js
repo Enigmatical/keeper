@@ -8,6 +8,8 @@ var TaskModel = require('../models/TaskModel');
 function QuestModel() {
     BaseModel.apply(this, ['quests']);
 
+    this.name = 'quest';
+
     this.attrs = {
         act_id: null,
         order: null,

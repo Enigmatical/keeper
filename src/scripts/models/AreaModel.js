@@ -8,6 +8,8 @@ var EncounterModel = require('../models/EncounterModel');
 function AreaModel() {
     BaseModel.apply(this, ['areas']);
 
+    this.name = 'area';
+
     this.attrs = {
         location_id: null,
 

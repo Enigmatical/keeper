@@ -5,7 +5,9 @@ var BaseModel = require('../models/BaseModel');
 
 
 function EncounterModel() {
-    BaseModel.apply(this, ['areas']);
+    BaseModel.apply(this, ['encounters']);
+
+    this.name = 'encounter';
 
     this.attrs = {
         parent_id: null,

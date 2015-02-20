@@ -8,7 +8,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('./FormModal');
-var RemoveModal = require('./RemoveModal');
+var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
 require('../../../styles/ItemCard.css');
@@ -41,7 +41,7 @@ var BountyCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal location={location} bounty={bounty} onUpdate={self.props.onUpdate} />
-                        <RemoveModal bounty={bounty} onUpdate={self.props.onUpdate} />
+                        <RemoveModal target={bounty} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

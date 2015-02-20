@@ -8,6 +8,8 @@ var EncounterModel = require('../models/EncounterModel');
 function TaskModel() {
     BaseModel.apply(this, ['tasks']);
 
+    this.name = 'task';
+
     this.attrs = {
         quest_id: null,
         order: null,

@@ -8,7 +8,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('./FormModal');
-var RemoveModal = require('./RemoveModal');
+var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
 require('../../../styles/ItemCard.css');
@@ -41,7 +41,15 @@ var LocationCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal campaign={campaign} location={location} onUpdate={this.props.onUpdate} />
-                        <RemoveModal location={location} onUpdate={this.props.onUpdate} />
+                        <RemoveModal target={location} onUpdate={this.props.onUpdate}>
+                            <p className="text-danger">
+                                This will also <strong>remove</strong> all associated:
+                                <ul className="text-danger">
+                                    <li>Areas</li>
+                                    <li>Shops</li>
+                                </ul>
+                            </p>
+                        </RemoveModal>
                     </ButtonToolbar>
                 </div>
             </div>

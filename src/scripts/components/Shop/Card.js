@@ -9,7 +9,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('./FormModal');
-var RemoveModal = require('./RemoveModal');
+var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
 var CharacterLinkModal = require('../Character/LinkModal');
@@ -72,7 +72,7 @@ var ShopCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal location={location} shop={shop} onUpdate={self.props.onUpdate} />
-                        <RemoveModal shop={shop} onUpdate={self.props.onUpdate} />
+                        <RemoveModal target={shop} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

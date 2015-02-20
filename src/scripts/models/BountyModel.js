@@ -8,6 +8,8 @@ var TaskModel = require('../models/TaskModel');
 function BountyModel() {
     BaseModel.apply(this, ['bounties']);
 
+    this.name = 'bounty';
+
     this.attrs = {
         location_id: null,
 
