@@ -3,14 +3,14 @@
 var React = require('react/addons');
 var Router = require('react-router');
 
-var Auth = require('../helpers/Auth');
+var Auth = require('../../helpers/Auth');
 
-var CampaignModel = require('../models/CampaignModel');
+var CampaignModel = require('../../models/CampaignModel');
 
-var Breadcrumb = require('./MainBreadcrumb');
-var PageHeader = require('./ModelPageHeader');
-var FormModal = require('./ActFormModal');
-var Card = require('./ActCard');
+var Breadcrumb = require('../MainBreadcrumb');
+var PageHeader = require('../ModelPageHeader');
+var FormModal = require('./FormModal');
+var Card = require('./Card');
 
 
 
