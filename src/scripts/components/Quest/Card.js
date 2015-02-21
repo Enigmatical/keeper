@@ -40,7 +40,7 @@ var QuestCard = React.createClass({
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-tasks" params={{campaignId: campaign.id, actId: act.id, questId: quest.id}}><Glyphicon glyph="cog" /> Tasks</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={quest} model={this.props.model} related={{key:'act_id', on: act}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={quest} model={this.props.model} parent={act} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={quest} onUpdate={this.props.onUpdate}>
                             <p className="text-danger">
                                 This will also <strong>remove</strong> all associated:

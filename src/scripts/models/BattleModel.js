@@ -15,7 +15,7 @@ function BattleModel() {
     this.name = 'group';
 
     this.attrs = {
-        user_id: null,
+        parent_id: null,
 
         name: null,
         type: null,

@@ -42,7 +42,7 @@ var FoeCard = React.createClass({
                         <span />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={foe} model={this.props.model} related={{key: 'user_id', on: Auth.User}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={foe} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={foe} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

@@ -39,7 +39,7 @@ var ActCard = React.createClass({
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-quests" params={{campaignId: campaign.id, actId: act.id}}><Glyphicon glyph="cog" /> Quests</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={act} model={this.props.model} related={{key: 'campaign_id', on: campaign}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={act} model={this.props.model} parent={campaign} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={act} onUpdate={this.props.onUpdate}>
                             <p className="text-danger">
                             This will also <strong>remove</strong> all associated:

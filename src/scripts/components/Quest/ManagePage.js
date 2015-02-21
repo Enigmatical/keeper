@@ -89,7 +89,7 @@ var QuestManagePage = React.createClass({
                 <div id="quest-manage-page" className="page-content">
                     <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={act.attrs.name} pageType="Quests">
-                        <FormModal model={QuestModel} related={{key: 'act_id', on: act}} inputs={self.getQuestInputs.bind(self, {})} onUpdate={self.getQuests} />
+                        <FormModal model={QuestModel} parent={act} inputs={self.getQuestInputs.bind(self, {})} onUpdate={self.getQuests} />
                     </PageHeader>
                     <div className="row">
                         {self.state.quests.map(function(quest){

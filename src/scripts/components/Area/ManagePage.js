@@ -220,9 +220,9 @@ var AreaManagePage = React.createClass({
                 <div id="area-manage-page" className="page-content">
                     <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={location.attrs.name} pageType="Areas, Shops, & Bounties">
-                        <FormModal model={AreaModel} related={{key: 'location_id', on: location}} inputs={self.getAreaInputs.bind(self, {})} onUpdate={self.getAreas} />
-                        <FormModal model={ShopModel} related={{key: 'location_id', on: location}} inputs={self.getShopInputs.bind(self, {})} onUpdate={self.getShops} />
-                        <FormModal model={BountyModel} related={{key: 'location_id', on: location}} inputs={self.getBountyInputs.bind(self, {})} onUpdate={self.getBounties} />
+                        <FormModal model={AreaModel} parent={location} inputs={self.getAreaInputs.bind(self, {})} onUpdate={self.getAreas} />
+                        <FormModal model={ShopModel} parent={location} inputs={self.getShopInputs.bind(self, {})} onUpdate={self.getShops} />
+                        <FormModal model={BountyModel} parent={location} inputs={self.getBountyInputs.bind(self, {})} onUpdate={self.getBounties} />
                     </PageHeader>
                    <div className="row">
                         <div className="col-md-12">

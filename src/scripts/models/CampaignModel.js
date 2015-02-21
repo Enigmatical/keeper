@@ -12,7 +12,7 @@ function CampaignModel() {
     this.name = 'campaign';
 
     this.attrs = {
-        user_id: null,
+        parent_id: null,
         order: null,
 
         name: null,
@@ -21,11 +21,11 @@ function CampaignModel() {
     };
 
     this.getActs = function() {
-        return this.getRelated(ActModel, 'campaign_id', 'order');
+        return this.getRelated(ActModel, 'order');
     };
 
     this.getLocations = function() {
-        return this.getRelated(LocationModel, 'campaign_id', 'order');
+        return this.getRelated(LocationModel, 'order');
     };
 }
 

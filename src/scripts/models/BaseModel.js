@@ -130,13 +130,13 @@ BaseModel.prototype.get = function(id) {
     return deferred.promise;
 };
 
-BaseModel.prototype.getRelated = function(RelatedModel, link_key, sort_key) {
+BaseModel.prototype.getRelated = function(RelatedModel, sort_key) {
     var deferred = Q.defer();
 
     var self = this;
 
     new RelatedModel().fb_ref
-        .orderByChild(link_key)
+        .orderByChild('parent_id')
         .equalTo(self.id)
         .once('value', function(snapshot) {
             if (snapshot !== null) {

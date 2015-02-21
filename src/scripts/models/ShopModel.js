@@ -14,7 +14,7 @@ function ShopModel() {
     this.name = 'shop';
 
     this.attrs = {
-        location_id: null,
+        parent_id: null,
 
         name: null,
         type: null,
@@ -56,7 +56,7 @@ function ShopModel() {
     };
 
     this.getEncounters = function() {
-        return this.getRelated(EncounterModel, 'parent_id', 'order');
+        return this.getRelated(EncounterModel, 'order');
     }
 }
 

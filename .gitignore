@@ -37,3 +37,4 @@ dist
 /src/config.codekit
 /src/styles/.sass-cache
 /src/.codekit-cache
+/src/firebase

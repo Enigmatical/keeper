@@ -10,7 +10,7 @@ function CharacterModel() {
     this.name = 'character';
 
     this.attrs = {
-        user_id: null,
+        parent_id: null,
 
         name: null,
         type: null,

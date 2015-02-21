@@ -94,7 +94,7 @@ var ActManagePage = React.createClass({
                 <div id="act-manage-page" className="page-content">
                     <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={campaign.attrs.name} pageType="Acts">
-                        <FormModal model={ActModel} related={{key: 'campaign_id', on: campaign}} inputs={self.getInputs.bind({})} onUpdate={self.getActs} />
+                        <FormModal model={ActModel} parent={campaign} inputs={self.getInputs.bind({})} onUpdate={self.getActs} />
                     </PageHeader>
                     <div className="row">
                         {self.state.acts.map(function(act) {

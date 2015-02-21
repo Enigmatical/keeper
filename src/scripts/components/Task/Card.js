@@ -42,7 +42,7 @@ var TaskCard = React.createClass({
                         <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={task} model={this.props.model} related={{key: 'quest_id', on: task}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={task} model={this.props.model} parent={task} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={task} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

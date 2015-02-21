@@ -19,19 +19,19 @@ function UserModel() {
     };
 
     this.getCampaigns = function() {
-        return this.getRelated(CampaignModel, 'user_id', 'order');
+        return this.getRelated(CampaignModel, 'order');
     };
 
     this.getCharacters = function() {
-        return this.getRelated(CharacterModel, 'user_id', 'name');
+        return this.getRelated(CharacterModel, 'name');
     };
 
     this.getFoes = function() {
-        return this.getRelated(FoeModel, 'user_id', 'name');
+        return this.getRelated(FoeModel, 'name');
     };
 
     this.getBattles = function() {
-        return this.getRelated(BattleModel, 'user_id', 'name');
+        return this.getRelated(BattleModel, 'name');
     };
 }
 

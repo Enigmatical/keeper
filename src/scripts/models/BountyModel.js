@@ -11,7 +11,7 @@ function BountyModel() {
     this.name = 'bounty';
 
     this.attrs = {
-        location_id: null,
+        parent_id: null,
 
         name: null,
         type: null,
@@ -25,7 +25,7 @@ function BountyModel() {
     };
 
     this.getTasks = function() {
-        return this.getRelated(TaskModel, 'bounty_id', 'order');
+        return this.getRelated(TaskModel, 'order');
     }
 }
 

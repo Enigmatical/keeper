@@ -40,7 +40,7 @@ var CharacterCard = React.createClass({
                         <span />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={character} model={this.props.model} related={{key: 'user_id', on: Auth.User}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={character} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={character} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

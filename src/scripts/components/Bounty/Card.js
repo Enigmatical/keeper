@@ -40,7 +40,7 @@ var BountyCard = React.createClass({
                         <Button bsSize="small" bsStyle="warning"><Glyphicon glyph="link" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={bounty} model={this.props.model} related={{key: 'location_id', on: location}} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <FormModal target={bounty} model={this.props.model} parent={location} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={bounty} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

@@ -10,7 +10,7 @@ function FoeModel() {
     this.name = 'foe';
 
     this.attrs = {
-        user_id: null,
+        parent_id: null,
 
         name: null,
         type: null,

@@ -13,7 +13,7 @@ function LocationModel() {
     this.name = 'location';
 
     this.attrs = {
-        campaign_id: null,
+        parent_id: null,
 
         name: null,
         type: null,
@@ -23,15 +23,15 @@ function LocationModel() {
     };
 
     this.getAreas = function() {
-        return this.getRelated(AreaModel, 'location_id', 'name');
+        return this.getRelated(AreaModel, 'name');
     };
 
     this.getShops = function() {
-        return this.getRelated(ShopModel, 'location_id', 'name');
+        return this.getRelated(ShopModel, 'name');
     };
 
     this.getBounties = function() {
-        return this.getRelated(BountyModel, 'location_id', 'rewardXp');
+        return this.getRelated(BountyModel, 'rewardXp');
     };
 }
 
