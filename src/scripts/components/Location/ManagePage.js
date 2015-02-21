@@ -9,7 +9,10 @@ var CampaignModel = require('../../models/CampaignModel');
 
 var Breadcrumb = require('../Common/Breadcrumb');
 var PageHeader = require('../Model/PageHeader');
-var FormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
+
+var Model = require('../../models/LocationModel');
 var Card = require('./Card');
 
 
@@ -46,6 +49,38 @@ var LocationManagePage = React.createClass({
             });
     },
 
+    getLocationInputs: function(attrs) {
+        return (
+            <div>
+                <Input
+                    type="text"
+                    name="name"
+                    defaultValue={attrs.name}
+                />
+                <Input
+                    type="text"
+                    name="type"
+                    defaultValue={attrs.type}
+                />
+                <Input
+                    type="textarea"
+                    name="details"
+                    defaultValue={attrs.details}
+                />
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
+                />
+                <Input
+                    type="text"
+                    name="coordinate"
+                    defaultValue={attrs.coordinate}
+                />
+            </div>
+            );
+    },
+
     render: function () {
         var self = this;
         var campaign = self.state.campaign;
@@ -59,13 +94,13 @@ var LocationManagePage = React.createClass({
                         }
                     ]} />
                     <PageHeader pageName={campaign.attrs.name} pageType="Locations">
-                        <FormModal className="pull-right" campaign={self.state.campaign} onUpdate={self.getLocations} />
+                        <FormModal model={Model} related={{key: 'campaign_id', on: campaign}} inputs={self.getLocationInputs.bind(self, {})} onUpdate={self.getLocations} />
                     </PageHeader>
                     <div className="row">
                         {self.state.locations.map(function(location) {
                             return (
                                 <div key={location.id} className="col-md-6">
-                                    <Card campaign={campaign} location={location} onUpdate={self.getLocations} />
+                                    <Card model={Model} campaign={campaign} location={location} inputs={self.getLocationInputs.bind(self, location.attrs)} onUpdate={self.getLocations} />
                                 </div>
                                 );
                         })}
