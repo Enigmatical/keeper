@@ -7,6 +7,8 @@ var BaseModel = require('../models/BaseModel');
 function FoeModel() {
     BaseModel.apply(this, ['foes']);
 
+    this.name = 'foe';
+
     this.attrs = {
         user_id: null,
 

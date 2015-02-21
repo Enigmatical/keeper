@@ -11,7 +11,10 @@ var QuestModel = require('../../models/QuestModel');
 
 var Breadcrumb = require('../Common/Breadcrumb');
 var PageHeader = require('../Model/PageHeader');
-var FormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
+
+var TaskModel = require('../../models/TaskModel');
 var Card = require('./Card');
 
 
@@ -62,6 +65,29 @@ var TaskManagePage = React.createClass({
             });
     },
 
+    getTaskInputs: function(attrs) {
+        return (
+            <div>
+                <Input
+                    type="text"
+                    name="name"
+                    placeholder="Objective"
+                    defaultValue={attrs.name}
+                />
+                <Input
+                    type="textarea"
+                    name="details"
+                    defaultValue={attrs.details}
+                />
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
+                />
+            </div>
+            );
+    },
+
     render: function () {
         var self = this;
         var campaign = self.state.campaign;
@@ -69,31 +95,37 @@ var TaskManagePage = React.createClass({
         var quest = self.state.quest;
 
         if (_.isObject(quest)) {
+            var crumbs = [
+                {
+                    text: (<span>Campaign: <strong>{campaign.attrs.name}</strong></span>),
+                    link: 'manage-campaigns'
+                },
+                {
+                    text: (<span>Act: <strong>{act.attrs.name}</strong></span>),
+                    link: 'manage-acts',
+                    params: {campaignId: campaign.id}
+                },
+                {
+                    text: (<span>Quest: <strong>{quest.attrs.name}</strong></span>),
+                    link: 'manage-quests',
+                    params: {campaignId: campaign.id, actId: act.id}
+                },
+                {
+                    text: (<span>Tasks</span>)
+                }
+            ];
+
             return (
                 <div id="task-manage-page" className="page-content">
-                    <Breadcrumb crumbs={[
-                        {
-                            text: campaign.attrs.name + " (Acts)",
-                            link: 'manage-acts',
-                            params: {campaignId: campaign.id}
-                        },
-                        {
-                            text: act.attrs.name,
-                            link: 'manage-quests',
-                            params: {campaignId: campaign.id, actId: act.id}
-                        },
-                        {
-                            text: quest.attrs.name
-                        }
-                    ]} />
+                    <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={quest.attrs.name} pageType="Tasks">
-                        <FormModal quest={quest} onUpdate={self.getTasks} />
+                        <FormModal model={TaskModel} related={{key: 'quest_id', on: quest}} inputs={self.getTaskInputs.bind(self, {})} onUpdate={self.getTasks} />
                     </PageHeader>
                     <div className="row">
                         {self.state.tasks.map(function(task){
                             return (
                                 <div key={task.id} className="col-md-6">
-                                    <Card campaign={campaign} act={act} quest={quest} task={task} onUpdate={self.getTasks} />
+                                    <Card model={TaskModel} campaign={campaign} act={act} quest={quest} task={task} inputs={self.getTaskInputs.bind(self, task.attrs)} onUpdate={self.getTasks} />
                                 </div>
                                 );
                         })}

@@ -7,9 +7,9 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('./FormModal');
-var RemoveModal = require('./RemoveModal');
-var AttrBlock = require('.././Model/AttrBlock');
+var FormModal = require('../Model/FormModal');
+var RemoveModal = require('../Model/RemoveModal');
+var AttrBlock = require('../Model/AttrBlock');
 
 require('../../../styles/ItemCard.css');
 
@@ -39,8 +39,8 @@ var AreaCard = React.createClass({
                         <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal location={location} area={area} onUpdate={this.props.onUpdate} />
-                        <RemoveModal area={area} onUpdate={this.props.onUpdate} />
+                        <FormModal target={area} model={this.props.model} related={{key: 'location_id', on: location}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <RemoveModal target={area} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

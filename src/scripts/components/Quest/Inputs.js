@@ -1,18 +1,14 @@
 'use strict';
 
 var React = require('react/addons');
-var _ = require('lodash');
 
 var Pathfinder = require('../../helpers/Pathfinder');
 
-var Model = require('../../models/BountyModel');
-
-var Modal = require('../Model/FormModal');
 var Input = require('../Model/FormInput');
 
 
 
-var BountyFormModal = React.createClass({
+var QuestInputs = React.createClass({
     handleRewards: function() {
         var challenge = this.refs.challenge.getDOMNode().querySelector('[name=challenge]').value;
         var quality = this.refs.quality.getDOMNode().querySelector('[name=quality]').value;
@@ -24,25 +20,11 @@ var BountyFormModal = React.createClass({
         this.refs.rewardCoin.getDOMNode().querySelector('[name=rewardCoin]').setAttribute('value', rewardCoin);
     },
 
-    render: function () {
-        var bounty = _.isObject(this.props.bounty) ? this.props.bounty : undefined;
-        var attrs = _.isObject(bounty) ? bounty.attrs : {};
-
-        var challengeOptions = Pathfinder.getChallengeRatingOptions();
-        var rewardOptions = Pathfinder.getRewardModifierOptions();
+    render: function() {
+        var attrs = this.props.attrs;
 
         return (
-            <Modal
-                titlePart="Bounty"
-                model={Model}
-
-                target={bounty}
-                related={this.props.location}
-                relatedKey="location_id"
-
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            >
+            <div>
                 <Input
                     type="text"
                     name="name"
@@ -71,7 +53,7 @@ var BountyFormModal = React.createClass({
                             name="challenge"
                             ref="challenge"
                             placeholder="Challenge Rating"
-                            options={challengeOptions}
+                            options={Pathfinder.getChallengeRatingOptions()}
                             defaultValue={attrs.challenge}
                             onChange={this.handleRewards}
                         />
@@ -82,7 +64,7 @@ var BountyFormModal = React.createClass({
                             name="quality"
                             ref="quality"
                             placeholder="Treasure"
-                            options={rewardOptions}
+                            options={Pathfinder.getRewardModifierOptions()}
                             defaultValue={attrs.quality || 'standard'}
                             onChange={this.handleRewards}
                         />
@@ -120,10 +102,9 @@ var BountyFormModal = React.createClass({
                     placeholder="Rewards"
                     defaultValue={attrs.rewardOther}
                 />
-            </Modal>
+            </div>
             );
     }
 });
 
-module.exports = BountyFormModal;
-
+module.exports = QuestInputs;

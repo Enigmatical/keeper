@@ -12,6 +12,8 @@ var FoeModel = require('../models/FoeModel');
 function BattleModel() {
     BaseModel.apply(this, ['battles']);
 
+    this.name = 'group';
+
     this.attrs = {
         user_id: null,
 

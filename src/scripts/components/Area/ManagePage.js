@@ -9,18 +9,25 @@ var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
 var Auth = require('../../helpers/Auth');
+var Pathfinder = require('../../helpers/Pathfinder');
 
 var CampaignModel = require('../../models/CampaignModel');
 var LocationModel = require('../../models/LocationModel');
 
 var Breadcrumb = require('../Common/Breadcrumb');
 var PageHeader = require('../Model/PageHeader');
-var AreaFormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
+
+var AreaModel = require('../../models/AreaModel');
 var AreaCard = require('./Card');
-var ShopFormModal = require('../Shop/FormModal');
+
+var ShopModel = require('../../models/ShopModel');
 var ShopCard = require('../Shop/Card');
-var BountyFormModal = require('../Bounty/FormModal');
+
+var BountyModel = require('../../models/BountyModel');
 var BountyCard = require('../Bounty/Card');
+var BountyInputs = require('../Bounty/Inputs');
 
 
 
@@ -75,6 +82,33 @@ var AreaManagePage = React.createClass({
             });
     },
 
+    getAreaInputs: function(attrs) {
+        return (
+            <div>
+                <Input
+                    type="text"
+                    name="name"
+                    defaultValue={attrs.name}
+                />
+                <Input
+                    type="text"
+                    name="type"
+                    defaultValue={attrs.type}
+                />
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
+                />
+                <Input
+                    type="textarea"
+                    name="details"
+                    defaultValue={attrs.details}
+                />
+            </div>
+            );
+    },
+
     getShops: function(setTab) {
         if (setTab === undefined) {
             setTab = true;
@@ -90,6 +124,48 @@ var AreaManagePage = React.createClass({
                     self.setState({activeTab: 2});
                 }
             });
+    },
+
+    getShopInputs: function(attrs) {
+        return (
+            <div>
+                <Input
+                    type="text"
+                    name="name"
+                    defaultValue={attrs.name}
+                />
+
+                <div className="row">
+                    <div className="col-md-6">
+                        <Input
+                            type="select"
+                            name="type"
+                            defaultValue={attrs.type}
+                            options={Pathfinder.getShopTypeOptions()}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <Input
+                            type="select"
+                            name="quality"
+                            defaultValue={attrs.quality}
+                            options={Pathfinder.getShopModifierOptions()}
+                        />
+                    </div>
+                </div>
+
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
+                />
+                <Input
+                    type="textarea"
+                    name="details"
+                    defaultValue={attrs.details}
+                />
+            </div>
+            );
     },
 
     getBounties: function(setTab) {
@@ -109,6 +185,12 @@ var AreaManagePage = React.createClass({
             });
     },
 
+    getBountyInputs: function(attrs) {
+        return(
+            <BountyInputs attrs={attrs} />
+            );
+    },
+
     handleTabs: function(selectedKey) {
         this.setState({activeTab: selectedKey});
     },
@@ -119,22 +201,28 @@ var AreaManagePage = React.createClass({
         var location = this.state.location;
 
         if (_.isObject(location)) {
+            var crumbs = [
+                {
+                    text: (<span>Campaign: <strong>{campaign.attrs.name}</strong></span>),
+                    link: 'manage-campaigns'
+                },
+                {
+                    text: (<span>Location: <strong>{location.attrs.name}</strong></span>),
+                    link: 'manage-locations',
+                    params: {campaignId: campaign.id}
+                },
+                {
+                    text: (<span>Areas, Shops, &amp; Bounties</span>)
+                }
+            ];
+
             return (
                 <div id="area-manage-page" className="page-content">
-                    <Breadcrumb crumbs={[
-                        {
-                            text: campaign.attrs.name + " (Locations)",
-                            link: 'manage-locations',
-                            params: {campaignId: campaign.id}
-                        },
-                        {
-                            text: location.attrs.name
-                        }
-                    ]} />
+                    <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={location.attrs.name} pageType="Areas, Shops, & Bounties">
-                        <AreaFormModal location={location} onUpdate={self.getAreas} />
-                        <ShopFormModal location={location} onUpdate={self.getShops} />
-                        <BountyFormModal location={location} onUpdate={self.getBounties} />
+                        <FormModal model={AreaModel} related={{key: 'location_id', on: location}} inputs={self.getAreaInputs.bind(self, {})} onUpdate={self.getAreas} />
+                        <FormModal model={ShopModel} related={{key: 'location_id', on: location}} inputs={self.getShopInputs.bind(self, {})} onUpdate={self.getShops} />
+                        <FormModal model={BountyModel} related={{key: 'location_id', on: location}} inputs={self.getBountyInputs.bind(self, {})} onUpdate={self.getBounties} />
                     </PageHeader>
                    <div className="row">
                         <div className="col-md-12">
@@ -143,7 +231,7 @@ var AreaManagePage = React.createClass({
                                     {self.state.areas.map(function(area) {
                                         return (
                                             <div key={area.id} className="col-md-6">
-                                                <AreaCard location={location} area={area} onUpdate={self.getAreas} />
+                                                <AreaCard model={AreaModel} location={location} area={area} inputs={self.getAreaInputs.bind(self, area.attrs)} onUpdate={self.getAreas} />
                                             </div>
                                             );
                                     })}
@@ -152,7 +240,7 @@ var AreaManagePage = React.createClass({
                                     {self.state.shops.map(function(shop) {
                                         return (
                                             <div key={shop.id} className="col-md-6">
-                                                <ShopCard location={location} shop={shop} onUpdate={self.getShops} />
+                                                <ShopCard model={ShopModel} location={location} shop={shop} inputs={self.getShopInputs.bind(self, shop.attrs)} onUpdate={self.getShops} />
                                             </div>
                                             );
                                     })}
@@ -161,7 +249,7 @@ var AreaManagePage = React.createClass({
                                     {self.state.bounties.map(function(bounty) {
                                         return (
                                             <div key={bounty.id} className="col-md-6">
-                                                <BountyCard location={location} bounty={bounty} onUpdate={self.getBounties} />
+                                                <BountyCard model={BountyModel} location={location} bounty={bounty} inputs={self.getBountyInputs.bind(self, bounty.attrs)} onUpdate={self.getBounties} />
                                             </div>
                                             );
                                     })}

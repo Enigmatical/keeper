@@ -7,8 +7,8 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('./FormModal');
-var RemoveModal = require('./RemoveModal');
+var FormModal = require('../Model/FormModal');
+var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
 require('../../../styles/ItemCard.css');
@@ -40,8 +40,8 @@ var BountyCard = React.createClass({
                         <Button bsSize="small" bsStyle="warning"><Glyphicon glyph="link" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal location={location} bounty={bounty} onUpdate={self.props.onUpdate} />
-                        <RemoveModal bounty={bounty} onUpdate={self.props.onUpdate} />
+                        <FormModal target={bounty} model={this.props.model} related={{key: 'location_id', on: location}} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <RemoveModal target={bounty} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
             </div>

@@ -8,7 +8,7 @@ var _ = require('lodash');
 
 function BaseModel(args) {
     this.id = null;
-    this.links = {};
+    this.name = 'base';
 
     this.fb_ref = this.connect(args);
 }

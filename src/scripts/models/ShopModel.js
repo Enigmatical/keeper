@@ -11,6 +11,8 @@ var EncounterModel = require('../models/EncounterModel');
 function ShopModel() {
     BaseModel.apply(this, ['shops']);
 
+    this.name = 'shop';
+
     this.attrs = {
         location_id: null,
 

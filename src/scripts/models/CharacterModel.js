@@ -7,6 +7,8 @@ var BaseModel = require('../models/BaseModel');
 function CharacterModel() {
     BaseModel.apply(this, ['characters']);
 
+    this.name = 'character';
+
     this.attrs = {
         user_id: null,
 

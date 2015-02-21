@@ -8,6 +8,8 @@ var QuestModel = require('../models/QuestModel');
 function ActModel() {
     BaseModel.apply(this, ['acts']);
 
+    this.name = 'act';
+
     this.attrs = {
         campaign_id: null,
         order: null,

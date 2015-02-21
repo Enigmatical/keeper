@@ -10,6 +10,8 @@ var BountyModel = require('../models/BountyModel');
 function LocationModel() {
     BaseModel.apply(this, ['locations']);
 
+    this.name = 'location';
+
     this.attrs = {
         campaign_id: null,
 

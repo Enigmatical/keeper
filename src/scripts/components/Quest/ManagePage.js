@@ -10,8 +10,12 @@ var ActModel = require('../../models/ActModel');
 
 var Breadcrumb = require('../Common/Breadcrumb');
 var PageHeader = require('../Model/PageHeader');
-var FormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
+
+var QuestModel = require('../../models/QuestModel');
 var Card = require('./Card');
+var QuestInputs = require('./Inputs');
 
 
 
@@ -54,32 +58,44 @@ var QuestManagePage = React.createClass({
             });
     },
 
+    getQuestInputs: function(attrs) {
+        return(
+            <QuestInputs attrs={attrs} />
+            );
+    },
+
     render: function () {
         var self = this;
         var campaign = this.state.campaign;
         var act = this.state.act;
 
         if (_.isObject(act)) {
+            var crumbs = [
+                {
+                    text: (<span>Campaign: <strong>{campaign.attrs.name}</strong></span>),
+                    link: 'manage-campaigns'
+                },
+                {
+                    text: (<span>Act: <strong>{act.attrs.name}</strong></span>),
+                    link: 'manage-acts',
+                    params: {campaignId: campaign.id}
+                },
+                {
+                    text: (<span>Quests</span>)
+                }
+            ];
+
             return (
                 <div id="quest-manage-page" className="page-content">
-                    <Breadcrumb crumbs={[
-                        {
-                            text: campaign.attrs.name + " (Acts)",
-                            link: 'manage-acts',
-                            params: {campaignId: campaign.id}
-                        },
-                        {
-                            text: act.attrs.name
-                        }
-                    ]} />
+                    <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={act.attrs.name} pageType="Quests">
-                        <FormModal act={act} onUpdate={self.getQuests} />
+                        <FormModal model={QuestModel} related={{key: 'act_id', on: act}} inputs={self.getQuestInputs.bind(self, {})} onUpdate={self.getQuests} />
                     </PageHeader>
                     <div className="row">
                         {self.state.quests.map(function(quest){
                             return (
                                 <div key={quest.id} className="col-md-6">
-                                    <Card campaign={campaign} act={act} quest={quest} onUpdate={self.getQuests} />
+                                    <Card model={QuestModel} campaign={campaign} act={act} quest={quest} inputs={self.getQuestInputs.bind(self, quest.attrs)} onUpdate={self.getQuests} />
                                 </div>
                                 );
                         })}
