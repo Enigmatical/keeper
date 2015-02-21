@@ -1,13 +1,14 @@
 'use strict';
 
 var React = require('react/addons');
+var Auth = require('../../helpers/Auth');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
@@ -40,7 +41,7 @@ var CampaignCard = React.createClass({
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-locations" params={{campaignId: campaign.id}}><Glyphicon glyph="cog" /> Locations</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal campaign={campaign} onUpdate={this.props.onUpdate} />
+                        <FormModal target={campaign} model={this.props.model} related={{key: 'user_id', on: Auth.User}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={campaign} onUpdate={this.props.onUpdate}>
                             <p className="text-danger">
                                 This will also <strong>remove</strong> all associated:
