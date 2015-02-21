@@ -2,12 +2,14 @@
 
 var React = require('react/addons');
 
+var Auth = require('../../helpers/Auth');
+
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
@@ -40,7 +42,7 @@ var FoeCard = React.createClass({
                         <span />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal foe={foe} onUpdate={this.props.onUpdate} />
+                        <FormModal target={foe} model={this.props.model} related={{key: 'user_id', on: Auth.User}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={foe} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

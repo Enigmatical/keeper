@@ -1,19 +1,14 @@
 'use strict';
 
 var React = require('react/addons');
-var _ = require('lodash');
 
-var Auth = require('../../helpers/Auth');
 var Pathfinder = require('../../helpers/Pathfinder');
 
-var Model = require('../../models/FoeModel');
-
-var Modal = require('../Model/FormModal');
 var Input = require('../Model/FormInput');
 
 
 
-var FoeFormModal = React.createClass({
+var FoeInputs = React.createClass({
     handleRewards: function() {
         var challenge = this.refs.challenge.getDOMNode().querySelector('[name=challenge]').value;
         var quality = this.refs.quality.getDOMNode().querySelector('[name=quality]').value;
@@ -26,24 +21,10 @@ var FoeFormModal = React.createClass({
     },
 
     render: function() {
-        var foe = _.isObject(this.props.foe) ? this.props.foe : undefined;
-        var attrs = _.isObject(foe) ? foe.attrs : {};
-
-        var challengeOptions = Pathfinder.getChallengeRatingOptions();
-        var rewardOptions = Pathfinder.getRewardModifierOptions();
+        var attrs = this.props.attrs;
 
         return (
-            <Modal
-                titlePart="Foe"
-                model={Model}
-
-                target={foe}
-                related={Auth.User}
-                relatedKey="user_id"
-
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            >
+            <div>
                 <Input
                     type="text"
                     name="name"
@@ -84,7 +65,7 @@ var FoeFormModal = React.createClass({
                             name="challenge"
                             ref="challenge"
                             placeholder="Challenge Rating"
-                            options={challengeOptions}
+                            options={Pathfinder.getChallengeRatingOptions()}
                             defaultValue={attrs.challenge}
                             onChange={this.handleRewards}
                         />
@@ -95,7 +76,7 @@ var FoeFormModal = React.createClass({
                             name="quality"
                             ref="quality"
                             placeholder="Treasure"
-                            options={rewardOptions}
+                            options={Pathfinder.getRewardModifierOptions()}
                             defaultValue={attrs.quality || 'standard'}
                             onChange={this.handleRewards}
                         />
@@ -145,11 +126,9 @@ var FoeFormModal = React.createClass({
                         />
                     </div>
                 </div>
-            </Modal>
+            </div>
             );
     }
 });
 
-module.exports = FoeFormModal;
-
-
+module.exports = FoeInputs;

@@ -9,9 +9,14 @@ var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
 var PageHeader = require('../Model/PageHeader');
-var FoeFormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
+
+var FoeModel = require('../../models/FoeModel');
 var FoeCard = require('./Card');
-var BattleFormModal = require('../Battle/FormModal');
+var FoeInputs = require('./Inputs');
+
+var BattleModel = require('../../models/BattleModel');
 var BattleCard = require('../Battle/Card');
 
 
@@ -46,6 +51,12 @@ var FoeManagePage = React.createClass({
         });
     },
 
+    getFoeInputs: function(attrs) {
+        return (
+            <FoeInputs attrs={attrs} />
+            );
+    },
+
     getBattles: function(setTab) {
         if (setTab === undefined) {
             setTab = true;
@@ -61,6 +72,37 @@ var FoeManagePage = React.createClass({
         });
     },
 
+    getBattleInputs: function(attrs) {
+        return(
+            <div>
+                <Input
+                    type="text"
+                    name="name"
+                    defaultValue={attrs.name}
+                />
+
+                <Input
+                    type="text"
+                    name="type"
+                    defaultValue={attrs.type}
+                />
+
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    defaultValue={attrs.flavor}
+                />
+
+                <Input
+                    type="textarea"
+                    name="details"
+                    placeholder="Behavior"
+                    defaultValue={attrs.details}
+                />
+            </div>
+            );
+    },
+
     handleTabs: function(selectedKey) {
         this.setState({activeTab: selectedKey});
     },
@@ -71,8 +113,8 @@ var FoeManagePage = React.createClass({
         return (
             <div id="foe-manage-page" className="page-content">
                 <PageHeader pageName="Foes">
-                    <FoeFormModal onUpdate={self.getFoes} />
-                    <BattleFormModal onUpdate={self.getBattles} />
+                    <FormModal model={FoeModel} related={{key: 'user_id', on: Auth.User}} inputs={self.getFoeInputs.bind(self, {})} onUpdate={self.getFoes} />
+                    <FormModal model={BattleModel} related={{key: 'user_id', on: Auth.User}} inputs={self.getBattleInputs.bind(self, {})} onUpdate={self.getBattles} />
                 </PageHeader>
                 <div className="row">
                     <div className="col-md-12">
@@ -81,7 +123,7 @@ var FoeManagePage = React.createClass({
                                 {self.state.foes.map(function(foe) {
                                     return (
                                         <div key={foe.id} className="col-md-6">
-                                            <FoeCard foe={foe} onUpdate={self.getFoes} />
+                                            <FoeCard model={FoeModel} foe={foe} inputs={self.getFoeInputs.bind(self, foe.attrs)} onUpdate={self.getFoes} />
                                         </div>
                                         );
                                 })}
@@ -90,7 +132,7 @@ var FoeManagePage = React.createClass({
                                 {self.state.battles.map(function(battle) {
                                      return (
                                          <div key={battle.id} className="col-md-6">
-                                             <BattleCard battle={battle} onUpdate={self.getBattles} />
+                                             <BattleCard model={BattleModel} battle={battle} inputs={self.getBattleInputs.bind(self, battle.attrs)} onUpdate={self.getBattles} />
                                          </div>
                                         );
                                 })}
