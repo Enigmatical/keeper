@@ -113,8 +113,8 @@ var FoeManagePage = React.createClass({
         return (
             <div id="foe-manage-page" className="page-content">
                 <PageHeader pageName="Foes">
-                    <FormModal model={FoeModel} related={{key: 'user_id', on: Auth.User}} inputs={self.getFoeInputs.bind(self, {})} onUpdate={self.getFoes} />
-                    <FormModal model={BattleModel} related={{key: 'user_id', on: Auth.User}} inputs={self.getBattleInputs.bind(self, {})} onUpdate={self.getBattles} />
+                    <FormModal model={FoeModel} parent={Auth.User} inputs={self.getFoeInputs.bind(self, {})} onUpdate={self.getFoes} />
+                    <FormModal model={BattleModel} parent={Auth.User} inputs={self.getBattleInputs.bind(self, {})} onUpdate={self.getBattles} />
                 </PageHeader>
                 <div className="row">
                     <div className="col-md-12">

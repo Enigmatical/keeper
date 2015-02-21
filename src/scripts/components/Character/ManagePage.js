@@ -74,7 +74,7 @@ var CharacterManagePage = React.createClass({
         return (
             <div id="characters-manage-page" className="page-content">
                 <PageHeader pageName="Characters">
-                    <FormModal model={Model} related={{key: 'user_id', on: Auth.User}} inputs={self.getCharacterInputs.bind(self, {})} onUpdate={self.getCharacters} />
+                    <FormModal model={Model} parent={Auth.User} inputs={self.getCharacterInputs.bind(self, {})} onUpdate={self.getCharacters} />
                 </PageHeader>
                 <div className="row">
                     {self.state.characters.map(function(character) {

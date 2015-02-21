@@ -11,7 +11,7 @@ function TaskModel() {
     this.name = 'task';
 
     this.attrs = {
-        quest_id: null,
+        parent_id: null,
         order: null,
 
         name: null,
@@ -20,7 +20,7 @@ function TaskModel() {
     };
 
     this.getEncounters = function() {
-        return this.getRelated(EncounterModel, 'parent_id', 'order');
+        return this.getRelated(EncounterModel, 'order');
     }
 }
 

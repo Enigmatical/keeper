@@ -41,7 +41,7 @@ var CampaignCard = React.createClass({
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-locations" params={{campaignId: campaign.id}}><Glyphicon glyph="cog" /> Locations</ButtonLink>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={campaign} model={this.props.model} related={{key: 'user_id', on: Auth.User}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={campaign} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={campaign} onUpdate={this.props.onUpdate}>
                             <p className="text-danger">
                                 This will also <strong>remove</strong> all associated:

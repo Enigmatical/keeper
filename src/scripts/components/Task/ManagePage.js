@@ -119,7 +119,7 @@ var TaskManagePage = React.createClass({
                 <div id="task-manage-page" className="page-content">
                     <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={quest.attrs.name} pageType="Tasks">
-                        <FormModal model={TaskModel} related={{key: 'quest_id', on: quest}} inputs={self.getTaskInputs.bind(self, {})} onUpdate={self.getTasks} />
+                        <FormModal model={TaskModel} parent={quest} inputs={self.getTaskInputs.bind(self, {})} onUpdate={self.getTasks} />
                     </PageHeader>
                     <div className="row">
                         {self.state.tasks.map(function(task){

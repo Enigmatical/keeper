@@ -72,7 +72,7 @@ var CampaignManagePage = React.createClass({
             <div id="campaign-manage-page" className="page-content">
                 <Breadcrumb crumbs={crumbs} />
                 <PageHeader pageName="Campaigns">
-                    <FormModal model={Model} related={{key: 'user_id', on: Auth.User}} inputs={self.getCampaignInputs.bind(self, {})} onUpdate={self.getCampaigns} />
+                    <FormModal model={Model} parent={Auth.User} inputs={self.getCampaignInputs.bind(self, {})} onUpdate={self.getCampaigns} />
                 </PageHeader>
                 <div className="row">
                     {self.state.campaigns.map(function(campaign) {

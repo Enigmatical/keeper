@@ -39,7 +39,7 @@ var AreaCard = React.createClass({
                         <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={area} model={this.props.model} related={{key: 'location_id', on: location}} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={area} model={this.props.model} parent={location} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={area} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

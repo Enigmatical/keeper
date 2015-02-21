@@ -44,9 +44,9 @@ var ModelFormModal = React.createClass({
             data[name] = input.value;
         });
 
-        var related = this.props.related;
-        if (_.isObject(related)) {
-            data[related.key] = related.on.id;
+        var parent = this.props.parent;
+        if (_.isObject(parent)) {
+            data['parent_id'] = parent.id;
         }
 
         var target = this.props.target;

@@ -100,7 +100,7 @@ var LocationManagePage = React.createClass({
                 <div id="location-manage-page" className="page-content">
                     <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={campaign.attrs.name} pageType="Locations">
-                        <FormModal model={Model} related={{key: 'campaign_id', on: campaign}} inputs={self.getLocationInputs.bind(self, {})} onUpdate={self.getLocations} />
+                        <FormModal model={Model} parent={campaign} inputs={self.getLocationInputs.bind(self, {})} onUpdate={self.getLocations} />
                     </PageHeader>
                     <div className="row">
                         {self.state.locations.map(function(location) {

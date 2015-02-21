@@ -54,7 +54,7 @@ var BattleCard = React.createClass({
                         <LinkModal target={battle} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={battle} model={this.props.model} related={{key: 'user_id', on: Auth.User}} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <FormModal target={battle} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={battle} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

@@ -71,7 +71,7 @@ var ShopCard = React.createClass({
                         <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="link" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={shop} model={this.props.model} related={{key: 'location_id', on: location}} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <FormModal target={shop} model={this.props.model} parent={location} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={shop} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
