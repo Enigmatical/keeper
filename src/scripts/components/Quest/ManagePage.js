@@ -70,18 +70,24 @@ var QuestManagePage = React.createClass({
         var act = this.state.act;
 
         if (_.isObject(act)) {
+            var crumbs = [
+                {
+                    text: (<span>Campaign: <strong>{campaign.attrs.name}</strong></span>),
+                    link: 'manage-campaigns'
+                },
+                {
+                    text: (<span>Act: <strong>{act.attrs.name}</strong></span>),
+                    link: 'manage-acts',
+                    params: {campaignId: campaign.id}
+                },
+                {
+                    text: (<span>Quests</span>)
+                }
+            ];
+
             return (
                 <div id="quest-manage-page" className="page-content">
-                    <Breadcrumb crumbs={[
-                        {
-                            text: campaign.attrs.name + " (Acts)",
-                            link: 'manage-acts',
-                            params: {campaignId: campaign.id}
-                        },
-                        {
-                            text: act.attrs.name
-                        }
-                    ]} />
+                    <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={act.attrs.name} pageType="Quests">
                         <FormModal model={QuestModel} related={{key: 'act_id', on: act}} inputs={self.getQuestInputs.bind(self, {})} onUpdate={self.getQuests} />
                     </PageHeader>

@@ -86,13 +86,19 @@ var LocationManagePage = React.createClass({
         var campaign = self.state.campaign;
 
         if (_.isObject(self.state.campaign)) {
+            var crumbs = [
+                {
+                    text: (<span>Campaign: <strong>{campaign.attrs.name}</strong></span>),
+                    link: 'manage-campaigns'
+                },
+                {
+                    text: (<span>Locations</span>)
+                }
+            ];
+
             return (
                 <div id="location-manage-page" className="page-content">
-                    <Breadcrumb crumbs={[
-                        {
-                            text: campaign.attrs.name + " (Locations)"
-                        }
-                    ]} />
+                    <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={campaign.attrs.name} pageType="Locations">
                         <FormModal model={Model} related={{key: 'campaign_id', on: campaign}} inputs={self.getLocationInputs.bind(self, {})} onUpdate={self.getLocations} />
                     </PageHeader>

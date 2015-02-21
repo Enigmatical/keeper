@@ -80,13 +80,19 @@ var ActManagePage = React.createClass({
         var campaign = self.state.campaign;
 
         if (_.isObject(campaign)) {
+            var crumbs = [
+                {
+                    text: (<span>Campaign: <strong>{campaign.attrs.name}</strong></span>),
+                    link: 'manage-campaigns'
+                },
+                {
+                    text: (<span>Acts</span>)
+                }
+            ];
+
             return (
                 <div id="act-manage-page" className="page-content">
-                    <Breadcrumb crumbs={[
-                        {
-                            text: campaign.attrs.name + " (Acts)"
-                        }
-                    ]} />
+                    <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={campaign.attrs.name} pageType="Acts">
                         <FormModal model={ActModel} related={{key: 'campaign_id', on: campaign}} inputs={self.getInputs.bind({})} onUpdate={self.getActs} />
                     </PageHeader>

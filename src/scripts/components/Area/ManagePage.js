@@ -201,18 +201,24 @@ var AreaManagePage = React.createClass({
         var location = this.state.location;
 
         if (_.isObject(location)) {
+            var crumbs = [
+                {
+                    text: (<span>Campaign: <strong>{campaign.attrs.name}</strong></span>),
+                    link: 'manage-campaigns'
+                },
+                {
+                    text: (<span>Location: <strong>{location.attrs.name}</strong></span>),
+                    link: 'manage-locations',
+                    params: {campaignId: campaign.id}
+                },
+                {
+                    text: (<span>Areas, Shops, &amp; Bounties</span>)
+                }
+            ];
+
             return (
                 <div id="area-manage-page" className="page-content">
-                    <Breadcrumb crumbs={[
-                        {
-                            text: campaign.attrs.name + " (Locations)",
-                            link: 'manage-locations',
-                            params: {campaignId: campaign.id}
-                        },
-                        {
-                            text: location.attrs.name
-                        }
-                    ]} />
+                    <Breadcrumb crumbs={crumbs} />
                     <PageHeader pageName={location.attrs.name} pageType="Areas, Shops, & Bounties">
                         <FormModal model={AreaModel} related={{key: 'location_id', on: location}} inputs={self.getAreaInputs.bind(self, {})} onUpdate={self.getAreas} />
                         <FormModal model={ShopModel} related={{key: 'location_id', on: location}} inputs={self.getShopInputs.bind(self, {})} onUpdate={self.getShops} />

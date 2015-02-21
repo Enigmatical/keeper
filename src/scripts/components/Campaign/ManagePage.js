@@ -62,9 +62,15 @@ var CampaignManagePage = React.createClass({
     render: function () {
         var self = this;
 
+        var crumbs = [
+            {
+                text: (<span>Campaigns</span>)
+            }
+        ];
+
         return (
             <div id="campaign-manage-page" className="page-content">
-                <Breadcrumb />
+                <Breadcrumb crumbs={crumbs} />
                 <PageHeader pageName="Campaigns">
                     <FormModal model={Model} related={{key: 'user_id', on: Auth.User}} inputs={self.getCampaignInputs.bind(self, {})} onUpdate={self.getCampaigns} />
                 </PageHeader>
