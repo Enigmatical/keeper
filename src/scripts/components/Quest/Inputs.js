@@ -1,18 +1,14 @@
 'use strict';
 
 var React = require('react/addons');
-var _ = require('lodash');
 
 var Pathfinder = require('../../helpers/Pathfinder');
 
-var Model = require('../../models/QuestModel');
-
-var Modal = require('../Model/FormModal');
 var Input = require('../Model/FormInput');
 
 
 
-var QuestFormModal = React.createClass({
+var QuestInputs = React.createClass({
     handleRewards: function() {
         var challenge = this.refs.challenge.getDOMNode().querySelector('[name=challenge]').value;
         var quality = this.refs.quality.getDOMNode().querySelector('[name=quality]').value;
@@ -24,25 +20,11 @@ var QuestFormModal = React.createClass({
         this.refs.rewardCoin.getDOMNode().querySelector('[name=rewardCoin]').setAttribute('value', rewardCoin);
     },
 
-    render: function () {
-        var quest = _.isObject(this.props.quest) ? this.props.quest : undefined;
-        var attrs = _.isObject(quest) ? quest.attrs : {};
-
-        var challengeOptions = Pathfinder.getChallengeRatingOptions();
-        var rewardOptions = Pathfinder.getRewardModifierOptions();
+    render: function() {
+        var attrs = this.props.attrs;
 
         return (
-            <Modal
-                titlePart="Quest"
-                model={Model}
-
-                target={quest}
-                related={this.props.act}
-                relatedKey="act_id"
-
-                className={this.props.className}
-                onUpdate={this.props.onUpdate}
-            >
+            <div>
                 <Input
                     type="text"
                     name="name"
@@ -67,24 +49,24 @@ var QuestFormModal = React.createClass({
                 <div className="row">
                     <div className="col-md-6">
                         <Input
-                        type="select"
-                        name="challenge"
-                        ref="challenge"
-                        placeholder="Challenge Rating"
-                        options={challengeOptions}
-                        defaultValue={attrs.challenge}
-                        onChange={this.handleRewards}
+                            type="select"
+                            name="challenge"
+                            ref="challenge"
+                            placeholder="Challenge Rating"
+                            options={Pathfinder.getChallengeRatingOptions()}
+                            defaultValue={attrs.challenge}
+                            onChange={this.handleRewards}
                         />
                     </div>
                     <div className="col-md-6">
                         <Input
-                        type="select"
-                        name="quality"
-                        ref="quality"
-                        placeholder="Treasure"
-                        options={rewardOptions}
-                        defaultValue={attrs.quality || 'standard'}
-                        onChange={this.handleRewards}
+                            type="select"
+                            name="quality"
+                            ref="quality"
+                            placeholder="Treasure"
+                            options={Pathfinder.getRewardModifierOptions()}
+                            defaultValue={attrs.quality || 'standard'}
+                            onChange={this.handleRewards}
                         />
                     </div>
                 </div>
@@ -92,24 +74,24 @@ var QuestFormModal = React.createClass({
                 <div className="row">
                     <div className="col-md-6">
                         <Input
-                        type="text"
-                        name="rewardXp"
-                        ref="rewardXp"
-                        placeholder="Reward XP"
-                        value={attrs.rewardXp}
-                        readOnly
-                        addonAfter="XP"
+                            type="text"
+                            name="rewardXp"
+                            ref="rewardXp"
+                            placeholder="Reward XP"
+                            value={attrs.rewardXp}
+                            readOnly
+                            addonAfter="XP"
                         />
                     </div>
                     <div className="col-md-6">
                         <Input
-                        type="text"
-                        name="rewardCoin"
-                        ref="rewardCoin"
-                        placeholder="Reward Coin"
-                        value={attrs.rewardCoin}
-                        readOnly
-                        addonAfter="gp"
+                            type="text"
+                            name="rewardCoin"
+                            ref="rewardCoin"
+                            placeholder="Reward Coin"
+                            value={attrs.rewardCoin}
+                            readOnly
+                            addonAfter="gp"
                         />
                     </div>
                 </div>
@@ -120,9 +102,9 @@ var QuestFormModal = React.createClass({
                     placeholder="Rewards"
                     defaultValue={attrs.rewardOther}
                 />
-            </Modal>
+            </div>
             );
     }
 });
 
-module.exports = QuestFormModal;
+module.exports = QuestInputs;

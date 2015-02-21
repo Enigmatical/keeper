@@ -10,8 +10,12 @@ var ActModel = require('../../models/ActModel');
 
 var Breadcrumb = require('../Common/Breadcrumb');
 var PageHeader = require('../Model/PageHeader');
-var FormModal = require('./FormModal');
+var FormModal = require('../Model/FormModal');
+var Input = require('../Model/FormInput');
+
+var QuestModel = require('../../models/QuestModel');
 var Card = require('./Card');
+var QuestInputs = require('./Inputs');
 
 
 
@@ -54,6 +58,12 @@ var QuestManagePage = React.createClass({
             });
     },
 
+    getQuestInputs: function(attrs) {
+        return(
+            <QuestInputs attrs={attrs} />
+            );
+    },
+
     render: function () {
         var self = this;
         var campaign = this.state.campaign;
@@ -73,13 +83,13 @@ var QuestManagePage = React.createClass({
                         }
                     ]} />
                     <PageHeader pageName={act.attrs.name} pageType="Quests">
-                        <FormModal act={act} onUpdate={self.getQuests} />
+                        <FormModal model={QuestModel} related={{key: 'act_id', on: act}} inputs={self.getQuestInputs.bind(self, {})} onUpdate={self.getQuests} />
                     </PageHeader>
                     <div className="row">
                         {self.state.quests.map(function(quest){
                             return (
                                 <div key={quest.id} className="col-md-6">
-                                    <Card campaign={campaign} act={act} quest={quest} onUpdate={self.getQuests} />
+                                    <Card model={QuestModel} campaign={campaign} act={act} quest={quest} inputs={self.getQuestInputs.bind(self, quest.attrs)} onUpdate={self.getQuests} />
                                 </div>
                                 );
                         })}
