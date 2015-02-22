@@ -14,7 +14,7 @@ var FoeModel = require('./FoeModel');
 function BattleModel() {
     BaseModel.apply(this, ['battles']);
 
-    this.name = 'group';
+    this.name = 'battle';
 
     this.attrs = {
         parent_id: null,
@@ -25,9 +25,7 @@ function BattleModel() {
         details: null,
         challenge: null,
         rewardXp: null,
-        rewardCoin: null,
-
-        foes: []
+        rewardCoin: null
     };
 
     this.getBattlers = function() {

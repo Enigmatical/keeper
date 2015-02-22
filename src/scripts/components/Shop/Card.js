@@ -1,7 +1,8 @@
 'use strict';
 
 var React = require('react/addons');
-var _ = require('lodash');
+
+var Auth = require('../../helpers/Auth');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
@@ -11,36 +12,71 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 var FormModal = require('../Model/FormModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
+var Input = require('../Model/FormInput');
 
-var CharacterLinkModal = require('../Character/LinkModal');
-var CharacterLink = require('../Character/Link');
+var ActorModel = require('../../models/ActorModel');
+var ActorCard = require('../Actor/Card');
 
 require('../../../styles/ItemCard.css');
 
 
 
 var ShopCard = React.createClass({
-    getShopkeepers: function() {
+    getInitialState: function() {
+        return {
+            actors: [],
+            characterOptions: []
+        }
+    },
+
+    componentWillMount: function() {
+        this.getActors();
+        this.getCharacterOptions();
+    },
+
+    getActors: function() {
         var self = this;
         var shop = self.props.shop;
 
-        if (shop.attrs.shopkeepers.length > 0) {
-            return(
-                    <div>
-                        <p className="body-header">Shopkeepers</p>
-                        <div className="card-links">
-                            {shop.attrs.shopkeepers.map(function(char, index) {
-                                return (
-                                    <CharacterLink key={char.id+index} target={shop} link={char} index={index} onUpdate={self.props.onUpdate} />
-                                    );
-                            })}
-                        </div>
-                    </div>
-                );
-        }
-        else {
-            return (<span />);
-        }
+        shop.getActors()
+            .done(function(actors) {
+                self.setState({actors: actors});
+            });
+    },
+
+    getCharacterOptions: function() {
+        var self = this;
+
+        Auth.User.getCharacterOptions()
+            .done(function(options) {
+                self.setState({characterOptions: options});
+            })
+    },
+
+    getActorInputs: function(attrs) {
+        return (
+            <div>
+                <Input
+                    type="select"
+                    name="character_id"
+                    placeholder="Character"
+                    defaultValue={attrs.character_id}
+                    options={this.state.characterOptions}
+                />
+                <Input
+                    type="textarea"
+                    name="details"
+                    placeholder="Motive (Why Am I Here?)"
+                    defaultValue={attrs.details}
+                />
+                <Input
+                    type="textarea"
+                    name="flavor"
+                    placeholder="Activity (What Am I Doing?)"
+                    defaultValue={attrs.flavor}
+                />
+            </div>
+            );
     },
 
     render: function () {
@@ -48,7 +84,25 @@ var ShopCard = React.createClass({
         var location = self.props.location;
         var shop = self.props.shop;
 
-        var shopkeepers = self.getShopkeepers();
+        var actors = function() {
+            var actors = self.state.actors;
+
+            if (actors.length > 0) {
+                return (
+                    <div className="card-links">
+                        <p className="body-header">Actors</p>
+                        {self.state.actors.map(function(actor) {
+                            return (
+                                <ActorCard key={actor.id} target={actor} parent={shop} model={ActorModel} inputs={self.getActorInputs.bind(self, actor.attrs)} onUpdate={self.getActors} />
+                                );
+                        })}
+                    </div>
+                    );
+            }
+            else {
+                return (<span />);
+            }
+        };
 
         return (
             <div className="item-card shop-card">
@@ -63,11 +117,11 @@ var ShopCard = React.createClass({
                 <div className="card-body">
                     <AttrBlock name="Flavor" attr={shop.attrs.flavor} markdown />
                     <AttrBlock name="Details" attr={shop.attrs.details} markdown />
-                    {shopkeepers}
+                    {actors()}
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <CharacterLinkModal name="Shopkeeper" target={shop} onUpdate={self.props.onUpdate} />
+                        <FormModal link={true} model={ActorModel} parent={shop} inputs={self.getActorInputs.bind(self, {})} onUpdate={self.getActors} />
                         <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="link" /> Encounter</Button>
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">

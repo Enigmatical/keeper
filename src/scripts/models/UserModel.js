@@ -28,6 +28,22 @@ function UserModel() {
         return this.getRelated(CharacterModel, 'name');
     };
 
+    this.getCharacterOptions = function() {
+        var self = this;
+        var deferred = Q.defer();
+
+        self.getCharacters()
+            .done(function(characters) {
+                var options = self.convertToOptions(characters, function(character) {
+                    return character.attrs.name + ' (' + character.attrs.type + ')';
+                });
+
+                deferred.resolve(options);
+            });
+
+        return deferred.promise;
+    };
+
     this.getFoes = function() {
         return this.getRelated(FoeModel, 'name');
     };
@@ -36,7 +52,7 @@ function UserModel() {
         var self = this;
         var deferred = Q.defer();
 
-        self.getRelated(FoeModel, 'name')
+        self.getFoes()
             .done(function(foes) {
                 var options = self.convertToOptions(foes, function(foe) {
                     return foe.attrs.name + ', CR ' + foe.attrs.challenge + ' (Max ' + foe.attrs.count + ')';

@@ -2,10 +2,12 @@
 
 var Q = require('q');
 
-var BaseModel = require('../models/BaseModel');
-var CharacterModel = require('../models/CharacterModel');
-var EncounterModel = require('../models/EncounterModel');
+var BaseModel = require('./BaseModel');
 
+var ActorModel = require('./ActorModel');
+var CharacterModel = require('./CharacterModel');
+
+var EncounterModel = require('./EncounterModel');
 
 
 function ShopModel() {
@@ -20,36 +22,19 @@ function ShopModel() {
         type: null,
         details: null,
         flavor: null,
-        quality: null,
-
-        shopkeepers: []
+        quality: null
     };
 
-    this.linkModel = function(data) {
+    this.getActors = function() {
         var self = this;
         var deferred = Q.defer();
 
-        new CharacterModel().get(data.id)
-            .done(function(link) {
-                data['attrs'] = link.attrs;
-                self.attrs['shopkeepers'].push(data);
-                self.save()
-                    .done(function() {
-                        deferred.resolve();
+        this.getRelated(ActorModel, 'order')
+            .done(function(actors) {
+                self.joinMany(CharacterModel, actors)
+                    .done(function(actors) {
+                        deferred.resolve(actors);
                     });
-            });
-
-        return deferred.promise;
-    };
-
-    this.unlinkModel = function(index) {
-        var self = this;
-        var deferred = Q.defer();
-
-        self.attrs.shopkeepers.splice(index, 1);
-        self.save()
-            .done(function() {
-                deferred.resolve();
             });
 
         return deferred.promise;
@@ -57,7 +42,7 @@ function ShopModel() {
 
     this.getEncounters = function() {
         return this.getRelated(EncounterModel, 'order');
-    }
+    };
 }
 
 ShopModel.prototype = new Object(BaseModel.prototype);

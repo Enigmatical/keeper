@@ -11,21 +11,21 @@ require('../../../styles/ItemLink.css');
 
 
 
-var BattlerCard = React.createClass({
+var ActorCard = React.createClass({
     render: function () {
-        var battler = this.props.target;
-        var foe = battler.foe;
+        var actor = this.props.target;
+        var character = actor.character;
 
-        if (_.isObject(foe)) {
+        if (_.isObject(character)) {
             return (
                 <div className="item-link-wrapper col-md-6">
-                    <div className="item-link battler-link">
+                    <div className="item-link actor-link">
                         <p className="pull-left">
-                            <strong>{foe.attrs.name}</strong>{', ' + battler.attrs.type} <small className="text-muted">x {battler.attrs.count}</small>
+                            <strong>{character.attrs.name}</strong> <small className="text-muted">{character.attrs.type}</small>
                         </p>
                         <ButtonToolbar className="pull-right">
-                            <FormModal link={true} target={battler} model={this.props.model} parent={this.props.parent} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
-                            <RemoveModal link={true} target={battler} onUpdate={this.props.onUpdate} />
+                            <FormModal link={true} target={actor} model={this.props.model} parent={this.props.parent} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                            <RemoveModal link={true} target={actor} onUpdate={this.props.onUpdate} />
                         </ButtonToolbar>
                     </div>
                 </div>
@@ -37,4 +37,4 @@ var BattlerCard = React.createClass({
     }
 });
 
-module.exports = BattlerCard;
+module.exports = ActorCard;
