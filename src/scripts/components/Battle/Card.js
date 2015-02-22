@@ -9,18 +9,94 @@ var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var LinkModal = require('../Foe/LinkModal');
 var FormModal = require('../Model/FormModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
-var Link = require('../Foe/Link');
+var Input = require('../Model/FormInput');
+
+var BattlerModel = require('../../models/BattlerModel');
+var Card = require('../Battler/Card');
 
 require('../../../styles/ItemCard.css');
 
 
 
 var BattleCard = React.createClass({
+    getInitialState: function() {
+        return {
+            battlers: [],
+            foeOptions: []
+        }
+    },
 
+    componentWillMount: function() {
+        this.getBattlers(false);
+        this.getFoeOptions();
+    },
+
+    getBattlers: function(callOnUpdate) {
+        if (callOnUpdate === undefined) {
+            callOnUpdate = true;
+        }
+
+        var self = this;
+        var battle = self.props.battle;
+
+        battle.getBattlers()
+            .done(function(battlers) {
+                self.setState({battlers: battlers});
+
+                if (callOnUpdate) {
+                    battle.updateAttributes()
+                        .done(function() {
+                            if (_.isFunction(self.props.onUpdate)) {
+                                self.props.onUpdate();
+                            }
+                        });
+                }
+            });
+    },
+
+    getFoeOptions: function() {
+        var self = this;
+
+        Auth.User.getFoeOptions()
+            .done(function(options) {
+                self.setState({foeOptions: options});
+            });
+    },
+
+    getBattlerInputs: function(attrs) {
+        return (
+            <div>
+                <Input
+                    type="select"
+                    name="foe_id"
+                    placeholder="Foe"
+                    defaultValue={attrs.foe_id}
+                    options={this.state.foeOptions}
+                />
+                <div className="row">
+                    <div className="col-md-6">
+                        <Input
+                            type="text"
+                            name="count"
+                            placeholder="How Many?"
+                            defaultValue={attrs.count}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <Input
+                            type="text"
+                            name="type"
+                            placeholder="Status"
+                            defaultValue={attrs.type}
+                        />
+                    </div>
+                </div>
+            </div>
+            );
+    },
 
     render: function () {
         var self = this;
@@ -42,16 +118,16 @@ var BattleCard = React.createClass({
                     <AttrBlock name="Flavor" attr={battle.attrs.flavor} markdown />
                     <AttrBlock name="Details" attr={battle.attrs.details} markdown />
                     <div className="card-links">
-                        {battle.attrs.foes.map(function(foe, index) {
+                        {self.state.battlers.map(function(battler) {
                             return (
-                                <Link key={foe.id+index} target={battle} link={foe} index={index} onUpdate={self.props.onUpdate} />
+                                <Card key={battler.id} target={battler} parent={battle} model={BattlerModel} inputs={self.getBattlerInputs.bind(self, battler.attrs)} onUpdate={self.getBattlers} />
                                 );
                         })}
                     </div>
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <LinkModal target={battle} onUpdate={self.props.onUpdate} />
+                        <FormModal link={true} model={BattlerModel} parent={battle} inputs={self.getBattlerInputs.bind(self, {})} onUpdate={self.getBattlers} />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={battle} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />

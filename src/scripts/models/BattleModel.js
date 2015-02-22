@@ -4,8 +4,10 @@ var Q = require('q');
 
 var Pathfinder = require('../helpers/Pathfinder');
 
-var BaseModel = require('../models/BaseModel');
-var FoeModel = require('../models/FoeModel');
+var BaseModel = require('./BaseModel');
+
+var BattlerModel = require('./BattlerModel');
+var FoeModel = require('./FoeModel');
 
 
 
@@ -28,47 +30,34 @@ function BattleModel() {
         foes: []
     };
 
-    this.updateAttributes = function() {
+    this.getBattlers = function() {
         var self = this;
         var deferred = Q.defer();
 
-        var new_attrs = Pathfinder.getBattleAttrs(self.attrs.foes);
-        self.attrs = _.assign(self.attrs, new_attrs);
-
-        self.save()
-            .done(function() {
-                deferred.resolve();
-            });
-
-        return deferred.promise;
-    };
-
-    this.linkModel = function(data) {
-        var self = this;
-        var deferred = Q.defer();
-
-        new FoeModel().get(data.id)
-            .done(function(link){
-                data['attrs'] = link.attrs;
-                self.attrs['foes'].push(data);
-
-                self.updateAttributes()
-                    .done(function() {
-                        deferred.resolve();
+        this.getRelated(BattlerModel, 'order')
+            .done(function(battlers) {
+                self.joinMany(FoeModel, battlers)
+                    .done(function (battlers) {
+                        deferred.resolve(battlers);
                     });
             });
 
         return deferred.promise;
     };
 
-    this.unlinkModel = function(index) {
+    this.updateAttributes = function() {
         var self = this;
         var deferred = Q.defer();
 
-        self.attrs.foes.splice(index, 1);
-        self.updateAttributes()
-            .done(function() {
-                deferred.resolve();
+        self.getBattlers()
+            .done(function(battlers) {
+                var new_attrs = Pathfinder.getBattleAttrs(battlers);
+                self.attrs = _.assign(self.attrs, new_attrs);
+
+                self.save()
+                    .done(function() {
+                        deferred.resolve();
+                    });
             });
 
         return deferred.promise;

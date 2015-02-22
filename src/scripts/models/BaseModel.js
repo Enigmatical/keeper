@@ -157,6 +157,42 @@ BaseModel.prototype.getRelated = function(RelatedModel, sort_key) {
     return deferred.promise;
 };
 
+BaseModel.prototype.joinOn = function(JoinModel, record) {
+    var deferred = Q.defer();
+    var modelName = new JoinModel().name.toLowerCase();
+    var joinKey = modelName + '_id';
+
+    if (!_.isEmpty(record.attrs[joinKey])) {
+        new JoinModel().get(record.attrs[joinKey])
+            .done(function(join) {
+                record[modelName] = join;
+                deferred.resolve(record);
+            });
+    }
+    else {
+        deferred.reject();
+    }
+
+    return deferred.promise;
+};
+
+BaseModel.prototype.joinMany = function(JoinModel, records) {
+    var self = this;
+    var deferred = Q.defer();
+    var promises = [];
+
+    _.each(records, function(record) {
+        promises.push(self.joinOn(JoinModel, record));
+    });
+
+    Q.allSettled(promises)
+        .done(function() {
+            deferred.resolve(records);
+        });
+
+    return deferred.promise;
+};
+
 BaseModel.prototype.remove = function() {
     var self = this;
     var deferred = Q.defer();
@@ -196,6 +232,21 @@ BaseModel.prototype.sortModels = function(array, key) {
     array = array.sort(compare);
 
     return array;
+};
+
+BaseModel.prototype.convertToOptions = function(array, buildLabel) {
+    var options = [];
+
+    _.each(array, function(item) {
+        var label = buildLabel(item);
+        var option = {
+            label: label,
+            value: item.id
+        };
+        options.push(option);
+    });
+
+    return options;
 };
 
 module.exports = BaseModel;

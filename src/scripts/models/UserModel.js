@@ -1,5 +1,7 @@
 'use strict';
 
+var Q = require('q');
+
 var BaseModel = require('../models/BaseModel');
 var CampaignModel = require('../models/CampaignModel');
 var CharacterModel = require('../models/CharacterModel');
@@ -28,6 +30,22 @@ function UserModel() {
 
     this.getFoes = function() {
         return this.getRelated(FoeModel, 'name');
+    };
+
+    this.getFoeOptions = function() {
+        var self = this;
+        var deferred = Q.defer();
+
+        self.getRelated(FoeModel, 'name')
+            .done(function(foes) {
+                var options = self.convertToOptions(foes, function(foe) {
+                    return foe.attrs.name + ', CR ' + foe.attrs.challenge + ' (Max ' + foe.attrs.count + ')';
+                });
+
+                deferred.resolve(options);
+            });
+
+        return deferred.promise;
     };
 
     this.getBattles = function() {

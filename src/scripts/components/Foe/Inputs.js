@@ -122,7 +122,7 @@ var FoeInputs = React.createClass({
                             type="text"
                             name="onHand"
                             placeholder="Pawns On Hand"
-                            defaultValue={attrs.onHand}
+                            defaultValue={attrs.count}
                         />
                     </div>
                 </div>

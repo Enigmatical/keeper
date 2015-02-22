@@ -21,7 +21,7 @@ function FoeModel() {
         quality: null,
         rewardXp: null,
         rewardCoin: null,
-        onHand: null,
+        count: null,
         page: null
     };
 }
