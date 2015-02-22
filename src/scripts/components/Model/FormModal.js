@@ -67,6 +67,7 @@ var ModelFormModal = React.createClass({
 
                 button.style = 'warning';
                 button.size = 'small';
+                button.glyph = 'link';
             }
         }
 

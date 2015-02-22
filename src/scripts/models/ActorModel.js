@@ -1,6 +1,8 @@
 'use strict';
 
-var BaseModel = require('../models/BaseModel');
+var Q = require('q');
+
+var BaseModel = require('./BaseModel');
 
 
 

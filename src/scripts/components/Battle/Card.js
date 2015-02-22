@@ -104,6 +104,26 @@ var BattleCard = React.createClass({
 
         var challengeRating = battle.attrs.challenge ? ('  CR ' + battle.attrs.challenge) : '';
 
+        var battlers = function() {
+            var battlers = self.state.battlers;
+
+            if (battlers.length > 0) {
+                return (
+                    <div className="card-links">
+                        <p className="body-header">Battlers</p>
+                        {self.state.battlers.map(function(battler) {
+                            return (
+                                <Card key={battler.id} target={battler} parent={battle} model={BattlerModel} inputs={self.getBattlerInputs.bind(self, battler.attrs)} onUpdate={self.getBattlers} />
+                                );
+                        })}
+                    </div>
+                    );
+            }
+            else {
+                return (<span />);
+            }
+        };
+
         return (
             <div className="item-card battle-card">
                 <div className="card-header">
@@ -117,13 +137,7 @@ var BattleCard = React.createClass({
                 <div className="card-body">
                     <AttrBlock name="Flavor" attr={battle.attrs.flavor} markdown />
                     <AttrBlock name="Details" attr={battle.attrs.details} markdown />
-                    <div className="card-links">
-                        {self.state.battlers.map(function(battler) {
-                            return (
-                                <Card key={battler.id} target={battler} parent={battle} model={BattlerModel} inputs={self.getBattlerInputs.bind(self, battler.attrs)} onUpdate={self.getBattlers} />
-                                );
-                        })}
-                    </div>
+                    {battlers()}
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
