@@ -19,6 +19,27 @@ var ModelRemoveModal = React.createClass({
         };
     },
 
+    getMode: function() {
+        var mode = {
+            name: 'Remove ' + _.startCase(this.props.target.name) + '?',
+            isLink: this.props.link ? true : false
+        };
+
+        var button = {
+            style: 'danger',
+            size: 'small',
+            glyph: 'remove'
+        };
+
+        if (mode.isLink) {
+            button.size = 'xsmall';
+        }
+
+        mode.button = button;
+
+        return mode;
+    },
+
     handleSubmit: function(e) {
         var self = this;
 
@@ -41,30 +62,30 @@ var ModelRemoveModal = React.createClass({
     },
 
     render: function () {
+        var button = this.getMode().button;
+
         return (
-            <Button bsStyle="danger" bsSize="small" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="remove" /></Button>
+            <Button bsStyle={button.style} bsSize={button.size} className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph={button.glyph} /></Button>
             );
     },
 
     renderOverlay: function() {
-        var targetName = _.startCase(this.props.target.name);
-        var modalTitle = 'Remove ' + targetName + '?';
+        var mode = this.getMode();
 
         if (!this.state.isModalOpen) {
             return <span />;
         }
 
         return (
-
-            <Modal title={modalTitle} onRequestHide={this.handleToggle}>
+            <Modal title={mode.name} onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
                         <p className="bg-danger text-danger"><strong>This will be removed permanently.</strong></p>
                         {this.props.children}
                     </div>
                     <div className="modal-footer">
-                        <Button bsStyle="danger" type="submit">Yes</Button>
-                        <Button onClick={this.handleToggle}>No</Button>
+                        <Button bsStyle={mode.button.style} type="submit">Remove</Button>
+                        <Button onClick={this.handleToggle}>Cancel</Button>
                     </div>
                 </form>
             </Modal>

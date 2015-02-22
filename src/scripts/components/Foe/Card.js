@@ -34,7 +34,7 @@ var FoeCard = React.createClass({
                 <div className="card-body">
                     <AttrBlock name="Flavor" attr={foe.attrs.flavor} markdown />
                     <AttrBlock name="Quick" attr={foe.attrs.quick} markdown />
-                    <AttrBlock name="Pawns On Hand" attr={foe.attrs.onHand} />
+                    <AttrBlock name="Pawns On Hand" attr={foe.attrs.count} />
                     <AttrBlock name="Bestiary Page" attr={foe.attrs.page} />
                 </div>
                 <div className="card-footer">

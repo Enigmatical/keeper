@@ -13,11 +13,10 @@ function EncounterModel() {
         parent_id: null,
         order: null,
 
+        name: null,
         type: null,
         details: null,
-        flavor: null,
-        challenge: null,
-        rewardXp: null
+        flavor: null
     };
 }
 

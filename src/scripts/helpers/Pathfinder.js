@@ -254,15 +254,15 @@ var Pathfinder = {
         return parseInt(total * modifier);
     },
 
-    getBattleAttrs: function(foes) {
+    getBattleAttrs: function(battlers) {
         var challenge;
         var totalXp = 0;
         var totalCoin = 0;
 
-        _.each(foes, function(foe) {
-            var count = foe.count;
-            var rewardXp = foe.attrs.rewardXp;
-            var rewardCoin = foe.attrs.rewardCoin;
+        _.each(battlers, function(battler) {
+            var count = battler.attrs.count;
+            var rewardXp = battler.foe.attrs.rewardXp;
+            var rewardCoin = battler.foe.attrs.rewardCoin;
 
             totalXp += parseInt(rewardXp * count);
             totalCoin += parseInt(rewardCoin * count);

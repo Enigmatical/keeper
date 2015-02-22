@@ -24,7 +24,6 @@ var ModelFormModal = React.createClass({
 
     componentWillMount: function() {
         var model = new this.props.model();
-
         this.setState({name: _.startCase(model.name)});
 
         if (model.attrs.hasOwnProperty('order')) {
@@ -32,8 +31,55 @@ var ModelFormModal = React.createClass({
         }
     },
 
+    getMode: function() {
+        var mode = {
+            size: 'large',
+            isLink: this.props.link ? true : false,
+            isEdit: _.isObject(this.props.target) ? true : false
+        };
+
+        var button = {
+            style: 'success',
+            size: 'medium',
+            glyph: 'plus'
+        };
+
+        if (mode.isEdit) {
+            mode.name = 'Edit ' + this.state.name;
+
+            button.style = 'info';
+            button.size = 'small';
+            button.glyph = 'pencil';
+
+            if (mode.isLink) {
+                mode.size = null;
+
+                button.size = 'xsmall';
+            }
+        }
+        else {
+            mode.name = 'Add ' + this.state.name;
+
+            button.text = 'Add ' + this.state.name;
+
+            if (mode.isLink) {
+                mode.size = null;
+
+                button.style = 'warning';
+                button.size = 'small';
+            }
+        }
+
+        mode.button = button;
+
+        return mode;
+    },
+
     handleSubmit: function(e) {
         e.preventDefault();
+
+        var self = this;
+        var mode = self.getMode();
 
         var data = {};
         var form = e.target;
@@ -44,26 +90,27 @@ var ModelFormModal = React.createClass({
             data[name] = input.value;
         });
 
-        var parent = this.props.parent;
+        var parent = self.props.parent;
         if (_.isObject(parent)) {
             data['parent_id'] = parent.id;
         }
 
-        var target = this.props.target;
+        var target = self.props.target;
 
         /* [EDIT MODE] */
-        if (_.isObject(target)) {
+        if (mode.isEdit) {
             target.merge(data).save();
         } else {
-            var model = new this.props.model();
+            var model = new self.props.model();
             model.create(data).save();
         }
 
-        if (_.isFunction(this.props.onUpdate)) {
-            this.props.onUpdate();
+        if (_.isFunction(self.props.onUpdate)) {
+            self.props.onUpdate();
         }
 
-        this.handleToggle();
+
+        self.handleToggle();
     },
 
     handleToggle: function() {
@@ -73,35 +120,23 @@ var ModelFormModal = React.createClass({
     },
 
     render: function () {
-        var button = (<Button bsStyle="success" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="plus" /> Add {this.state.name}</Button>);
-
-        /* [EDIT MODE] */
-        if (_.isObject(this.props.target)) {
-            button = (<Button bsSize="small" bsStyle="info" className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph="pencil" /></Button>);
-        }
+        var button = this.getMode().button;
 
         return (
-            button
+            <Button bsSize={button.size} bsStyle={button.style} className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph={button.glyph} />{button.text ? ' ' + button.text : ''}</Button>
             );
     },
 
     renderOverlay: function() {
-        var modalTitle = 'Add ' + this.state.name;
-        var modalButton = (<Button bsStyle="success" type="submit">Save</Button>);
+        var mode = this.getMode();
+
         var orderInput;
-
-        /* [EDIT MODE] */
-        if (_.isObject(this.props.target)) {
-            modalTitle = 'Edit ' + this.state.name;
-            modalButton = (<Button bsStyle="info" type="submit">Edit</Button>);
-        }
-
         if (this.state.hasOrder) {
             var orderValue;
             if (_.isObject(this.props.target)) {
                 orderValue = this.props.target.attrs.order;
             }
-            orderInput = (<Input type="text" name="order" placeholder="Sort Order" defaultValue={orderValue} />);
+            orderInput = (<Input type="text" name="order" addonBefore="Sort" placeholder="Sort Order" defaultValue={orderValue} />);
         }
 
         if (!this.state.isModalOpen) {
@@ -109,14 +144,14 @@ var ModelFormModal = React.createClass({
         }
 
         return (
-            <Modal title={modalTitle} bsSize="large" onRequestHide={this.handleToggle}>
+            <Modal title={mode.name} bsSize={mode.size} onRequestHide={this.handleToggle}>
                 <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
                         {this.props.inputs()}
                         {orderInput}
                     </div>
                     <div className="modal-footer">
-                        {modalButton}
+                        <Button bsStyle={mode.button.style} type="submit">Save</Button>
                         <Button onClick={this.handleToggle}>Cancel</Button>
                     </div>
                 </form>
