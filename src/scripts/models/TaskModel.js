@@ -1,7 +1,7 @@
 'use strict';
 
-var BaseModel = require('../models/BaseModel');
-var EncounterModel = require('../models/EncounterModel');
+var BaseModel = require('./BaseModel');
+var EncounterModel = require('./EncounterModel');
 
 
 

@@ -17,6 +17,9 @@ var Input = require('../Model/FormInput');
 var ActorModel = require('../../models/ActorModel');
 var ActorCard = require('../Actor/Card');
 
+var EncounterFormModal = require('../Encounter/FormModal');
+var EncounterCard = require('../Encounter/Card');
+
 require('../../../styles/ItemCard.css');
 
 
@@ -24,8 +27,9 @@ require('../../../styles/ItemCard.css');
 var AreaCard = React.createClass({
     getInitialState: function() {
         return {
+            characterOptions: [],
             actors: [],
-            characterOptions: []
+            encounters: []
         }
     },
 
@@ -79,8 +83,19 @@ var AreaCard = React.createClass({
             );
     },
 
+    getEncounters: function() {
+        var self = this;
+        var area = self.props.area;
+
+        area.getEncounters()
+            .done(function(encounters) {
+                self.setState({encounters: encounters});
+            });
+    },
+
     render: function () {
         var self = this;
+        var campaign = self.props.campaign;
         var location = self.props.location;
         var area = self.props.area;
 
@@ -104,6 +119,23 @@ var AreaCard = React.createClass({
             }
         };
 
+        var encounters = function() {
+            var encounters = self.state.encounters;
+
+            if (encounters.length > 0) {
+                return (
+                    <div className="card-links">
+                        <p className="body-header">Encounters</p>
+                        {self.state.encounters.map(function(encounter) {
+                            return (
+                                <EncounterCard key={encounter.id} target={encounter} parent={area} campaign={campaign} onUpdate={self.getEncounters} />
+                                );
+                        })}
+                    </div>
+                    );
+            }
+        };
+
         return (
             <div className="item-card area-card">
                 <div className="card-header">
@@ -118,11 +150,12 @@ var AreaCard = React.createClass({
                     <AttrBlock name="Flavor" attr={area.attrs.flavor} markdown />
                     <AttrBlock name="Details" attr={area.attrs.details} markdown />
                     {actors()}
+                    {encounters()}
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
                         <FormModal link={true} model={ActorModel} parent={area} inputs={self.getActorInputs.bind(self, {})} onUpdate={self.getActors} />
-                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="plus" /> Encounter</Button>
+                        <EncounterFormModal link={true} parent={area} campaign={campaign} onUpdate={self.getEncounters} />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={area} model={this.props.model} parent={location} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
