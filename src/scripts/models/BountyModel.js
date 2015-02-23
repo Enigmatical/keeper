@@ -1,7 +1,7 @@
 'use strict';
 
-var BaseModel = require('../models/BaseModel');
-var TaskModel = require('../models/TaskModel');
+var BaseModel = require('./BaseModel');
+var EncounterModel = require('./EncounterModel');
 
 
 
@@ -24,8 +24,8 @@ function BountyModel() {
         rewardOther: null
     };
 
-    this.getTasks = function() {
-        return this.getRelated(TaskModel, 'order');
+    this.getEncounters = function() {
+        return this.getRelated(EncounterModel, 'order');
     }
 }
 

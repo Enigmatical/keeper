@@ -231,7 +231,7 @@ var AreaManagePage = React.createClass({
                                     {self.state.areas.map(function(area) {
                                         return (
                                             <div key={area.id} className="col-md-6">
-                                                <AreaCard model={AreaModel} location={location} area={area} inputs={self.getAreaInputs.bind(self, area.attrs)} onUpdate={self.getAreas} />
+                                                <AreaCard model={AreaModel} campaign={campaign} location={location} area={area} inputs={self.getAreaInputs.bind(self, area.attrs)} onUpdate={self.getAreas} />
                                             </div>
                                             );
                                     })}
@@ -240,7 +240,7 @@ var AreaManagePage = React.createClass({
                                     {self.state.shops.map(function(shop) {
                                         return (
                                             <div key={shop.id} className="col-md-6">
-                                                <ShopCard model={ShopModel} location={location} shop={shop} inputs={self.getShopInputs.bind(self, shop.attrs)} onUpdate={self.getShops} />
+                                                <ShopCard model={ShopModel} campaign={campaign} location={location} shop={shop} inputs={self.getShopInputs.bind(self, shop.attrs)} onUpdate={self.getShops} />
                                             </div>
                                             );
                                     })}
@@ -249,7 +249,7 @@ var AreaManagePage = React.createClass({
                                     {self.state.bounties.map(function(bounty) {
                                         return (
                                             <div key={bounty.id} className="col-md-6">
-                                                <BountyCard model={BountyModel} location={location} bounty={bounty} inputs={self.getBountyInputs.bind(self, bounty.attrs)} onUpdate={self.getBounties} />
+                                                <BountyCard model={BountyModel} campaign={campaign} location={location} bounty={bounty} inputs={self.getBountyInputs.bind(self, bounty.attrs)} onUpdate={self.getBounties} />
                                             </div>
                                             );
                                     })}

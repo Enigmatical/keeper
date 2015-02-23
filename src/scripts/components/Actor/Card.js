@@ -7,7 +7,7 @@ var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var FormModal = require('../Model/FormModal');
 var RemoveModal = require('../Model/RemoveModal');
 
-require('../../../styles/ItemLink.css');
+require('../../../styles/ItemCard.css');
 
 
 

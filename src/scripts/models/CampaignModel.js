@@ -1,5 +1,7 @@
 'use strict';
 
+var Q = require('q');
+
 var BaseModel = require('../models/BaseModel');
 var ActModel = require('../models/ActModel');
 var LocationModel = require('../models/LocationModel');
@@ -25,7 +27,23 @@ function CampaignModel() {
     };
 
     this.getLocations = function() {
-        return this.getRelated(LocationModel, 'order');
+        return this.getRelated(LocationModel, 'name');
+    };
+
+    this.getLocationOptions = function() {
+        var self = this;
+        var deferred = Q.defer();
+
+        self.getLocations()
+            .done(function(locations) {
+                var options = self.convertToOptions(locations, function(location) {
+                    return location.attrs.name + ' (' + location.attrs.type + ')';
+                });
+
+                deferred.resolve(options);
+            });
+
+        return deferred.promise;
     };
 }
 

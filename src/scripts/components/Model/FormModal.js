@@ -110,7 +110,6 @@ var ModelFormModal = React.createClass({
             self.props.onUpdate();
         }
 
-
         self.handleToggle();
     },
 

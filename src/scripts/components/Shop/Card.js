@@ -17,6 +17,9 @@ var Input = require('../Model/FormInput');
 var ActorModel = require('../../models/ActorModel');
 var ActorCard = require('../Actor/Card');
 
+var EncounterFormModal = require('../Encounter/FormModal');
+var EncounterCard = require('../Encounter/Card');
+
 require('../../../styles/ItemCard.css');
 
 
@@ -24,14 +27,25 @@ require('../../../styles/ItemCard.css');
 var ShopCard = React.createClass({
     getInitialState: function() {
         return {
+            characterOptions: [],
             actors: [],
-            characterOptions: []
+            encounters: []
         }
     },
 
     componentWillMount: function() {
-        this.getActors();
         this.getCharacterOptions();
+        this.getActors();
+        this.getEncounters();
+    },
+
+    getCharacterOptions: function() {
+        var self = this;
+
+        Auth.User.getCharacterOptions()
+            .done(function(options) {
+                self.setState({characterOptions: options});
+            })
     },
 
     getActors: function() {
@@ -42,15 +56,6 @@ var ShopCard = React.createClass({
             .done(function(actors) {
                 self.setState({actors: actors});
             });
-    },
-
-    getCharacterOptions: function() {
-        var self = this;
-
-        Auth.User.getCharacterOptions()
-            .done(function(options) {
-                self.setState({characterOptions: options});
-            })
     },
 
     getActorInputs: function(attrs) {
@@ -79,6 +84,16 @@ var ShopCard = React.createClass({
             );
     },
 
+    getEncounters: function() {
+        var self = this;
+        var shop = self.props.shop;
+
+        shop.getEncounters()
+            .done(function(encounters) {
+                self.setState({encounters: encounters});
+            })
+    },
+
     render: function () {
         var self = this;
         var location = self.props.location;
@@ -104,6 +119,23 @@ var ShopCard = React.createClass({
             }
         };
 
+        var encounters = function() {
+            var encounters = self.state.encounters;
+
+            if (encounters.length > 0) {
+                return (
+                    <div className="card-links">
+                        <p className="body-header">Encounters</p>
+                        {self.state.encounters.map(function(encounter) {
+                            return (
+                                <EncounterCard key={encounter.id} target={encounter} parent={shop} campaign={self.props.campaign} onUpdate={self.getEncounters} />
+                                );
+                        })}
+                    </div>
+                    );
+            }
+        };
+
         return (
             <div className="item-card shop-card">
                 <div className="card-header">
@@ -118,14 +150,15 @@ var ShopCard = React.createClass({
                     <AttrBlock name="Flavor" attr={shop.attrs.flavor} markdown />
                     <AttrBlock name="Details" attr={shop.attrs.details} markdown />
                     {actors()}
+                    {encounters()}
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
                         <FormModal link={true} model={ActorModel} parent={shop} inputs={self.getActorInputs.bind(self, {})} onUpdate={self.getActors} />
-                        <Button bsStyle="warning" bsSize="small"><Glyphicon glyph="link" /> Encounter</Button>
+                        <EncounterFormModal link={true} parent={shop} campaign={self.props.campaign} onUpdate={self.getEncounters} />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={shop} model={this.props.model} parent={location} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <FormModal target={shop} model={self.props.model} parent={location} inputs={self.props.inputs} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={shop} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

@@ -67,6 +67,22 @@ function UserModel() {
     this.getBattles = function() {
         return this.getRelated(BattleModel, 'name');
     };
+
+    this.getBattleOptions = function() {
+        var self = this;
+        var deferred = Q.defer();
+
+        self.getBattles()
+            .done(function(battles) {
+                var options = self.convertToOptions(battles, function(battle) {
+                    return battle.attrs.name + ', CR ' + battle.attrs.challenge;
+                });
+
+                deferred.resolve(options);
+            });
+
+        return deferred.promise;
+    };
 }
 
 UserModel.prototype = new Object(BaseModel.prototype);

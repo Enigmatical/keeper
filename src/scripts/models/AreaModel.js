@@ -7,7 +7,7 @@ var BaseModel = require('./BaseModel');
 var ActorModel = require('./ActorModel');
 var CharacterModel = require('./CharacterModel');
 
-var EncounterModel = require('../models/EncounterModel');
+var EncounterModel = require('./EncounterModel');
 
 
 

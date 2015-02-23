@@ -200,7 +200,123 @@ var Pathfinder = {
                 medium: '4d4',
                 major: '3d4'
             }
-        }
+        },
+
+        skills: {
+            acrobatics: {
+                name: 'Acrobatics',
+                page: 87
+            },
+            appraise: {
+                name: 'Appraise',
+                page: 90
+            },
+            bluff: {
+                name: 'Bluff',
+                page: 90
+            },
+            climb: {
+                name: 'Climb',
+                page: 90
+            },
+            craft: {
+                name: 'Craft',
+                page: 91
+            },
+            diplomacy: {
+                name: 'Diplomacy',
+                page: 93
+            },
+            disableDevice: {
+                name: 'Disable Device',
+                page: 94
+            },
+            disguise: {
+                name: 'Disguise',
+                page: 95
+            },
+            escapeArtist: {
+                name: 'Escape Artist',
+                page: 95
+            },
+            fly: {
+                name: 'Fly',
+                page: 96
+            },
+            handleAnimal: {
+                name: 'Handle Animal',
+                page: 97
+            },
+            heal: {
+                name: 'Heal',
+                page: 98
+            },
+            intimidate: {
+                name: 'Intimidate',
+                page: 99
+            },
+            knowledge: {
+                name: 'Knowledge (Multiple)',
+                page: 99
+            },
+            linguistics: {
+                name: 'Linguistics',
+                page: 100
+            },
+            perception: {
+                name: 'Perception',
+                page: 102
+            },
+            perform: {
+                name: 'Perform',
+                page: 102
+            },
+            profession: {
+                name: 'Profession (Multiple)',
+                page: 103
+            },
+            ride: {
+                name: 'Ride',
+                page: 103
+            },
+            senseMotive: {
+                name: 'Sense Motive',
+                page: 104
+            },
+            sleightOfHand: {
+                name: 'Sleight of Hand',
+                page: 104
+            },
+            spellcraft: {
+                name: 'Spellcraft',
+                page: 106
+            },
+            stealth: {
+                name: 'Stealth',
+                page: 106
+            },
+            survival: {
+                name: 'Survival',
+                page: 107
+            },
+            swim: {
+                name: 'Swim',
+                page: 108
+            },
+            useMagicDevice: {
+                name: 'Use Magic Device',
+                page: 108
+            }
+        },
+
+        mechanismTypes: [
+            'trap',
+            'wall',
+            'door',
+            'caveIn',
+            'collapse',
+            'flora'
+        ]
     },
 
 
@@ -218,6 +334,23 @@ var Pathfinder = {
 
     getShopModifierOptions: function() {
         return this.helpers.buildOptions(this.statics.shopModifiers, true);
+    },
+
+    getSkillOptions: function() {
+        var options = [];
+
+        for (var skill in this.statics.skills) {
+            options.push({
+                label: this.statics.skills[skill].name,
+                value: skill
+            });
+        }
+
+        return options;
+    },
+
+    getMechanismTypeOptions: function() {
+        return this.helpers.buildOptions(this.statics.mechanismTypes, true);
     },
 
     getXp: function(cr) {
