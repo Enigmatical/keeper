@@ -30,8 +30,6 @@ BaseModel.prototype.create = function(attributes) {
 BaseModel.prototype.merge = function(attributes) {
     this.attrs = _.assign(this.attrs, attributes);
 
-    console.log(this.attrs);
-
     return this;
 };
 

@@ -100,7 +100,7 @@ var ActManagePage = React.createClass({
                         {self.state.acts.map(function(act) {
                             return (
                                 <div key={act.id} className="col-md-6">
-                                    <Card model={ActModel} campaign={campaign} act={act} inputs={self.getInputs.bind(act.attrs)} onUpdate={self.getActs} />
+                                    <Card model={ActModel} campaign={campaign} act={act} inputs={self.getInputs.bind(self, act.attrs)} onUpdate={self.getActs} />
                                 </div>
                                 );
                         })}
