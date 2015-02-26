@@ -46,6 +46,7 @@ var MainNav = React.createClass({
         if (loggedIn) {
             leftNav = (
                 <Nav className="navbar-left">
+                    <NavItemLink to="manage-parties">Parties</NavItemLink>
                     <NavItemLink to="manage-campaigns">Campaigns</NavItemLink>
                     <NavItemLink to="manage-characters">Characters</NavItemLink>
                     <NavItemLink to="manage-foes">Foes</NavItemLink>

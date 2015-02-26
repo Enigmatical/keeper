@@ -5,6 +5,7 @@ var Q = require('q');
 var BaseModel = require('../models/BaseModel');
 var ActModel = require('../models/ActModel');
 var LocationModel = require('../models/LocationModel');
+var SaveModel = require('../models/SaveModel');
 
 
 
@@ -18,6 +19,7 @@ function CampaignModel() {
         order: null,
 
         name: null,
+        startDate: null,
         details: null,
         flavor: null
     };
@@ -44,6 +46,10 @@ function CampaignModel() {
             });
 
         return deferred.promise;
+    };
+
+    this.getSaves = function() {
+        return this.getRelated(SaveModel, 'party_id');
     };
 }
 
