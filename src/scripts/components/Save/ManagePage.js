@@ -11,7 +11,7 @@ var SaveModel = require('../../models/SaveModel');
 var Breadcrumb = require('../Common/Breadcrumb');
 var PageHeader = require('../Model/PageHeader');
 var FormModal = require('../Model/FormModal');
-var Input = require('../Model/FormInput');
+var Inputs = require('./Inputs');
 var Card = require('./Card');
 
 
@@ -22,8 +22,7 @@ var SaveManagePage = React.createClass({
     getInitialState: function() {
         return {
             campaign: null,
-            saves: [],
-            partyOptions: []
+            saves: []
         }
     },
 
@@ -35,7 +34,6 @@ var SaveManagePage = React.createClass({
         new CampaignModel().get(campaignId)
             .done(function(campaign) {
                 self.setState({campaign: campaign});
-                self.getPartyOptions();
                 self.getSaves();
             });
     },
@@ -50,52 +48,9 @@ var SaveManagePage = React.createClass({
             });
     },
 
-    getPartyOptions: function() {
-        var self = this;
-
-        Auth.User.getPartyOptions()
-            .done(function(options) {
-                self.setState({partyOptions: options});
-            });
-    },
-
     getInputs: function(attrs) {
         return (
-            <div>
-                <Input
-                    type="select"
-                    name="party_id"
-                    placeholder="Party"
-                    defaultValue={attrs.party_id}
-                    options={this.state.partyOptions}
-                />
-                <div className="row">
-                    <div className="col-md-6">
-                        <Input
-                            type="text"
-                            name="xp"
-                            placeholder="Current XP"
-                            defaultValue={attrs.xp}
-                            addonBefore="Current XP"
-                        />
-                    </div>
-                    <div className="col-md-6">
-                        <Input
-                            type="text"
-                            name="days"
-                            placeholder="Current Days"
-                            defaultValue={attrs.days}
-                            addonBefore="Current Days"
-                        />
-                    </div>
-                </div>
-                <Input
-                    type="textarea"
-                    name="notes"
-                    placeholder="Notes"
-                    defaultValue={attrs.notes}
-                />
-            </div>
+            <Inputs attrs={attrs} />
             );
     },
 

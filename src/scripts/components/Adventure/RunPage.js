@@ -9,7 +9,7 @@ var RunPage = React.createClass({
         return (
             <div className="row">
                 <div className="col-md-12">
-                    <h1>Run</h1>
+                    <h1></h1>
                 </div>
             </div>
             );

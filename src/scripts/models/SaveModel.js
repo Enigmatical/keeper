@@ -16,7 +16,7 @@ function SaveModel() {
 
         party_id: null,
         location_id: null,
-        days: null,
+        segs: null,
         xp: null,
         notes: null,
         completed: []
