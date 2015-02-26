@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 var Pathfinder = {
     helpers: {
         buildOptions: function(items, useStartCase) {
@@ -408,6 +410,39 @@ var Pathfinder = {
             rewardXp: totalXp,
             rewardCoin: totalCoin
         };
+    },
+
+    getDay: function(segs) {
+        if (_.isEmpty(segs)) {
+            segs = 0;
+        }
+        else {
+            segs = parseInt(segs);
+        }
+
+        return parseInt(segs/48);
+    },
+
+    getDayTime: function(segs) {
+        if (_.isEmpty(segs)) {
+          segs = 0;
+        }
+        else {
+          segs = parseInt(segs);
+        }
+
+        var days = parseInt(segs/48);
+        var hours = parseInt((segs%48)/2);
+        var halfs = parseInt((segs%48)%2);
+
+        var dayLabel = 'Day';
+        if (days > 1) dayLabel = 'Days';
+
+        if (halfs === 0) halfs = '00';
+        else halfs = '30';
+
+
+        return days + " " + dayLabel + ", " + hours + ":" + halfs;
     }
 };
 

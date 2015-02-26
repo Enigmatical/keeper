@@ -3,6 +3,7 @@
 var React = require('react/addons');
 
 var Auth = require('../../helpers/Auth');
+var Pathfinder = require('../../helpers/Pathfinder');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
@@ -53,7 +54,7 @@ var SaveCard = React.createClass({
                             {party.attrs.name}
                         </p>
                         <p className="pull-right">
-                            <small className="text-muted">{save.attrs.days} Days</small>
+                            <small className="text-muted">{Pathfinder.getDayTime(save.attrs.segs)}</small>
                         </p>
                     </div>
                     <div className="card-body">
