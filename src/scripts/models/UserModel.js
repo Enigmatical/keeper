@@ -4,6 +4,7 @@ var Q = require('q');
 
 var BaseModel = require('../models/BaseModel');
 var CampaignModel = require('../models/CampaignModel');
+var PartyModel = require('../models/PartyModel');
 var CharacterModel = require('../models/CharacterModel');
 var FoeModel = require('../models/FoeModel');
 var BattleModel = require('../models/BattleModel');
@@ -22,6 +23,26 @@ function UserModel() {
 
     this.getCampaigns = function() {
         return this.getRelated(CampaignModel, 'order');
+    };
+
+    this.getParties = function() {
+        return this.getRelated(PartyModel, 'name');
+    };
+
+    this.getPartyOptions = function() {
+        var self = this;
+        var deferred = Q.defer();
+
+        self.getParties()
+            .done(function(parties) {
+                var options = self.convertToOptions(parties, function(party) {
+                    return party.attrs.name;
+                });
+
+                deferred.resolve(options);
+            });
+
+        return deferred.promise;
     };
 
     this.getCharacters = function() {

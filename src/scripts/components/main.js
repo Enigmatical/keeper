@@ -12,11 +12,16 @@ var CampaignManagePage = require('./Campaign/ManagePage');
     var LocationManagePage = require('./Location/ManagePage');
         var AreaManagePage = require('./Area/ManagePage');
 
+var PartyManagePage = require('./Party/ManagePage');
+
 var CharacterManagePage = require('./Character/ManagePage');
 
 var FoeManagePage = require('./Foe/ManagePage');
 
 var ToolsPage = require('./ToolsPage');
+
+var SaveManagePage = require('./Save/ManagePage');
+    var RunPage = require('./Adventure/RunPage');
 
 var content = document.getElementById('content');
 
@@ -32,9 +37,14 @@ var Routes = (
                     <Route name="manage-tasks" path="/manage/campaign/:campaignId/act/:actId/quest/:questId/tasks" handler={TaskManagePage} />
             <Route name="manage-locations" path="/manage/campaign/:campaignId/locations" handler={LocationManagePage}/>
                 <Route name="manage-areas" path="/manage/campaign/:campaignId/location/:locationId/areas" handler={AreaManagePage}/>
+        <Route name="manage-parties" path="/manage/parties" handler={PartyManagePage}/>
         <Route name="manage-characters" path="/manage/characters" handler={CharacterManagePage}/>
         <Route name="manage-foes" path="/manage/foes" handler={FoeManagePage}/>
         <Route name="tools" path="/tools" handler={ToolsPage}/>
+
+        <Route name="manage-saves" path="/manage/campaign/:campaignId/saves" handler={SaveManagePage} />
+
+        <Route name="run-campaign" path="/adventure/campaign/:campaignId/save/:saveId" handler={RunPage} />
     </Route>
     );
 

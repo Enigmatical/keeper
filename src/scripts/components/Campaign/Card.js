@@ -36,7 +36,7 @@ var CampaignCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <Button bsStyle="success" bsSize="small"><Glyphicon glyph="play" /> Run</Button>
+                        <ButtonLink bsStyle="success" bsSize="small" to="manage-saves" params={{campaignId: campaign.id}}><Glyphicon glyph="cog" /> Saves</ButtonLink>
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-acts" params={{campaignId: campaign.id}}><Glyphicon glyph="cog" /> Acts</ButtonLink>
                         <ButtonLink bsStyle="primary" bsSize="small" to="manage-locations" params={{campaignId: campaign.id}}><Glyphicon glyph="cog" /> Locations</ButtonLink>
                     </ButtonToolbar>
