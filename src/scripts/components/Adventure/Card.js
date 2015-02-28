@@ -2,46 +2,43 @@
 
 var React = require('react/addons');
 
-var Auth = require('../../helpers/Auth');
-
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var FormModal = require('../Model/FormModal');
-var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
+
+var InfoModal = require('./InfoModal');
 
 require('../../../styles/ItemCard.css');
 
 
 
-var PartyCard = React.createClass({
+var AdventureCard = React.createClass({
     render: function () {
-        var party = this.props.party;
+        var target = this.props.target;
 
         return (
-            <div className="item-card party-card">
+            <div className="item-card adventure-card">
                 <div className="card-header">
                     <p className="pull-left">
-                        {party.attrs.name}
+                        {target.attrs.name}
                     </p>
                     <p className="pull-right">
-                        <small className="text-muted">{party.attrs.type}</small>
+                        <small className="text-muted">{this.props.type}</small>
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Party Size" attr={party.attrs.count} />
-                    <AttrBlock name="Players" attr={party.attrs.details} markdown />
+                    <AttrBlock name="Flavor" attr={target.attrs.flavor} markdown />
+                    <AttrBlock name="Details" attr={target.attrs.details} markdown />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <span />
+                        {this.props.leftButtons}
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={party} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
-                        <RemoveModal target={party} onUpdate={this.props.onUpdate} />
+                        <InfoModal model={this.props.model} target={this.props.target} info={this.props.getInfo()} />
                     </ButtonToolbar>
                 </div>
             </div>
@@ -49,4 +46,4 @@ var PartyCard = React.createClass({
     }
 });
 
-module.exports = PartyCard;
+module.exports = AdventureCard;

@@ -45,6 +45,14 @@ var PartyManagePage = React.createClass({
                 />
 
                 <Input
+                    type="text"
+                    name="count"
+                    placeholder="Party Size"
+                    defaultValue={attrs.count}
+                    addonBefore="Size"
+                />
+
+                <Input
                     type="textarea"
                     name="details"
                     defaultValue={attrs.details}

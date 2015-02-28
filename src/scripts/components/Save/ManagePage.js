@@ -49,8 +49,10 @@ var SaveManagePage = React.createClass({
     },
 
     getInputs: function(attrs) {
+        var campaign = this.state.campaign;
+
         return (
-            <Inputs attrs={attrs} />
+            <Inputs campaign={campaign} attrs={attrs} />
             );
     },
 

@@ -1,5 +1,6 @@
 'use strict';
 
+var React = require('react/addons');
 var _ = require('lodash');
 
 var Pathfinder = {
@@ -318,6 +319,29 @@ var Pathfinder = {
             'caveIn',
             'collapse',
             'flora'
+        ],
+
+        xpToLevel: [
+            0,
+            2000,
+            5000,
+            9000,
+            15000,
+            23000,
+            35000,
+            51000,
+            75000,
+            105000,
+            155000,
+            220000,
+            315000,
+            445000,
+            635000,
+            890000,
+            1300000,
+            1800000,
+            2550000,
+            3600000
         ]
     },
 
@@ -412,37 +436,60 @@ var Pathfinder = {
         };
     },
 
-    getDay: function(segs) {
+    getDayTime: function(segs) {
         if (_.isEmpty(segs)) {
             segs = 0;
         }
+
+        var days, hours, half, dayLabel, hourLabel, halfLabel, ampmLabel;
+
+        /*
+            Days
+         */
+        days = parseInt(segs/48);
+        segs = segs - (days * 48);
+        dayLabel = 'Day ' + (days + 1);
+
+        /*
+            Hours
+         */
+        hours = parseInt(segs/2);
+
+        segs = segs - (hours * 2);
+        if (hours === 0) {
+            hourLabel = '12';
+            ampmLabel = 'AM';
+        }
+        else if (hours < 12) {
+            hourLabel = hours;
+            ampmLabel = 'AM';
+        }
+        else if (hours === 12) {
+            hourLabel = '12';
+            ampmLabel = 'PM';
+        }
         else {
-            segs = parseInt(segs);
+            hourLabel = parseInt(hours-12);
+            ampmLabel = 'PM';
         }
 
-        return parseInt(segs/48);
+        half = parseInt(segs);
+        halfLabel = (half === 1) ? ':30' : ':00';
+
+        return (<span>{dayLabel}&nbsp;&nbsp;<small className="text-muted">{hourLabel + halfLabel} {ampmLabel}</small></span>);
+        //return (dayLabel + ', ' + hourLabel + halfLabel + ' ' + ampmLabel);
     },
 
-    getDayTime: function(segs) {
-        if (_.isEmpty(segs)) {
-          segs = 0;
-        }
-        else {
-          segs = parseInt(segs);
-        }
+    getPartyXp: function(xp, size) {
+        var xpEach = parseInt(xp/size);
 
-        var days = parseInt(segs/48);
-        var hours = parseInt((segs%48)/2);
-        var halfs = parseInt((segs%48)%2);
+        var level = 0;
+        _.each(this.statics.xpToLevel, function(xpNeeded) {
+            if (xpEach >= xpNeeded) level++;
+            else { return false; }
+        });
 
-        var dayLabel = 'Day';
-        if (days > 1) dayLabel = 'Days';
-
-        if (halfs === 0) halfs = '00';
-        else halfs = '30';
-
-
-        return days + " " + dayLabel + ", " + hours + ":" + halfs;
+        return (<span>{xp}&nbsp;&nbsp;<small className="text-muted">Level {level} ({xpEach})</small></span>);
     }
 };
 

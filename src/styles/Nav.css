@@ -1,2 +1,8 @@
 .navbar-right .navbar-btn {
   margin-right: 15px; }
+
+.navbar.navbar-adventure {
+  min-height: 40px; }
+  .navbar.navbar-adventure .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px; }

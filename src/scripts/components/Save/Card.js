@@ -62,7 +62,7 @@ var SaveCard = React.createClass({
                     </div>
                     <div className="card-footer">
                         <ButtonToolbar className="pull-left">
-                            <ButtonLink bsStyle="success" bsSize="small" to="run-campaign" params={{campaignId: campaign.id, saveId: save.id}}><Glyphicon glyph="play" /> Begin</ButtonLink>
+                            <ButtonLink bsStyle="success" bsSize="small" to="adventure-acts" params={{campaignId: campaign.id, saveId: save.id}}><Glyphicon glyph="play" /> Begin</ButtonLink>
                         </ButtonToolbar>
                         <ButtonToolbar className="pull-right">
                             <FormModal target={save} model={this.props.model} parent={campaign} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />

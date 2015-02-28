@@ -12,12 +12,14 @@ var Input = require('../Model/FormInput');
 var SaveInputs = React.createClass({
     getInitialState: function() {
         return {
-            partyOptions: []
+            partyOptions: [],
+            locationOptions: []
         }
     },
 
     componentWillMount: function() {
         this.getPartyOptions();
+        this.getLocationOptions();
     },
 
     componentDidMount: function() {
@@ -30,6 +32,16 @@ var SaveInputs = React.createClass({
         Auth.User.getPartyOptions()
             .done(function(options) {
                 self.setState({partyOptions: options});
+            });
+    },
+
+    getLocationOptions: function() {
+        var self = this;
+        var campaign = self.props.campaign;
+
+        campaign.getLocationOptions()
+            .done(function(options) {
+                self.setState({locationOptions: options});
             });
     },
 
@@ -53,8 +65,15 @@ var SaveInputs = React.createClass({
                     defaultValue={attrs.party_id}
                     options={this.state.partyOptions}
                 />
+                <Input
+                    type="select"
+                    name="location_id"
+                    placeholder="Location"
+                    defaultValue={attrs.location_id}
+                    options={this.state.locationOptions}
+                />
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <Input
                             type="text"
                             name="xp"
@@ -63,7 +82,18 @@ var SaveInputs = React.createClass({
                             addonBefore="Current XP"
                         />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
+                        <Input
+                            type="text"
+                            name="coordinate"
+                            placeholder="Coordinate"
+                            defaultValue={attrs.coordinate || 0}
+                            addonBefore="Coordinate"
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-6">
                         <Input
                             type="text"
                             name="segs"
@@ -74,7 +104,7 @@ var SaveInputs = React.createClass({
                             addonBefore="Current Segs"
                         />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-6">
                         <Input
                             type="text"
                             name="daytime"
