@@ -20,7 +20,7 @@ var Breadcrumb = React.createClass({
         });
 
         return (
-            <ol className="breadcrumb">
+            <ol className={this.props.className + " breadcrumb"}>
                 {crumbs}
             </ol>
             );

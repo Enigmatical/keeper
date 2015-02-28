@@ -13,6 +13,7 @@ function PartyModel() {
         parent_id: null,
 
         name: null,
+        count: null,
         details: null
     };
 }

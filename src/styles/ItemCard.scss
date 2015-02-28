@@ -23,12 +23,16 @@
     font-size: 12px;
     overflow: auto;
 
+    &.card-flavor {
+      padding-bottom: 0px;
+    }
+
     .body-header {
-      font-size: 12px;
-      font-weight: 700;
-      color: #959595;
-      letter-spacing: 1px;
-      margin-bottom: 3px;
+      font-size: 16px;
+
+      small {
+        margin-left: 10px;
+      }
     }
 
     .body-content {
@@ -65,6 +69,12 @@
       line-height: 1.8;
       margin-bottom: 0;
     }
+  }
+}
+
+.adventure-card {
+  .card-body {
+    height: auto;
   }
 }
 

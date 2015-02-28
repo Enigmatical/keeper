@@ -21,7 +21,12 @@ var FoeManagePage = require('./Foe/ManagePage');
 var ToolsPage = require('./ToolsPage');
 
 var SaveManagePage = require('./Save/ManagePage');
-    var RunPage = require('./Adventure/RunPage');
+
+var ActAdventurePage = require('./Adventure/Act/Page');
+    var QuestAdventurePage = require('./Adventure/Quest/Page');
+        var TaskAdventurePage = require('./Adventure/Task/Page');
+var LocationAdventurePage = require('./Adventure/Location/Page');
+    var AreaAdventurePage = require('./Adventure/Area/Page');
 
 var content = document.getElementById('content');
 
@@ -31,6 +36,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Routes = (
     <Route handler={KeeperApp}>
         <DefaultRoute name="home" handler={HomePage}/>
+
         <Route name="manage-campaigns" path="/manage/campaigns" handler={CampaignManagePage}/>
             <Route name="manage-acts" path="/manage/campaign/:campaignId/acts" handler={ActManagePage}/>
                 <Route name="manage-quests" path="/manage/campaign/:campaignId/act/:actId/quests" handler={QuestManagePage} />
@@ -44,7 +50,11 @@ var Routes = (
 
         <Route name="manage-saves" path="/manage/campaign/:campaignId/saves" handler={SaveManagePage} />
 
-        <Route name="run-campaign" path="/adventure/campaign/:campaignId/save/:saveId" handler={RunPage} />
+        <Route name="adventure-acts" path="/adventure/campaign/:campaignId/save/:saveId/acts" handler={ActAdventurePage} />
+            <Route name="adventure-quests" path="/adventure/campaign/:campaignId/save/:saveId/act/:actId/quests" handler={QuestAdventurePage} />
+                <Route name="adventure-tasks" path="/adventure/campaign/:campaignId/save/:saveId/act/:actId/quest/:questId/tasks" handler={TaskAdventurePage} />
+        <Route name="adventure-locations" path="/adventure/campaign/:campaignId/save/:saveId/locations" handler={LocationAdventurePage} />
+            <Route name="adventure-areas" path="/adventure/campaign/:campaignId/save/:saveId/location/:locationId/area" handler={AreaAdventurePage} />
     </Route>
     );
 
