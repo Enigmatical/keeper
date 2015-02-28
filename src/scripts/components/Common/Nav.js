@@ -43,6 +43,10 @@ var MainNav = React.createClass({
         var loggedIn = this.state.loggedIn;
         var leftNav, rightNav;
 
+        var brandLink = (
+                <Link to="home">Dungeon Keeper</Link>
+            );
+
         if (loggedIn) {
             leftNav = (
                 <Nav className="navbar-left">
@@ -78,8 +82,7 @@ var MainNav = React.createClass({
         }
 
         return (
-            <Navbar className="navbar-static-top" fluid>
-                <Link to="home" className="navbar-brand">Dungeon Keeper</Link>
+            <Navbar className="navbar-static-top" brand={brandLink} fluid>
                 {leftNav}
                 {rightNav}
             </Navbar>

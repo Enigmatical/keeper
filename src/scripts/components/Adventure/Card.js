@@ -30,8 +30,8 @@ var AdventureCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={target.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={target.attrs.details} markdown />
+                    <AttrBlock text="turquoise" attr={target.attrs.flavor} markdown />
+                    <AttrBlock attr={target.attrs.details} markdown />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

@@ -22,8 +22,8 @@ var LocationAdventureInfo = React.createClass({
             <div className="row">
                 <Stats stats={stats} />
                 <div className="col-md-12">
-                    <AttrBlock name="Flavor" text="info" attr={target.attrs.flavor} markdown />
-                    <AttrBlock name="Details" text="info" attr={target.attrs.details} markdown />
+                    <AttrBlock text="turquoise" attr={target.attrs.flavor} markdown />
+                    <AttrBlock attr={target.attrs.details} markdown />
                 </div>
             </div>
             );
