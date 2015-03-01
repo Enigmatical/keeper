@@ -18,6 +18,7 @@ var PageHeader = require('../PageHeader');
 var Breadcrumb = require('../../Common/Breadcrumb');
 
 var Card = require('../Card');
+var Progress = require('../ProgressBar');
 
 var ActInfo = require('./Info');
 
@@ -71,6 +72,10 @@ var ActAdventurePage = React.createClass({
         return (<ActInfo target={target} />);
     },
 
+    getProgress: function(target, save) {
+        return (<Progress className="progressbar-adventure" target={target} save={save} />);
+    },
+
     render: function () {
         var self = this;
         var campaign = self.state.campaign;
@@ -94,7 +99,7 @@ var ActAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={act.id} className="col-md-12">
-                                    <Card target={act} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, act)} />
+                                    <Card target={act} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, act)} getProgress={self.getProgress.bind(self, act, save)} />
                                 </div>
                                 );
                         })}

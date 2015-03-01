@@ -67,6 +67,19 @@
   }
 }
 
+.progressbar-adventure.progress {
+  display: inline-block;
+  min-width: 200px;
+  margin-bottom: 0px;
+  margin-top: 12px;
+  height: 10px;
+}
+
+.completelabel-adventure {
+  margin-left: 15px;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
 
 textarea.markdown {
   background-color: #EEFBF9;
