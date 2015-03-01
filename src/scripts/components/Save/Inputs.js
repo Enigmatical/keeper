@@ -13,7 +13,8 @@ var SaveInputs = React.createClass({
     getInitialState: function() {
         return {
             partyOptions: [],
-            locationOptions: []
+            locationOptions: [],
+            daytime: null
         }
     },
 
@@ -50,7 +51,7 @@ var SaveInputs = React.createClass({
 
         var daytime = Pathfinder.getDayTime(segs);
 
-        this.refs.daytime.getDOMNode().querySelector('[name=daytime]').setAttribute('value', daytime);
+        this.setState({daytime: daytime});
     },
 
     render: function() {
@@ -65,13 +66,29 @@ var SaveInputs = React.createClass({
                     defaultValue={attrs.party_id}
                     options={this.state.partyOptions}
                 />
-                <Input
-                    type="select"
-                    name="location_id"
-                    placeholder="Location"
-                    defaultValue={attrs.location_id}
-                    options={this.state.locationOptions}
-                />
+                <div className="row">
+                    <div className="col-md-6">
+                        <Input
+                            type="select"
+                            name="location_id"
+                            placeholder="Location"
+                            defaultValue={attrs.location_id}
+                            options={this.state.locationOptions}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <Input
+                            type="text"
+                            name="segs"
+                            ref="segs"
+                            placeholder="Segs (48 = 1 Day)"
+                            defaultValue={attrs.segs || 0}
+                            onChange={this.handleDayTime}
+                            addonBefore="Current Segs"
+                            addonAfter={this.state.daytime}
+                        />
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-md-6">
                         <Input
@@ -89,29 +106,6 @@ var SaveInputs = React.createClass({
                             placeholder="Coordinate"
                             defaultValue={attrs.coordinate || 0}
                             addonBefore="Coordinate"
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6">
-                        <Input
-                            type="text"
-                            name="segs"
-                            ref="segs"
-                            placeholder="Segs (48 = 1 Day)"
-                            defaultValue={attrs.segs || 0}
-                            onChange={this.handleDayTime}
-                            addonBefore="Current Segs"
-                        />
-                    </div>
-                    <div className="col-md-6">
-                        <Input
-                            type="text"
-                            name="daytime"
-                            ref="daytime"
-                            placeholder="Daytime"
-                            readOnly
-                            addonBefore="Daytime"
                         />
                     </div>
                 </div>

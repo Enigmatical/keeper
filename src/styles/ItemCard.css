@@ -13,20 +13,10 @@
       font-weight: 500;
       margin-bottom: 0; }
   .item-card .card-body {
-    padding: 10px 15px;
+    padding: 10px 0px;
     height: 179.928px;
     font-size: 12px;
     overflow: auto; }
-    .item-card .card-body.card-flavor {
-      padding-bottom: 0px; }
-    .item-card .card-body .body-header {
-      font-size: 16px; }
-      .item-card .card-body .body-header small {
-        margin-left: 10px; }
-    .item-card .card-body .body-content {
-      margin-bottom: 10px; }
-      .item-card .card-body .body-content p {
-        margin-bottom: 2px; }
   .item-card .card-links {
     overflow: hidden; }
   .item-card .card-footer {
@@ -34,18 +24,20 @@
     border-top: 1px solid #EEE;
     overflow: hidden; }
 
-.item-link-wrapper {
-  padding: 0px; }
-  .item-link-wrapper .item-link {
-    border: 1px solid #DDD;
-    border-radius: 4px;
-    padding: 6px;
-    overflow: hidden;
-    margin: 2.5px;
-    background-color: #F5F5F5; }
-    .item-link-wrapper .item-link p {
-      line-height: 1.8;
-      margin-bottom: 0; }
+.item-link-wrapper .item-link {
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  padding: 6px;
+  overflow: hidden;
+  margin: 2.5px 0px;
+  background-color: #F5F5F5; }
+  .item-link-wrapper .item-link p {
+    line-height: 1.8;
+    margin-bottom: 0; }
 
 .adventure-card .card-body {
-  height: auto; }
+  height: auto;
+  padding-bottom: 0; }
+
+.encounter-card .style-flavor {
+  font-size: 0.9em; }

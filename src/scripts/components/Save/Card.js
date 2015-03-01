@@ -22,12 +22,14 @@ require('../../../styles/ItemCard.css');
 var SaveCard = React.createClass({
     getInitialState: function() {
         return {
-            party: null
+            party: null,
+            location: null
         }
     },
 
     componentWillMount: function() {
         this.getParty();
+        this.getLocation();
     },
 
     getParty: function() {
@@ -40,13 +42,24 @@ var SaveCard = React.createClass({
             });
     },
 
+    getLocation: function() {
+        var self = this;
+        var save = self.props.save;
+
+        save.getLocation()
+            .done(function() {
+                self.setState({location: save.location});
+            });
+    },
+
     render: function () {
         var self = this;
         var campaign = self.props.campaign;
         var save = self.props.save;
         var party = self.state.party;
+        var location = self.state.location;
 
-        if (_.isObject(party)) {
+        if (_.isObject(party) && _.isObject(location)) {
             return (
                 <div className="item-card save-card">
                     <div className="card-header">
@@ -58,7 +71,11 @@ var SaveCard = React.createClass({
                         </p>
                     </div>
                     <div className="card-body">
-                        <AttrBlock name="Notes" attr={save.attrs.notes} markdown />
+                        <section className="row">
+                            <AttrBlock type="stat" name="Location" glyph="location" attr={location.attrs.name} />
+                            <AttrBlock type="stat" name="Current XP" glyph="xp" attr={save.attrs.xp} />
+                        </section>
+                        <AttrBlock type="details" attr={save.attrs.notes} />
                     </div>
                     <div className="card-footer">
                         <ButtonToolbar className="pull-left">

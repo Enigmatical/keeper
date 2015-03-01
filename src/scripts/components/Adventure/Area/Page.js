@@ -135,7 +135,7 @@ var AreaAdventurePage = React.createClass({
 
             return (
                 <div id="area-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} />
+                    <PageHeader campaign={campaign} save={save} section="map" />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         <div className="col-md-12">
@@ -157,7 +157,7 @@ var AreaAdventurePage = React.createClass({
 
                                         return (
                                             <div key={shop.id} className="col-md-12">
-                                                <Card model={ShopModel} target={shop} leftButtons={leftButtons} getInfo={self.getShopInfo.bind(self, shop)} />
+                                                <Card model={ShopModel} target={shop} type={<span><strong>{_.startCase(shop.attrs.type)}</strong> <small>{_.startCase(shop.attrs.quality)}</small></span>} leftButtons={leftButtons} getInfo={self.getShopInfo.bind(self, shop)} />
                                             </div>
                                             );
                                     })}
@@ -165,12 +165,11 @@ var AreaAdventurePage = React.createClass({
                                 <TabPane eventKey={3} tab="Bounties">
                                     {self.state.bounties.map(function(bounty) {
                                         var leftButtons = [
-                                            (<Button bsStyle="warning"><Glyphicon glyph="unchecked" /> Complete</Button>)
                                         ];
 
                                         return (
                                             <div key={bounty.id} className="col-md-12">
-                                                <Card model={BountyModel} target={bounty} leftButtons={leftButtons} getInfo={self.getBountyInfo.bind(self, bounty)} />
+                                                <Card model={BountyModel} target={bounty} type={<span><strong>{_.startCase(bounty.attrs.type)}</strong> <small>CR <strong>{bounty.attrs.challenge}</strong></small></span>} leftButtons={leftButtons} getInfo={self.getBountyInfo.bind(self, bounty)} />
                                             </div>
                                             );
                                     })}

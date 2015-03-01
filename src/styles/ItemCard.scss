@@ -18,29 +18,10 @@
   }
 
   .card-body {
-    padding: 10px 15px;
+    padding: 10px 0px;
     height: 14px*1.428*9;
     font-size: 12px;
     overflow: auto;
-
-    &.card-flavor {
-      padding-bottom: 0px;
-    }
-
-    .body-header {
-      font-size: 16px;
-
-      small {
-        margin-left: 10px;
-      }
-    }
-
-    .body-content {
-      margin-bottom: 10px;
-      p {
-        margin-bottom: 2px;
-      }
-    }
   }
 
   .card-links {
@@ -55,14 +36,13 @@
 }
 
 .item-link-wrapper {
-  padding: 0px;
 
   .item-link {
     border: 1px solid #DDD;
     border-radius: 4px;
     padding: 6px;
     overflow: hidden;
-    margin: 2.5px;
+    margin: 2.5px 0px;
     background-color: #F5F5F5;
 
     p {
@@ -75,6 +55,13 @@
 .adventure-card {
   .card-body {
     height: auto;
+    padding-bottom: 0;
+  }
+}
+
+.encounter-card {
+  .style-flavor {
+    font-size: 0.9em;
   }
 }
 

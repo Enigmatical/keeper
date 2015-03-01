@@ -45,14 +45,16 @@ var ShopAdventureInfo = React.createClass({
         var encounters = function() {
             if (self.state.encounters.length > 0) {
                 return(
-                    <div className="encounters">
-                        <p className="body-header">Encounters</p>
-                        {self.state.encounters.map(function(encounter) {
-                            return (
-                                <EncounterCard key={encounter.id} target={encounter} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="col-md-12">
+                            <p className="body-header">Encounters</p>
+                            {self.state.encounters.map(function(encounter) {
+                                return (
+                                    <EncounterCard key={encounter.id} target={encounter} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
             else {
@@ -61,13 +63,14 @@ var ShopAdventureInfo = React.createClass({
         };
 
         return (
-            <div className="row">
-                <Stats stats={stats} />
-                <div className="col-md-12">
-                    <AttrBlock text="turquoise" attr={target.attrs.flavor} markdown />
-                    <AttrBlock attr={target.attrs.details} markdown />
-                    {encounters()}
-                </div>
+            <div>
+                <AttrBlock type="flavor" attr={target.attrs.flavor} />
+                <section className="row">
+                    <AttrBlock type="stat" name="Type" glyph="type" attr={_.startCase(target.attrs.type)} />
+                    <AttrBlock type="stat" name="Quality" glyph="type" attr={_.startCase(target.attrs.quality)} />
+                </section>
+                <AttrBlock type="details" attr={target.attrs.details} />
+                {encounters()}
             </div>
             );
     }

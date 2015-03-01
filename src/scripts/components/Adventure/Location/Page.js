@@ -84,13 +84,12 @@ var LocationAdventurePage = React.createClass({
 
             return (
                 <div id="location-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} />
+                    <PageHeader campaign={campaign} save={save} section="map" />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         {self.state.locations.map(function(location) {
                             var leftButtons = [
-                                (<ButtonLink key="button-link" bsStyle="primary" to="adventure-areas" params={{campaignId: campaign.id, saveId: save.id, locationId: location.id}}><Glyphicon glyph="play" /> Areas, Shops, &amp; Bounties</ButtonLink>),
-                                (<Button key="button-action" bsStyle="warning"><Glyphicon glyph="globe" /> Travel</Button>)
+                                (<ButtonLink key="button-link" bsStyle="primary" to="adventure-areas" params={{campaignId: campaign.id, saveId: save.id, locationId: location.id}}><Glyphicon glyph="play" /> Areas, Shops, &amp; Bounties</ButtonLink>)
                             ];
                             return (
                                 <div key={location.id} className="col-md-12">

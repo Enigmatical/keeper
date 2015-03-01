@@ -97,17 +97,16 @@ var QuestAdventurePage = React.createClass({
 
             return (
                 <div id="quest-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} />
+                    <PageHeader campaign={campaign} save={save} section="campaign" />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         {self.state.quests.map(function(quest) {
                             var leftButtons = [
-                                (<ButtonLink bsStyle="primary" to="adventure-tasks" params={{campaignId: campaign.id, saveId: save.id, actId: act.id, questId: quest.id}}><Glyphicon glyph="play" /> Tasks</ButtonLink>),
-                                (<Button bsStyle="warning"><Glyphicon glyph="unchecked" /> Complete</Button>)
+                                (<ButtonLink bsStyle="primary" to="adventure-tasks" params={{campaignId: campaign.id, saveId: save.id, actId: act.id, questId: quest.id}}><Glyphicon glyph="play" /> Tasks</ButtonLink>)
                             ];
                             return (
                                 <div key={quest.id} className="col-md-12">
-                                    <Card model={QuestModel} target={quest} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} />
+                                    <Card model={QuestModel} target={quest} type={<span>CR <strong>{quest.attrs.challenge}</strong></span>} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} />
                                 </div>
                                 );
                         })}

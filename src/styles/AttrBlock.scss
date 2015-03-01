@@ -1,0 +1,81 @@
+.card-body, .modal-body {
+  section.row {
+    margin: 10px 0px;
+
+    &:first-child {
+      margin-top: 0px;
+    }
+  }
+
+  p:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.style-flavor {
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.style-details {
+  text-align: justify;
+}
+
+.style-stat {
+  display: inline-block;
+
+  span.glyphicon {
+    margin-right: 3px;
+    opacity: 0.75;
+  }
+
+  span.attr-label {
+    display: inline-block;
+    font-size: 0.9em;
+    opacity: 0.75;
+    margin-right: 9px;
+  }
+
+  span.attr-value {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1em;
+  }
+}
+
+$colors:
+'turquoise'     #1abc9c,
+'greensea'      #16a085,
+'emerald'       #2ecc71,
+'nephritis'     #27ae60,
+'peterriver'    #3498db,
+'belizehole'    #2980b9,
+'amethyst'      #9b59b6,
+'wisteria'      #8e44ad,
+'wetasphalt'    #34495e,
+'midnightblue'  #2c3e50,
+'sunflower'     #f1c40f,
+'orange'        #f39c12,
+'carrot'        #e67e22,
+'pumpkin'       #d35400,
+'alizarin'      #e74c3c,
+'pomegranate'   #c0392b,
+'clouds'        #ecf0f1,
+'silver'        #bdc3c7,
+'concrete'      #95a5a6,
+'asbestos'      #7f8c8d;
+
+@each $color in $colors {
+  $type: nth($color, 1);
+  $hex: nth($color, 2);
+
+  .text-#{$type} {
+    color: $hex;
+  }
+
+  .bg-#{$type} {
+    padding: 5px 10px;
+    background-color: rgba($hex, 0.15);
+    border-left: 5px solid $hex;
+  }
+}

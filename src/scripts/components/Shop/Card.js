@@ -104,14 +104,16 @@ var ShopCard = React.createClass({
 
             if (actors.length > 0) {
                 return (
-                    <div className="card-links">
-                        <p className="body-header">Actors</p>
-                        {self.state.actors.map(function(actor) {
-                            return (
-                                <ActorCard key={actor.id} target={actor} parent={shop} model={ActorModel} inputs={self.getActorInputs.bind(self, actor.attrs)} onUpdate={self.getActors} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="card-links col-md-12">
+                            <p className="body-header">Actors</p>
+                            {self.state.actors.map(function(actor) {
+                                return (
+                                    <ActorCard key={actor.id} target={actor} parent={shop} model={ActorModel} inputs={self.getActorInputs.bind(self, actor.attrs)} onUpdate={self.getActors} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
             else {
@@ -124,14 +126,16 @@ var ShopCard = React.createClass({
 
             if (encounters.length > 0) {
                 return (
-                    <div className="card-links">
-                        <p className="body-header">Encounters</p>
-                        {self.state.encounters.map(function(encounter) {
-                            return (
-                                <EncounterCard key={encounter.id} target={encounter} parent={shop} campaign={self.props.campaign} onUpdate={self.getEncounters} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="card-links col-md-12">
+                            <p className="body-header">Encounters</p>
+                            {self.state.encounters.map(function(encounter) {
+                                return (
+                                    <EncounterCard key={encounter.id} target={encounter} parent={shop} campaign={self.props.campaign} onUpdate={self.getEncounters} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
         };
@@ -143,12 +147,12 @@ var ShopCard = React.createClass({
                         {shop.attrs.name}
                     </p>
                     <p className="pull-right">
-                        <small className="text-muted">{_.startCase(shop.attrs.type)}, <strong>{_.startCase(shop.attrs.quality)}</strong></small>
+                        <small className="text-muted">{_.startCase(shop.attrs.type)}, <small>{_.startCase(shop.attrs.quality)}</small></small>
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={shop.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={shop.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={shop.attrs.flavor} />
+                    <AttrBlock type="details" attr={shop.attrs.details} />
                     {actors()}
                     {encounters()}
                 </div>

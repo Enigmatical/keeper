@@ -32,10 +32,14 @@ var FoeCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={foe.attrs.flavor} markdown />
-                    <AttrBlock name="Quick" attr={foe.attrs.quick} markdown />
-                    <AttrBlock name="Pawns On Hand" attr={foe.attrs.count} />
-                    <AttrBlock name="Bestiary Page" attr={foe.attrs.page} />
+                    <AttrBlock type="flavor" attr={foe.attrs.flavor} />
+                    <section className="row">
+                        <AttrBlock type="custom" className="text-wetasphalt bg-wetasphalt" attr={foe.attrs.quick} />
+                    </section>
+                    <section className="row">
+                        <AttrBlock type="stat" name="Pawns" glyph="count" attr={foe.attrs.count} />
+                        <AttrBlock type="stat" name="Page" glyph="page" attr={foe.attrs.page} />
+                    </section>
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

@@ -77,36 +77,38 @@ var EncounterCombatAdventureInfo = React.createClass({
             return (
                 <div>
                     <div className="card-body">
-                        <div className="text-alizarin">
-                            <p className="body-header">Stats</p>
-                            <Stats stats={stats} />
-                        </div>
-                        <div className="text-pomegranate">
-                            {battlers.map(function(battler) {
-                                return (
-                                    <div key={battler.id}>
-                                        <p className="body-header">{battler.foe.attrs.name}<small>x{battler.attrs.count}</small></p>
-                                        <AttrBlock text="muted" attr={battler.foe.attrs.quick} markdown />
-                                    </div>
-                                    );
-                            })}
-                        </div>
-                        <div className="text-peterriver">
-                            <p className="body-header">Bestiary</p>
+                        <section className="row">
                             <div className="col-md-12">
+                                {battlers.map(function(battler) {
+                                    return (
+                                        <div key={battler.id} className="text-pomegranate bg-pomegranate">
+                                            <p className="body-header">{battler.foe.attrs.name} <small>x<strong>{battler.attrs.count}</strong></small></p>
+                                            <section className="row">
+                                                <AttrBlock type="custom" className="text-wetasphalt" attr={battler.foe.attrs.quick} />
+                                            </section>
+                                        </div>
+                                        );
+                                })}
+                            </div>
+                        </section>
+                        <section className="row">
+                            <div className="col-md-12">
+                                <p className="body-header">Bestiary</p>
                                 <TabbedArea defaultActiveKey={1}>
                                     {battlers.map(function(battler, index) {
                                         return (
                                             <TabPane key={'foe' + index} eventKey={index + 1} tab={battler.foe.attrs.name}>
-                                                <AttrBlock text="turquoise" attr={battler.foe.attrs.flavor} markdown />
-                                                <AttrBlock attr={battler.foe.attrs.details} markdown />
-                                                <AttrBlock attr={battler.foe.attrs.page} />
+                                                <AttrBlock type="flavor" attr={battler.foe.attrs.flavor} />
+                                                <AttrBlock type="details" attr={battler.foe.attrs.details} />
+                                                <section className="row">
+                                                    <AttrBlock type="stat" name="Page" glyph="page" attr={battler.foe.attrs.page} />
+                                                </section>
                                             </TabPane>
                                             );
                                     })}
                                 </TabbedArea>
                             </div>
-                        </div>
+                        </section>
                     </div>
                     <div className="card-footer">
                         <ButtonToolbar className="pull-left">

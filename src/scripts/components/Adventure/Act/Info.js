@@ -3,28 +3,19 @@
 var React = require('react/addons');
 
 var AttrBlock = require('../../Model/AttrBlock');
-var Stats = require('../Stats');
 
 
 var ActAdventureInfo = React.createClass({
     render: function () {
         var target = this.props.target;
 
-        var stats = [
-            {
-                glyph: 'info-sign',
-                label: 'Type',
-                value: target.attrs.type
-            }
-        ];
-
         return (
-            <div className="row">
-                <Stats stats={stats} />
-                <div className="col-md-12">
-                    <AttrBlock text="turquoise" attr={target.attrs.flavor} markdown />
-                    <AttrBlock attr={target.attrs.details} markdown />
-                </div>
+            <div>
+                <AttrBlock type="flavor" attr={target.attrs.flavor} />
+                <section className="row">
+                    <AttrBlock type="stat" name="Type" glyph="type" attr={target.attrs.type} />
+                </section>
+                <AttrBlock type="details" attr={target.attrs.details} markdown />
             </div>
             );
     }

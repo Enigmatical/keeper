@@ -26,19 +26,20 @@ var AdventureCard = React.createClass({
                         {target.attrs.name}
                     </p>
                     <p className="pull-right">
-                        <small className="text-muted">{this.props.type}</small>
+                        <small className="text-muted">{this.props.type || target.attrs.type}</small>
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock text="turquoise" attr={target.attrs.flavor} markdown />
-                    <AttrBlock attr={target.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={target.attrs.flavor} />
+                    <AttrBlock type="details" attr={target.attrs.details} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
+                        <InfoModal model={this.props.model} target={this.props.target} info={this.props.getInfo()} />
                         {this.props.leftButtons}
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <InfoModal model={this.props.model} target={this.props.target} info={this.props.getInfo()} />
+                        <span />
                     </ButtonToolbar>
                 </div>
             </div>

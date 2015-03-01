@@ -104,14 +104,16 @@ var AreaCard = React.createClass({
 
             if (actors.length > 0) {
                 return (
-                    <div className="card-links">
-                        <p className="body-header">Actors</p>
-                        {self.state.actors.map(function(actor) {
-                            return (
-                                <ActorCard key={actor.id} target={actor} parent={area} model={ActorModel} inputs={self.getActorInputs.bind(self, actor.attrs)} onUpdate={self.getActors} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="card-links col-md-12">
+                            <p className="body-header">Actors</p>
+                            {self.state.actors.map(function(actor) {
+                                return (
+                                    <ActorCard key={actor.id} target={actor} parent={area} model={ActorModel} inputs={self.getActorInputs.bind(self, actor.attrs)} onUpdate={self.getActors} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
             else {
@@ -124,14 +126,16 @@ var AreaCard = React.createClass({
 
             if (encounters.length > 0) {
                 return (
-                    <div className="card-links">
-                        <p className="body-header">Encounters</p>
-                        {self.state.encounters.map(function(encounter) {
-                            return (
-                                <EncounterCard key={encounter.id} target={encounter} parent={area} campaign={campaign} onUpdate={self.getEncounters} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="card-links col-md-12">
+                            <p className="body-header">Encounters</p>
+                            {self.state.encounters.map(function(encounter) {
+                                return (
+                                    <EncounterCard key={encounter.id} target={encounter} parent={area} campaign={campaign} onUpdate={self.getEncounters} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
         };
@@ -147,8 +151,8 @@ var AreaCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={area.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={area.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={area.attrs.flavor} />
+                    <AttrBlock type="details" attr={area.attrs.details} />
                     {actors()}
                     {encounters()}
                 </div>
