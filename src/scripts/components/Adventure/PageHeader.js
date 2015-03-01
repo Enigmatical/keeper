@@ -14,7 +14,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var PageHeader = require('../Model/PageHeader');
-var Stats = require('./Stats');
+var AttrBlock = require('../Model/AttrBlock');
 
 var AdventurePageHeader = React.createClass({
     getInitialState: function() {
@@ -28,41 +28,31 @@ var AdventurePageHeader = React.createClass({
         var save = this.props.save;
         var location = save.location;
 
-        var stats = [
-            {
-                glyph: 'time',
-                label: 'Day',
-                value: Pathfinder.getDayTime(save.attrs.segs)
-            },
-            {
-                glyph: 'globe',
-                label: 'Location',
-                value: (<span><Link to="adventure-areas" params={{campaignId: campaign.id, saveId: save.id, locationId: location.id}}>{location.attrs.name}</Link>&nbsp;&nbsp;<small className="text-muted">{location.attrs.type}</small></span>)
-            },
-            {
-                glyph: 'star',
-                label: 'XP',
-                value: Pathfinder.getPartyXp(save.attrs.xp, save.party.attrs.count)
-            }
-        ];
+        var locationLink = (<span><Link to="adventure-areas" params={{campaignId: campaign.id, saveId: save.id, locationId: location.id}}>{location.attrs.name}</Link>&nbsp;&nbsp;<small className="text-muted">{location.attrs.type}</small></span>);
 
         return (
             <div>
                 <PageHeader pageName={campaign.attrs.name} pageType="Adventure">
-                    <Button bsStyle="info"><Glyphicon glyph="user" /> Party: {save.party.attrs.name}</Button>
+                    <Button bsStyle="info"><Glyphicon glyph="user" /> {save.party.attrs.name}</Button>
                     <Button bsStyle="danger"><Glyphicon glyph="flash" /> GM Actions</Button>
                 </PageHeader>
-                <div className="row">
+                <div className="stats-adventure row">
                     <div className="col-md-12">
-                        <Navbar className="navbar-adventure navbar-inverse" fluid>
+                        <AttrBlock type="stat" name="Day" glyph="date" attr={Pathfinder.getDayTime(save.attrs.segs)} />
+                        <AttrBlock type="stat" name="Location" glyph="location" attr={locationLink} />
+                        <AttrBlock type="stat" name="XP" glyph="xp" attr={Pathfinder.getPartyXp(save.attrs.xp, save.party.attrs.count)} />
+                    </div>
+                </div>
+                <div className="navbar-adventure row">
+                    <div className="col-md-12">
+                        <Navbar fluid>
                             <Nav className="navbar-left">
-                                <NavItemLink to="adventure-acts" params={{campaignId: campaign.id, saveId: save.id}}>Campaign</NavItemLink>
-                                <NavItemLink to="adventure-locations" params={{campaignId: campaign.id, saveId: save.id}}>Map</NavItemLink>
+                                <NavItemLink to="adventure-acts" params={{campaignId: campaign.id, saveId: save.id}} active={this.props.section === 'campaign'}>Campaign</NavItemLink>
+                                <NavItemLink to="adventure-locations" params={{campaignId: campaign.id, saveId: save.id}} active={this.props.section === 'map'}>Map</NavItemLink>
                             </Nav>
                         </Navbar>
                     </div>
                 </div>
-                <Stats stats={stats} />
             </div>
             );
 

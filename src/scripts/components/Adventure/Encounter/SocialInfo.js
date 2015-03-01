@@ -46,13 +46,22 @@ var EncounterSocialAdventureInfo = React.createClass({
             return (
                 <div>
                     <div className="card-body">
-                        <div className="text-alizarin">
-                            <p className="body-header">{character.attrs.name} <small>{character.attrs.type}</small></p>
-                            <AttrBlock attr={character.attrs.flavor} markdown />
-                            <AttrBlock attr={character.attrs.details} markdown />
-                        </div>
-                        <AttrBlock name="Primary Topics" text="peterriver" attr={details.primary} markdown />
-                        <AttrBlock name="Secondary Topics" text="amethyst" attr={details.secondary} markdown />
+                        <section className="row">
+                            <div className="col-md-12">
+                                <div className="text-pumpkin bg-pumpkin">
+                                    <p className="body-header">{character.attrs.name}&nbsp;&nbsp;&nbsp;<small>{character.attrs.type}</small></p>
+                                    <section className="row">
+                                        <AttrBlock type="custom" className="text-wetasphalt" attr={character.attrs.details} />
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+                        <section className="row">
+                            <AttrBlock type="custom" name="Primary Topics" className="text-peterriver bg-peterriver" attr={details.primary} />
+                        </section>
+                        <section className="row">
+                            <AttrBlock type="custom" name="Secondary Topics" className="text-amethyst bg-amethyst" attr={details.secondary} />
+                        </section>
                     </div>
                 </div>
                 );

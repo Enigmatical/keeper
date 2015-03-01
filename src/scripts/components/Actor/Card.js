@@ -18,8 +18,8 @@ var ActorCard = React.createClass({
 
         if (_.isObject(character)) {
             return (
-                <div className="item-link-wrapper col-md-6">
-                    <div className="item-link actor-link">
+                <div className="item-link-wrapper">
+                    <div className="item-link">
                         <p className="pull-left">
                             <strong>{character.attrs.name}</strong> <small className="text-muted">{character.attrs.type}</small>
                         </p>

@@ -52,14 +52,16 @@ var TaskCard = React.createClass({
 
             if (encounters.length > 0) {
                 return (
-                    <div className="card-links">
-                        <p className="body-header">Encounters</p>
-                        {self.state.encounters.map(function(encounter) {
-                            return (
-                                <EncounterCard key={encounter.id} target={encounter} parent={task} campaign={campaign} onUpdate={self.getEncounters} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="card-links col-md-12">
+                            <p className="body-header">Encounters</p>
+                            {self.state.encounters.map(function(encounter) {
+                                return (
+                                    <EncounterCard key={encounter.id} target={encounter} parent={task} campaign={campaign} onUpdate={self.getEncounters} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
         };
@@ -75,8 +77,8 @@ var TaskCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={task.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={task.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={task.attrs.flavor} />
+                    <AttrBlock type="details" attr={task.attrs.details} />
                     {encounters()}
                 </div>
                 <div className="card-footer">

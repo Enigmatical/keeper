@@ -50,14 +50,16 @@ var BountyCard = React.createClass({
 
             if (encounters.length > 0) {
                 return (
-                    <div className="card-links">
-                        <p className="body-header">Encounters</p>
-                        {self.state.encounters.map(function(encounter) {
-                            return (
-                                <EncounterCard key={encounter.id} target={encounter} parent={bounty} campaign={campaign} onUpdate={self.getEncounters} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="col-md-12">
+                            <p className="body-header">Encounters</p>
+                            {self.state.encounters.map(function(encounter) {
+                                return (
+                                    <EncounterCard key={encounter.id} target={encounter} parent={bounty} campaign={campaign} onUpdate={self.getEncounters} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
         };
@@ -73,8 +75,11 @@ var BountyCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={bounty.attrs.flavor} markdown />
-                    <AttrBlock name="Rewards" attr={bounty.attrs.rewardOther} markdown />
+                    <AttrBlock type="flavor" attr={bounty.attrs.flavor} markdown />
+                    <section className="row">
+                        <AttrBlock type="stat" name="XP" glyph="xp" attr={'+' + bounty.attrs.rewardXp} />
+                        <AttrBlock type="stat" name="Coin" glyph="coin" attr={'+' + bounty.attrs.rewardCoin + ' gp'} />
+                    </section>
                     {encounters()}
                 </div>
                 <div className="card-footer">

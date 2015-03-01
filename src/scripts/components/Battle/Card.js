@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
+var _ = require('lodash');
 
 var Auth = require('../../helpers/Auth');
 
@@ -66,6 +67,23 @@ var BattleCard = React.createClass({
             });
     },
 
+    getBattlerStateOptions: function() {
+        return [
+            {
+                label: 'Aware',
+                value: 'aware'
+            },
+            {
+                label: 'Unaware',
+                value: 'unaware'
+            },
+            {
+                label: 'Asleep',
+                value: 'asleep'
+            }
+        ]
+    },
+
     getBattlerInputs: function(attrs) {
         return (
             <div>
@@ -87,10 +105,11 @@ var BattleCard = React.createClass({
                     </div>
                     <div className="col-md-6">
                         <Input
-                            type="text"
+                            type="select"
                             name="type"
-                            placeholder="Status"
+                            placeholder="State"
                             defaultValue={attrs.type}
+                            options={this.getBattlerStateOptions()}
                         />
                     </div>
                 </div>
@@ -102,21 +121,23 @@ var BattleCard = React.createClass({
         var self = this;
         var battle = self.props.battle;
 
-        var challengeRating = battle.attrs.challenge ? ('  CR ' + battle.attrs.challenge) : '';
+        var challengeRating = battle.attrs.challenge ? (<small>CR <strong>{battle.attrs.challenge}</strong></small>) : '';
 
         var battlers = function() {
             var battlers = self.state.battlers;
 
             if (battlers.length > 0) {
                 return (
-                    <div className="card-links">
-                        <p className="body-header">Battlers</p>
-                        {self.state.battlers.map(function(battler) {
-                            return (
-                                <Card key={battler.id} target={battler} parent={battle} model={BattlerModel} inputs={self.getBattlerInputs.bind(self, battler.attrs)} onUpdate={self.getBattlers} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="col-md-12">
+                            <p className="body-header">Battlers</p>
+                            {self.state.battlers.map(function(battler) {
+                                return (
+                                    <Card key={battler.id} target={battler} parent={battle} model={BattlerModel} inputs={self.getBattlerInputs.bind(self, battler.attrs)} onUpdate={self.getBattlers} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
             else {
@@ -131,12 +152,16 @@ var BattleCard = React.createClass({
                         {battle.attrs.name}
                     </p>
                     <p className="pull-right">
-                        <small className="text-muted">{battle.attrs.type}<strong>{challengeRating}</strong></small>
+                        <small className="text-muted">{_.startCase(battle.attrs.type)} {challengeRating}</small>
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={battle.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={battle.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={battle.attrs.flavor} />
+                    <AttrBlock type="details" attr={battle.attrs.details} />
+                    <section className="row">
+                        <AttrBlock type="stat" name="XP" glyph="xp" attr={'+' + battle.attrs.rewardXp} />
+                        <AttrBlock type="stat" name="Coin" glyph="coin" attr={'+' + battle.attrs.rewardCoin + ' gp'} />
+                    </section>
                     {battlers()}
                 </div>
                 <div className="card-footer">

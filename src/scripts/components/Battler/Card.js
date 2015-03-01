@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react/addons');
+var _ = require('lodash');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 
@@ -18,10 +19,10 @@ var BattlerCard = React.createClass({
 
         if (_.isObject(foe)) {
             return (
-                <div className="item-link-wrapper col-md-6">
-                    <div className="item-link battler-link">
+                <div className="item-link-wrapper">
+                    <div className="item-link">
                         <p className="pull-left">
-                            <strong>{foe.attrs.name}</strong>{', ' + battler.attrs.type} <small className="text-muted">x {battler.attrs.count}</small>
+                            <strong>{foe.attrs.name}</strong>{', ' + _.startCase(battler.attrs.type)} <small className="text-muted">x {battler.attrs.count}</small>
                         </p>
                         <ButtonToolbar className="pull-right">
                             <FormModal link={true} target={battler} model={this.props.model} parent={this.props.parent} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />

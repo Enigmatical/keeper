@@ -56,8 +56,8 @@ var EncounterCard = React.createClass({
 
         if (_.isObject(encounter)) {
             return (
-                <div className="item-link-wrapper col-md-12">
-                    <div className="item-link actor-link">
+                <div className="item-link-wrapper">
+                    <div className="item-link">
                         <p className="pull-left">
                             {this.getObjective(encounter.attrs)}
                         </p>

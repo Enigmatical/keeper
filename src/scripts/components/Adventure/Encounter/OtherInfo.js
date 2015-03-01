@@ -22,7 +22,7 @@ var EncounterOtherAdventureInfo = React.createClass({
         return (
             <div>
                 <div className="card-body">
-                    <AttrBlock text="alizarin" attr={details.description} />
+                    <AttrBlock type="details" attr={details.description} />
                 </div>
             </div>
             );

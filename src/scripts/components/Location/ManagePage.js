@@ -76,6 +76,7 @@ var LocationManagePage = React.createClass({
                     type="text"
                     name="coordinate"
                     defaultValue={attrs.coordinate}
+                    addonBefore="Coordinate"
                 />
             </div>
             );

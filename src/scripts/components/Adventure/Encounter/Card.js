@@ -79,14 +79,12 @@ var EncounterAdventureCard = React.createClass({
         var encounterFlavor = (<span />);
         if (!_.isEmpty(target.attrs.flavor)) {
             encounterFlavor = (
-                <div className="card-body card-flavor">
-                    <AttrBlock text="turquoise" attr={target.attrs.flavor} />
-                </div>
+                    <AttrBlock type="flavor" attr={target.attrs.flavor} />
                 );
         }
 
         return (
-            <div className="item-card adventure-card">
+            <div className="item-card adventure-card encounter-card">
                 <div className="card-header">
                     <p className="pull-left">
                         {self.getObjective(target.attrs)}
@@ -98,7 +96,6 @@ var EncounterAdventureCard = React.createClass({
 
                 {encounterFlavor}
                 {self.getBody(target.attrs)}
-
             </div>
             );
     }

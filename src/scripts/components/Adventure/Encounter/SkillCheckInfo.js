@@ -38,20 +38,22 @@ var EncounterSkillCheckAdventureInfo = React.createClass({
         return (
             <div>
                 <div className="card-body">
-                    <div className="text-alizarin">
-                        <p className="body-header">Skill Check</p>
-                        <Stats stats={stats} />
+                    <section className="row">
+                        <AttrBlock type="stat" name="Skill" glyph="skill" attr={details.skill} />
+                        <AttrBlock type="stat" name="DC" glyph="challenge" attr={details.skillDifficulty} />
+                    </section>
+                    <section className="row">
                         <div className="col-md-12">
                             <TabbedArea defaultActiveKey={1}>
                                 <TabPane eventKey={1} tab="Pass">
-                                    <AttrBlock attr={details.skillPass} markdown />
+                                    <AttrBlock type="details" attr={details.skillPass} />
                                 </TabPane>
                                 <TabPane eventKey={2} tab="Fail">
-                                    <AttrBlock attr={details.skillFail} markdown />
+                                    <AttrBlock type="details" attr={details.skillFail} />
                                 </TabPane>
                             </TabbedArea>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
             );

@@ -4,48 +4,102 @@ var React = require('react/addons');
 var Markdown = require('../Common/MarkdownBlock');
 var _ = require('lodash');
 
+var Glyphicon = require('react-bootstrap').Glyphicon;
+
+require('../../../styles/AttrBlock.css');
+
 
 
 var ModelAttrBlock = React.createClass({
-    render: function () {
+    getAttrTemplate: function() {
+        var type = this.props.type;
+
         var name = this.props.name;
         var attr = this.props.attr;
-        var text = this.props.text || '';
-        var bg = this.props.bg || '';
+        var glyph = this.props.glyph;
 
-        var blockClass = 'attribute-block';
-        blockClass += !_.isEmpty(this.props.className) ? this.props.className : '';
+        var glyphs = {
+            type:       'info-sign',
+            challenge:  'exclamation-sign',
+            xp:         'star',
+            coin:       'tasks',
+            date:       'calendar',
+            location:   'globe',
+            party:      'user',
+            count:      'th-large',
+            page:       'book',
+            skill:      'eye-open'
+        };
 
-        var headerClass = 'body-header';
-        headerClass += !_.isEmpty(this.props.text) ? ' text-' + this.props.text : '';
-        headerClass += !_.isEmpty(this.props.bg) ? ' bg-' + this.props.bg : '';
+        switch(type) {
+            case 'flavor':
+                return (
+                    <section className="row">
+                        <div className="attribute-block col-md-12">
+                            <div className="style-flavor text-turquoise bg-turquoise">
+                                <Markdown text={attr} />
+                            </div>
+                        </div>
+                    </section>
+                    );
+                break;
+            case 'details':
+                return (
+                    <section className="row">
+                        <div className="attribute-block col-md-12">
+                            <div className="style-details">
+                                <Markdown text={attr} />
+                            </div>
+                        </div>
+                    </section>
+                    );
+                break;
+            case 'rewards':
+                return (
+                    <section className="row">
+                        <div className="attribute-block col-md-12">
+                            <div className="style-rewards text-orange bg-orange">
+                                <p className="body-header">Rewards</p>
+                                <Markdown className="attr-value" text={attr} />
+                            </div>
+                        </div>
+                    </section>
+                    );
+                break;
+            case 'custom':
+                var header = !_.isEmpty(name) ? (<p className="body-header">{name}</p>) : '';
 
-        var bodyClass = 'body-content';
-        bodyClass += !_.isEmpty(this.props.text) ? ' text-' + this.props.text : '';
-        bodyClass += !_.isEmpty(this.props.bg) ? ' bg-' + this.props.bg : '';
-
-        var header = (<p className={headerClass}>{name}</p>);
-        if (_.isEmpty(name)) {
-            header = (<span />);
+                return (
+                    <div className="attribute-block style-custom col-md-12">
+                        <div className={this.props.className}>
+                            {header}
+                            <Markdown className="attr-value" text={attr} />
+                        </div>
+                    </div>
+                    );
+                break;
+            case 'stat':
+                return (
+                    <div className="attribute-block style-stat col-md-3">
+                        <Glyphicon glyph={glyphs[glyph]} />
+                        <span className="attr-label">{name}</span>
+                        <span className="attr-value">{attr}</span>
+                    </div>
+                    );
+                break;
+            default:
+                return (<div>Need to define a <strong>type</strong> for this AttrBlock.</div>);
+                break;
         }
+    },
 
-        if (attr) {
-            if (this.props.markdown === true) {
-                return (
-                    <div className={blockClass}>
-                        {header}
-                        <Markdown className={bodyClass} text={attr} />
-                    </div>
-                    );
-            }
-            else {
-                return (
-                    <div className={blockClass}>
-                        {header}
-                        <p className={bodyClass}>{attr}</p>
-                    </div>
-                    );
-            }
+    render: function () {
+        var attr = this.props.attr;
+
+        if (!_.isEmpty(attr) || _.isNumber(attr)) {
+            return (
+                    this.getAttrTemplate()
+                );
         }
         else {
             return (<span />);

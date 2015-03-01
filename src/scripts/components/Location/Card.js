@@ -31,9 +31,11 @@ var LocationCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={location.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={location.attrs.details} markdown />
-                    <AttrBlock name="Coordinate" attr={location.attrs.coordinate} />
+                    <AttrBlock type="flavor" attr={location.attrs.flavor} />
+                    <section className="row">
+                        <AttrBlock type="stat" name="Coordinate" glyph="location" attr={location.attrs.coordinate} />
+                    </section>
+                    <AttrBlock type="details" attr={location.attrs.details} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

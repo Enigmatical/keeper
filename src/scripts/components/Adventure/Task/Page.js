@@ -111,12 +111,11 @@ var TaskAdventurePage = React.createClass({
 
             return (
                 <div id="task-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} />
+                    <PageHeader campaign={campaign} save={save} section="campaign" />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         {self.state.tasks.map(function(task) {
                             var leftButtons = [
-                                (<Button bsStyle="warning"><Glyphicon glyph="unchecked" /> Complete</Button>)
                             ];
                             return (
                                 <div key={task.id} className="col-md-12">

@@ -10,21 +10,14 @@ var LocationAdventureInfo = React.createClass({
     render: function () {
         var target = this.props.target;
 
-        var stats = [
-            {
-                glyph: 'question-sign',
-                label: 'Type',
-                value: target.attrs.type
-            }
-        ];
-
         return (
-            <div className="row">
-                <Stats stats={stats} />
-                <div className="col-md-12">
-                    <AttrBlock text="turquoise" attr={target.attrs.flavor} markdown />
-                    <AttrBlock attr={target.attrs.details} markdown />
-                </div>
+            <div>
+                <AttrBlock type="flavor" attr={target.attrs.flavor} />
+                <section className="row">
+                    <AttrBlock type="stat" name="Type" glyph="type" attr={target.attrs.type} />
+                    <AttrBlock type="stat" name="Coordinate" glyph="location" attr={target.attrs.coordinate} />
+                </section>
+                <AttrBlock type="details" attr={target.attrs.details} />
             </div>
             );
     }

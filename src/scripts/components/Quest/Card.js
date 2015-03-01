@@ -32,8 +32,8 @@ var QuestCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={quest.attrs.flavor} markdown />
-                    <AttrBlock name="Rewards" attr={quest.attrs.rewardOther} markdown />
+                    <AttrBlock type="flavor" attr={quest.attrs.flavor} />
+                    <AttrBlock type="details" attr={quest.attrs.rewardOther} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

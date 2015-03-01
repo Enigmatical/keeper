@@ -85,7 +85,7 @@ var ActAdventurePage = React.createClass({
 
             return (
                 <div id="act-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} />
+                    <PageHeader campaign={campaign} save={save} section="campaign" />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         {self.state.acts.map(function(act) {

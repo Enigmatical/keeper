@@ -31,8 +31,8 @@ var CampaignCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={campaign.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={campaign.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={campaign.attrs.flavor} />
+                    <AttrBlock type="details" attr={campaign.attrs.details} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

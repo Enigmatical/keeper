@@ -69,46 +69,61 @@ var EncounterMechanismAdventureInfo = React.createClass({
         return (
             <div>
                 <div className="card-body">
-                    <div className="text-alizarin">
-                        <p className="body-header">Trigger</p>
-                        <Stats stats={stats} />
-                        <AttrBlock attr={details.trigger} markdown />
-                    </div>
+                    <section className="row">
+                        <AttrBlock type="stat" name="Type" glyph="type" attr={_.startCase(details.mechanism)} />
+                        <AttrBlock type="stat" name="CR" glyph="challenge" attr={details.challenge} />
+                        <AttrBlock type="stat" name="XP" glyph="xp" attr={details.rewardXp} />
+                    </section>
+                    <section className="row">
+                        <AttrBlock type="custom" name="Trigger" className="text-alizarin bg-alizarin" attr={details.trigger} />
+                    </section>
+                    <section className="row">
+                        <AttrBlock type="custom" name="Effects" className="text-pomegranate bg-pomegranate" attr={details.effects} />
+                    </section>
 
-                    <div className="text-pomegranate">
-                        <p className="body-header">Effects</p>
-                        <AttrBlock attr={details.effects} markdown />
-                    </div>
-
-                    <div className="text-peterriver">
-                        <p className="body-header">Sense</p>
-                        <Stats stats={senseStats} />
+                    <section className="row">
                         <div className="col-md-12">
-                            <TabbedArea defaultActiveKey={1}>
-                                <TabPane eventKey={1} tab="Pass">
-                                    <AttrBlock attr={details.senseSkillPass} markdown />
-                                </TabPane>
-                                <TabPane eventKey={2} tab="Fail">
-                                    <AttrBlock attr={details.senseSkillFail} markdown />
-                                </TabPane>
-                            </TabbedArea>
+                            <div className="text-peterriver">
+                                <p className="body-header">Sense</p>
+                                <section className="row">
+                                    <AttrBlock type="stat" name="Skill" glyph="skill" attr={details.senseSkill} />
+                                    <AttrBlock type="stat" name="DC" glyph="challenge" attr={details.senseSkillDifficulty} />
+                                </section>
+                                <section className="row">
+                                    <TabbedArea defaultActiveKey={1}>
+                                        <TabPane eventKey={1} tab="Pass">
+                                            <AttrBlock type="details" attr={details.senseSkillPass} />
+                                        </TabPane>
+                                        <TabPane eventKey={2} tab="Fail">
+                                            <AttrBlock type="details" attr={details.senseSkillFail} />
+                                        </TabPane>
+                                    </TabbedArea>
+                                </section>
+                            </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div className="text-amethyst">
-                        <p className="body-header">Overcome</p>
-                        <Stats stats={overcomeStats} />
+                    <section className="row">
                         <div className="col-md-12">
-                            <TabbedArea defaultActiveKey={1}>
-                                <TabPane eventKey={1} tab="Pass">
-                                    <AttrBlock attr={details.overcomeSkillPass} markdown />
-                                </TabPane>
-                                <TabPane eventKey={2} tab="Fail">
-                                    <AttrBlock attr={details.overcomeSkillFail} markdown />
-                                </TabPane>
-                            </TabbedArea>
+                            <div className="text-amethyst">
+                                <p className="body-header">Overcome</p>
+                                <section className="row">
+                                    <AttrBlock type="stat" name="Skill" glyph="skill" attr={details.overcomeSkill} />
+                                    <AttrBlock type="stat" name="DC" glyph="challenge" attr={details.overcomeSkillDifficulty} />
+                                </section>
+                                <section className="row">
+                                    <TabbedArea defaultActiveKey={1}>
+                                        <TabPane eventKey={1} tab="Pass">
+                                            <AttrBlock type="details" attr={details.overcomeSkillPass} />
+                                        </TabPane>
+                                        <TabPane eventKey={2} tab="Fail">
+                                            <AttrBlock type="details" attr={details.overcomeSkillFail} />
+                                        </TabPane>
+                                    </TabbedArea>
+                                </section>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

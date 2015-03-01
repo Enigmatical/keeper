@@ -32,8 +32,10 @@ var PartyCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Party Size" attr={party.attrs.count} />
-                    <AttrBlock name="Players" attr={party.attrs.details} markdown />
+                    <section className="row">
+                        <AttrBlock type="stat" name="Size" glyph="party" attr={party.attrs.count} />
+                    </section>
+                    <AttrBlock type="details" attr={party.attrs.details} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

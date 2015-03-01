@@ -31,8 +31,8 @@ var ActCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Flavor" attr={act.attrs.flavor} markdown />
-                    <AttrBlock name="Details" attr={act.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={act.attrs.flavor} />
+                    <AttrBlock type="details" attr={act.attrs.details} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

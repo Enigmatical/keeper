@@ -11,95 +11,50 @@
   border-radius: 4px;
   background-color: #EEE; }
 
+.info-adventure.modal .modal-body {
+  padding: 15px 0px 0px 0px; }
+
 .page-header {
   margin: 20px 0px 20px;
   padding-bottom: 9px;
   border-bottom: 1px solid #EEE; }
 
+.body-header {
+  font-size: 1.25em;
+  font-weight: 200;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  opacity: 0.75; }
+
 .breadcrumb {
   margin-bottom: 0; }
 
+.navbar-adventure .navbar {
+  margin-bottom: 0;
+  min-height: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+  .navbar-adventure .navbar .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px; }
+
+.stats-adventure {
+  margin-bottom: 10px; }
+
 .breadcrumb-adventure {
   margin-bottom: 20px; }
+  .breadcrumb-adventure.breadcrumb {
+    background: linear-gradient(bottom to, #FFF 0px, #F8F8F8 100%) white;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.15) inset, 0px 1px 5px rgba(0, 0, 0, 0.075);
+    border-left: 1px solid #E7E7E7;
+    border-bottom: 1px solid #E7E7E7;
+    border-right: 1px solid #E7E7E7; }
 
 textarea.markdown {
   background-color: #EEFBF9; }
 
 .tab-pane {
   margin-top: 15px; }
-
-.stats-adventure .stat .stat-label {
-  margin-right: 10px; }
-
-.info-adventure.modal .encounters {
-  margin-top: 30px; }
-
-.body-header {
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 0;
-  padding-bottom: 10px; }
-  .body-header small {
-    font-size: 12px;
-    margin-left: 10px; }
-
-.text-turquoise {
-  color: #1abc9c; }
-
-.text-greensea {
-  color: #16a085; }
-
-.text-emerald {
-  color: #2ecc71; }
-
-.text-nephritis {
-  color: #27ae60; }
-
-.text-peterriver {
-  color: #3498db; }
-
-.text-belizehole {
-  color: #2980b9; }
-
-.text-amethyst {
-  color: #9b59b6; }
-
-.text-wisteria {
-  color: #8e44ad; }
-
-.text-wetasphalt {
-  color: #34495e; }
-
-.text-midnightblue {
-  color: #2c3e50; }
-
-.text-sunflower {
-  color: #f1c40f; }
-
-.text-orange {
-  color: #f39c12; }
-
-.text-carrot {
-  color: #e67e22; }
-
-.text-color {
-  color: #d35400; }
-
-.text-alizarin {
-  color: #e74c3c; }
-
-.text-pomegranate {
-  color: #c0392b; }
-
-.text-clouds {
-  color: #ecf0f1; }
-
-.text-silver {
-  color: #bdc3c7; }
-
-.text-concrete {
-  color: #95a5a6; }
-
-.text-asbestos {
-  color: #7f8c8d; }

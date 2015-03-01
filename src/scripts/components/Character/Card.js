@@ -32,8 +32,10 @@ var CharacterCard = React.createClass({
                     </p>
                 </div>
                 <div className="card-body">
-                    <AttrBlock name="Personality" attr={character.attrs.flavor} markdown />
-                    <AttrBlock name="Stats & Skills" attr={character.attrs.details} markdown />
+                    <AttrBlock type="flavor" attr={character.attrs.flavor} />
+                    <section className="row">
+                        <AttrBlock type="custom" name="Stats & Skills" attr={character.attrs.details} />
+                    </section>
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

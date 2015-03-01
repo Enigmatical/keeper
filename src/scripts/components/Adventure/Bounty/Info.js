@@ -54,14 +54,16 @@ var BountyAdventureInfo = React.createClass({
         var encounters = function() {
             if (self.state.encounters.length > 0) {
                 return(
-                    <div className="encounters">
-                        <p className="body-header">Encounters</p>
-                        {self.state.encounters.map(function(encounter) {
-                            return (
-                                <EncounterCard key={encounter.id} target={encounter} />
-                                );
-                        })}
-                    </div>
+                    <section className="row">
+                        <div className="col-md-12">
+                            <p className="body-header">Encounters</p>
+                            {self.state.encounters.map(function(encounter) {
+                                return (
+                                    <EncounterCard key={encounter.id} target={encounter} />
+                                    );
+                            })}
+                        </div>
+                    </section>
                     );
             }
             else {
@@ -70,14 +72,16 @@ var BountyAdventureInfo = React.createClass({
         };
 
         return (
-            <div className="row">
-                <Stats stats={stats} />
-                <div className="col-md-12">
-                    <AttrBlock text="turquoise" attr={target.attrs.flavor} markdown />
-                    <AttrBlock attr={target.attrs.details} markdown />
-                    <AttrBlock name="Rewards" text="peterriver" attr={target.attrs.rewardOther} markdown />
-                    {encounters()}
-                </div>
+            <div>
+                <AttrBlock type="flavor" attr={target.attrs.flavor} />
+                <section className="row">
+                    <AttrBlock type="stat" name="CR" glyph="challenge" attr={target.attrs.challenge} />
+                    <AttrBlock type="stat" name="XP" glyph="xp" attr={'+' + target.attrs.rewardXp} />
+                    <AttrBlock type="stat" name="Coins" glyph="coin" attr={'+' + target.attrs.rewardCoin + ' gp'} />
+                </section>
+                <AttrBlock type="details" attr={target.attrs.details} />
+                <AttrBlock type="rewards" attr={target.attrs.rewardOther} />
+                {encounters()}
             </div>
             );
     }
