@@ -119,7 +119,7 @@ var TaskAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={task.id} className="col-md-12">
-                                    <Card model={TaskModel} target={task} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, task)} />
+                                    <Card target={task} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, task)} />
                                 </div>
                                 );
                         })}

@@ -106,7 +106,7 @@ var QuestAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={quest.id} className="col-md-12">
-                                    <Card model={QuestModel} target={quest} type={<span>CR <strong>{quest.attrs.challenge}</strong></span>} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} />
+                                    <Card target={quest} save={save} canComplete={true} type={<span>CR <strong>{quest.attrs.challenge}</strong></span>} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} />
                                 </div>
                                 );
                         })}

@@ -5,8 +5,11 @@ var _ = require('lodash');
 
 var OverlayMixin = require('react-bootstrap').OverlayMixin;
 var Modal = require('react-bootstrap').Modal;
+var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
+
+var CompleteButton = require('./CompleteButton');
 
 
 
@@ -36,7 +39,14 @@ var AdventureInfoModal = React.createClass({
     },
 
     renderOverlay: function() {
+        var save = this.props.save;
         var target = this.props.target;
+        var canComplete = this.props.canComplete;
+
+        var completeButton = (<span />);
+        if (canComplete === true) {
+            completeButton = (<CompleteButton target={target} save={save} />);
+        }
 
         if (!this.state.isModalOpen) {
             return <span />;
@@ -49,7 +59,10 @@ var AdventureInfoModal = React.createClass({
                         {this.props.info}
                     </div>
                     <div className="modal-footer">
-                        <Button onClick={this.handleToggle}>Close</Button>
+                        <ButtonToolbar>
+                            {completeButton}
+                            <Button onClick={this.handleToggle}>Close</Button>
+                        </ButtonToolbar>
                     </div>
                 </form>
             </Modal>

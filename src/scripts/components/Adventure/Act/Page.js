@@ -94,7 +94,7 @@ var ActAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={act.id} className="col-md-12">
-                                    <Card model={ActModel} target={act} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, act)} />
+                                    <Card target={act} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, act)} />
                                 </div>
                                 );
                         })}
