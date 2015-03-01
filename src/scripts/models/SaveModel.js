@@ -46,20 +46,54 @@ function SaveModel() {
         return (this.attrs.completed.hasOwnProperty(id));
     };
 
-    this.toggleComplete = function(id) {
+    this.toggleComplete = function(id, xp) {
+        if (xp === undefined) xp = 0;
+
         var deferred = Q.defer();
         var checked = this.isComplete(id);
 
         if (checked === true) {
             delete this.attrs.completed[id];
+            this.attrs.xp = parseInt(this.attrs.xp) - parseInt(xp);
         }
         else {
             this.attrs.completed[id] = 1;
+            this.attrs.xp = parseInt(this.attrs.xp) + parseInt(xp);
         }
 
         this.save()
             .done(function() {
                 deferred.resolve(!checked);
+            });
+
+        return deferred.promise;
+    };
+
+    this.adjustXp = function(xp) {
+        if (xp === undefined) xp = 0;
+
+        var deferred = Q.defer();
+
+        this.attrs.xp = parseInt(this.attrs.xp) + parseInt(xp);
+
+        this.save()
+            .done(function() {
+                deferred.resolve();
+            });
+
+        return deferred.promise;
+    };
+
+    this.adjustTime = function(segs) {
+        if (segs === undefined) segs = 0;
+
+        var deferred = Q.defer();
+
+        this.attrs.segs = parseInt(this.attrs.segs) + parseInt(segs);
+
+        this.save()
+            .done(function() {
+                deferred.resolve();
             });
 
         return deferred.promise;

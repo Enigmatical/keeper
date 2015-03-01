@@ -26,27 +26,27 @@ var EncounterAdventureCard = React.createClass({
         var objectiveTemplates = {
             travel: function(data) { return (
                 <span>
-                    <Glyphicon glyph="globe" />&nbsp;&nbsp;<small class="text-muted">Travel to</small> <strong>{data.details.area}</strong> <small class="text-muted">in</small> <strong>{data.details.location}</strong>
+                    <Glyphicon glyph="globe" />&nbsp;&nbsp;<small className="text-muted">Travel to</small> <strong>{data.details.area}</strong> <small class="text-muted">in</small> <strong>{data.details.location}</strong>
                 </span>
                 )},
             social: function(data) { return (
                 <span>
-                    <Glyphicon glyph="comment" />&nbsp;&nbsp;<small class="text-muted">Conversation with</small> <strong>{data.details.character}</strong>
+                    <Glyphicon glyph="comment" />&nbsp;&nbsp;<small className="text-muted">Conversation with</small> <strong>{data.details.character}</strong>
                 </span>
                 )},
             skillCheck: function(data) { return(
                 <span>
-                    <Glyphicon glyph="eye-open" />&nbsp;&nbsp;<strong>{data.details.skill}</strong> <small class="text-muted">Check,</small> <strong>DC {data.details.skillDifficulty}</strong>
+                    <Glyphicon glyph="eye-open" />&nbsp;&nbsp;<strong>{data.details.skill}</strong> <small className="text-muted">Check,</small> <strong>DC {data.details.skillDifficulty}</strong>
                 </span>
                 )},
             combat: function(data) { return(
                 <span>
-                    <Glyphicon glyph="warning-sign" />&nbsp;&nbsp;<small class="text-muted">Combat with</small> <strong>{data.details.battle}</strong>
+                    <Glyphicon glyph="warning-sign" />&nbsp;&nbsp;<small className="text-muted">Combat with</small> <strong>{data.details.battle}</strong>
                 </span>
                 )},
             mechanism: function(data) { return(
                 <span>
-                    <Glyphicon glyph="cog" />&nbsp;&nbsp;<small class="text-muted">Interact with</small> <strong>{data.details.name} ({_.startCase(data.details.mechanism)})</strong>
+                    <Glyphicon glyph="cog" />&nbsp;&nbsp;<small className="text-muted">Interact with</small> <strong>{data.details.name} ({_.startCase(data.details.mechanism)})</strong>
                 </span>
                 )},
             other: function(data) { return(
@@ -60,13 +60,16 @@ var EncounterAdventureCard = React.createClass({
     },
 
     getBody: function(data) {
+        var save = this.props.save;
+        var onSave = this.props.onSave;
+
         var objectiveTemplates = {
-            travel:         function(data) { return(<TravelInfo data={data} />); },
-            social:         function(data) { return(<SocialInfo data={data} />); },
-            skillCheck:     function(data) { return(<SkillCheckInfo data={data} />); },
-            combat:         function(data) { return(<CombatInfo data={data} />); },
-            mechanism:      function(data) { return(<MechanismInfo data={data} />); },
-            other:          function(data) { return(<OtherInfo data={data} />); }
+            travel:         function(data) { return(<TravelInfo data={data} save={save} onSave={onSave} />); },
+            social:         function(data) { return(<SocialInfo data={data} save={save} onSave={onSave} />); },
+            skillCheck:     function(data) { return(<SkillCheckInfo data={data} save={save} onSave={onSave} />); },
+            combat:         function(data) { return(<CombatInfo data={data} save={save} onSave={onSave} />); },
+            mechanism:      function(data) { return(<MechanismInfo data={data} save={save} onSave={onSave} />); },
+            other:          function(data) { return(<OtherInfo data={data} save={save} onSave={onSave} />); }
         };
 
         return objectiveTemplates[data.type](data);

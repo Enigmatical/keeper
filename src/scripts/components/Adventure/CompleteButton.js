@@ -10,7 +10,6 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 var CompleteAdventureButton = React.createClass({
     getInitialState: function() {
         return {
-            save: null,
             checked: this.props.save.isComplete(this.props.target.id)
         }
     },
@@ -19,14 +18,19 @@ var CompleteAdventureButton = React.createClass({
         var self = this;
         var save = self.props.save;
         var target = self.props.target;
+        var xp = target.attrs.rewardXp;
 
-        save.toggleComplete(target.id)
+        save.toggleComplete(target.id, xp)
             .done(function(checked) {
                 self.setState({checked: checked});
             });
 
         if (_.isFunction(this.props.onComplete)) {
             this.props.onComplete();
+        }
+
+        if (_.isFunction(this.props.onSave)) {
+            this.props.onSave();
         }
     },
 

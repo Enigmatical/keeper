@@ -437,7 +437,7 @@ var Pathfinder = {
     },
 
     getDayTime: function(segs) {
-        if (_.isEmpty(segs)) {
+        if (_.isNaN(parseInt(segs))) {
             segs = 0;
         }
 
@@ -480,7 +480,7 @@ var Pathfinder = {
         //return (dayLabel + ', ' + hourLabel + halfLabel + ' ' + ampmLabel);
     },
 
-    getPartyXp: function(xp, size) {
+    getPartyLevel: function(xp, size) {
         var xpEach = parseInt(xp/size);
 
         var level = 0;
@@ -489,7 +489,66 @@ var Pathfinder = {
             else { return false; }
         });
 
+        return level;
+    },
+
+    getPartyXp: function(xp, size) {
+        var xpEach = parseInt(xp/size);
+
+        var level = this.getPartyLevel(xp, size);
+
         return (<span>{xp}&nbsp;&nbsp;<small className="text-muted">Level {level} ({xpEach})</small></span>);
+    },
+
+    getBattleTime: function(xp, size, cr) {
+        var level = this.getPartyLevel(xp, size);
+        var challenge = parseInt(cr);
+
+        if (challenge < level) {
+            return 0;
+        }
+        else if (challenge === level) {
+            return 1;
+        }
+        else if (challenge > level) {
+            return 1 + (challenge-level);
+        }
+    },
+
+    getAdjustTimeLabel: function(segs) {
+        if (_.isNaN(parseInt(segs))) {
+            segs = 0;
+        }
+
+        var days, hours, half, dayLabel, hourLabel, halfLabel, ampmLabel;
+
+        /*
+         Days
+         */
+        days = parseInt(segs/48);
+        segs = segs - (days * 48);
+
+        if (days > 0) {
+            dayLabel = days + ' Day(s)';
+        }
+
+        /*
+         Hours
+         */
+        hours = parseInt(segs/2);
+        segs = segs - (hours * 2);
+
+        if (hours > 0) {
+            hourLabel = hours + ' Hour(s)';
+        }
+
+        half = parseInt(segs);
+        halfLabel = (half === 1) ? ' 30 Minutes' : '';
+
+        console.log(days, hours, half);
+
+        return (<span>{dayLabel} {hourLabel} {halfLabel}</span>);
+        //return (dayLabel + ', ' + hourLabel + halfLabel + ' ' + ampmLabel);
     }
 };
 

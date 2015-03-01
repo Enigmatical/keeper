@@ -73,6 +73,19 @@ var AreaAdventurePage = React.createClass({
 
     },
 
+    getSave: function() {
+        var self = this;
+        var saveId = self.getParams().saveId;
+
+        new SaveModel().get(saveId)
+            .done(function(save) {
+                save.getJoins()
+                    .done(function() {
+                        self.setState({save: save});
+                    });
+            });
+    },
+
     getAreas: function() {
         var self = this;
         var location = this.state.location;
@@ -146,7 +159,7 @@ var AreaAdventurePage = React.createClass({
 
                                         return (
                                             <div key={area.id} className="col-md-12">
-                                                <Card target={area} leftButtons={leftButtons} getInfo={self.getAreaInfo.bind(self, area)} />
+                                                <Card target={area} save={save} leftButtons={leftButtons} getInfo={self.getAreaInfo.bind(self, area)} onSave={self.getSave} />
                                             </div>
                                             );
                                     })}
@@ -157,7 +170,7 @@ var AreaAdventurePage = React.createClass({
 
                                         return (
                                             <div key={shop.id} className="col-md-12">
-                                                <Card target={shop} type={<span><strong>{_.startCase(shop.attrs.type)}</strong> <small>{_.startCase(shop.attrs.quality)}</small></span>} leftButtons={leftButtons} getInfo={self.getShopInfo.bind(self, shop)} />
+                                                <Card target={shop} save={save} type={<span><strong>{_.startCase(shop.attrs.type)}</strong> <small>{_.startCase(shop.attrs.quality)}</small></span>} leftButtons={leftButtons} getInfo={self.getShopInfo.bind(self, shop)} onSave={self.getSave} />
                                             </div>
                                             );
                                     })}
@@ -169,7 +182,7 @@ var AreaAdventurePage = React.createClass({
 
                                         return (
                                             <div key={bounty.id} className="col-md-12">
-                                                <Card target={bounty} save={save} canComplete={true} type={<span><strong>{_.startCase(bounty.attrs.type)}</strong> <small>CR <strong>{bounty.attrs.challenge}</strong></small></span>} leftButtons={leftButtons} getInfo={self.getBountyInfo.bind(self, bounty)} />
+                                                <Card target={bounty} save={save} canComplete={true} type={<span><strong>{_.startCase(bounty.attrs.type)}</strong> <small>CR <strong>{bounty.attrs.challenge}</strong></small></span>} leftButtons={leftButtons} getInfo={self.getBountyInfo.bind(self, bounty)} onSave={self.getSave} />
                                             </div>
                                             );
                                     })}

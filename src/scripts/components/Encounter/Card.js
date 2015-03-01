@@ -18,27 +18,27 @@ var EncounterCard = React.createClass({
         var objectiveTemplates = {
             travel: function(data) { return (
                 <span>
-                    <small class="text-muted">Travel to</small> <strong>{data.details.area}</strong> <small class="text-muted">in</small> <strong>{data.details.location}</strong>
+                    <small className="text-muted">Travel to</small> <strong>{data.details.area}</strong> <small className="text-muted">in</small> <strong>{data.details.location}</strong>
                 </span>
                 )},
             social: function(data) { return (
                 <span>
-                    <small class="text-muted">Conversation with</small> <strong>{data.details.character}</strong>
+                    <small className="text-muted">Conversation with</small> <strong>{data.details.character}</strong>
                 </span>
                 )},
             skillCheck: function(data) { return(
                 <span>
-                    <strong>{data.details.skill}</strong> <small class="text-muted">Check,</small> <strong>DC {data.details.skillDifficulty}</strong>
+                    <strong>{data.details.skill}</strong> <small className="text-muted">Check,</small> <strong>DC {data.details.skillDifficulty}</strong>
                 </span>
                 )},
             combat: function(data) { return(
                 <span>
-                    <small class="text-muted">Combat with</small> <strong>{data.details.battle}</strong>
+                    <small className="text-muted">Combat with</small> <strong>{data.details.battle}</strong>
                 </span>
                 )},
             mechanism: function(data) { return(
                 <span>
-                    <small class="text-muted">Interact with</small> <strong>{data.details.name} ({_.startCase(data.details.mechanism)})</strong>
+                    <small className="text-muted">Interact with</small> <strong>{data.details.name} ({_.startCase(data.details.mechanism)})</strong>
                 </span>
                 )},
             other: function(data) { return(

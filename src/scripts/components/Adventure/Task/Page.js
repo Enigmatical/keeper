@@ -71,6 +71,19 @@ var TaskAdventurePage = React.createClass({
 
     },
 
+    getSave: function() {
+        var self = this;
+        var saveId = self.getParams().saveId;
+
+        new SaveModel().get(saveId)
+            .done(function(save) {
+                save.getJoins()
+                    .done(function() {
+                        self.setState({save: save});
+                    });
+            });
+    },
+
     getTasks: function() {
         var self = this;
         var quest = this.state.quest;
@@ -119,7 +132,7 @@ var TaskAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={task.id} className="col-md-12">
-                                    <Card target={task} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, task)} />
+                                    <Card target={task} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, task)} getSave={self.getSave} />
                                 </div>
                                 );
                         })}

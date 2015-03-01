@@ -29,8 +29,6 @@ var AdventureCard = React.createClass({
 
     getComplete: function() {
         if (this.props.canComplete === true) {
-            console.log('Hey!');
-
             var save = this.props.save;
             var target = this.props.target;
 
@@ -64,7 +62,7 @@ var AdventureCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <InfoModal target={this.props.target} save={this.props.save} info={this.props.getInfo()} canComplete={this.props.canComplete} onComplete={this.getComplete} />
+                        <InfoModal target={this.props.target} save={this.props.save} info={this.props.getInfo()} canComplete={this.props.canComplete} onComplete={this.getComplete} onSave={this.props.onSave} />
                         {this.props.leftButtons}
                     </ButtonToolbar>
                     <div className="pull-right">
