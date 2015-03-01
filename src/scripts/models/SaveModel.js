@@ -23,21 +23,48 @@ function SaveModel() {
         segs: null,
         xp: null,
         notes: null,
-        completed: []
+        completed: {}
     };
 
-    this.getParty = function() {
+    this.getParty = function () {
         return this.joinOn(PartyModel, this);
     };
 
-    this.getLocation = function() {
+    this.getLocation = function () {
         return this.joinOn(LocationModel, this);
     };
 
-    this.getJoins = function() {
+    this.getJoins = function () {
         var self = this;
 
         return Q.allSettled([self.getParty(), self.getLocation()]);
+    };
+
+    this.isComplete = function (id) {
+        if (this.attrs.completed === undefined) this.attrs.completed = {};
+
+        return (this.attrs.completed.hasOwnProperty(id));
+    };
+
+    this.toggleComplete = function(id) {
+        var deferred = Q.defer();
+        var checked = this.isComplete(id);
+
+        if (checked === true) {
+            delete this.attrs.completed[id];
+        }
+        else {
+            this.attrs.completed[id] = 1;
+        }
+
+        console.log(this.attrs);
+
+        this.save()
+            .done(function() {
+                deferred.resolve(!checked);
+            });
+
+        return deferred.promise;
     };
 }
 

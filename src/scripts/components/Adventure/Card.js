@@ -35,7 +35,7 @@ var AdventureCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <InfoModal model={this.props.model} target={this.props.target} info={this.props.getInfo()} />
+                        <InfoModal target={this.props.target} save={this.props.save} info={this.props.getInfo()} canComplete={this.props.canComplete} />
                         {this.props.leftButtons}
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
