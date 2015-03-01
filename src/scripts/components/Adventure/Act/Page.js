@@ -54,8 +54,19 @@ var ActAdventurePage = React.createClass({
                             });
                     });
             });
+    },
 
+    getSave: function() {
+        var self = this;
+        var saveId = self.getParams().saveId;
 
+        new SaveModel().get(saveId)
+            .done(function(save) {
+                save.getJoins()
+                    .done(function() {
+                        self.setState({save: save});
+                    });
+            });
     },
 
     getActs: function() {
@@ -95,11 +106,11 @@ var ActAdventurePage = React.createClass({
                     <div className="row">
                         {self.state.acts.map(function(act) {
                             var leftButtons = [
-                                (<ButtonLink key={act.id + '_link'} bsStyle="primary" to="adventure-quests" params={{campaignId: campaign.id, saveId: save.id, actId: act.id}}><Glyphicon glyph="play" /> Quests</ButtonLink>),
+                                (<ButtonLink key={act.id + '_link'} bsStyle="primary" to="adventure-quests" params={{campaignId: campaign.id, saveId: save.id, actId: act.id}}><Glyphicon glyph="play" /> Quests</ButtonLink>)
                             ];
                             return (
                                 <div key={act.id} className="col-md-12">
-                                    <Card target={act} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, act)} getProgress={self.getProgress.bind(self, act, save)} />
+                                    <Card target={act} save={save} canComplete={true} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, act)} getProgress={self.getProgress.bind(self, act, save)} onSave={self.getSave} />
                                 </div>
                                 );
                         })}

@@ -56,6 +56,19 @@ var LocationAdventurePage = React.createClass({
 
     },
 
+    getSave: function() {
+        var self = this;
+        var saveId = self.getParams().saveId;
+
+        new SaveModel().get(saveId)
+            .done(function(save) {
+                save.getJoins()
+                    .done(function() {
+                        self.setState({save: save});
+                    });
+            });
+    },
+
     getLocations: function() {
         var self = this;
         var campaign = this.state.campaign;
@@ -93,7 +106,7 @@ var LocationAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={location.id} className="col-md-12">
-                                    <Card model={LocationModel} target={location} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, location)} />
+                                    <Card target={location} save={save} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, location)} onSave={self.getSave} />
                                 </div>
                                 );
                         })}

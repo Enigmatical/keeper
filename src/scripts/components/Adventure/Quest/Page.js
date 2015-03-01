@@ -64,6 +64,19 @@ var QuestAdventurePage = React.createClass({
 
     },
 
+    getSave: function() {
+        var self = this;
+        var saveId = self.getParams().saveId;
+
+        new SaveModel().get(saveId)
+            .done(function(save) {
+                save.getJoins()
+                    .done(function() {
+                        self.setState({save: save});
+                    });
+            });
+    },
+
     getQuests: function() {
         var self = this;
         var act = this.state.act;
@@ -111,7 +124,7 @@ var QuestAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={quest.id} className="col-md-12">
-                                    <Card target={quest} save={save} canComplete={true} type={<span>CR <strong>{quest.attrs.challenge}</strong></span>} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} getProgress={self.getProgress.bind(self, quest, save)} />
+                                    <Card target={quest} save={save} canComplete={true} type={<span>CR <strong>{quest.attrs.challenge}</strong></span>} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} getProgress={self.getProgress.bind(self, quest, save)} onSave={self.getSave} />
                                 </div>
                                 );
                         })}

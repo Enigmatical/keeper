@@ -3,6 +3,8 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
+var Pathfinder = require('../../../helpers/Pathfinder');
+
 var BattleModel = require('../../../models/BattleModel');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
@@ -13,7 +15,9 @@ var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
 var AttrBlock = require('../../Model/AttrBlock');
-var Stats = require('../Stats');
+
+var AdjustXp = require('../AdjustXpButton');
+var AdjustTime = require('../AdjustTimeButton');
 
 
 
@@ -47,32 +51,28 @@ var EncounterCombatAdventureInfo = React.createClass({
             });
     },
 
+    getBattleTime: function() {
+        var save = this.props.save;
+        var battle = this.state.battle;
+
+        return Pathfinder.getBattleTime(save.attrs.xp, save.party.attrs.count, battle.attrs.challenge);
+    },
+
     render: function () {
         var self = this;
-        var data = this.props.data;
-        var details = this.props.data.details;
+        var save = self.props.save;
+        var data = self.props.data;
+        var details = data.details;
 
-        var battle = this.state.battle;
-        var battlers = this.state.battlers;
+        var battle = self.state.battle;
+        var battlers = self.state.battlers;
 
         if (_.isObject(battle)) {
-            var stats = [
-                {
-                    glyph: 'exclamation-sign',
-                    label: 'CR',
-                    value: battle.attrs.challenge
-                },
-                {
-                    glyph: 'star',
-                    label: 'XP',
-                    value: '+' + battle.attrs.rewardXp
-                },
-                {
-                    glyph: 'tasks',
-                    label: 'Coin',
-                    value: '+' + battle.attrs.rewardCoin + ' gp'
-                }
-            ];
+            var time = self.getBattleTime();
+            var timeButton = (<span />);
+            if (time > 0) {
+                timeButton = (<AdjustTime save={save} segs={time} onSave={self.props.onSave} />);
+            }
 
             return (
                 <div>
@@ -112,7 +112,8 @@ var EncounterCombatAdventureInfo = React.createClass({
                     </div>
                     <div className="card-footer">
                         <ButtonToolbar className="pull-left">
-                            <Button bsStyle="success" bsSize="small"><Glyphicon glyph="star" /> Reward +{battle.attrs.rewardXp} XP</Button>
+                            <AdjustXp save={save} xp={battle.attrs.rewardXp} onSave={self.props.onSave} />
+                            {timeButton}
                         </ButtonToolbar>
                     </div>
                 </div>

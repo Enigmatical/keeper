@@ -11,7 +11,6 @@ var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
 var AttrBlock = require('../../Model/AttrBlock');
-var Stats = require('../Stats');
 
 
 
@@ -19,21 +18,8 @@ var EncounterSkillCheckAdventureInfo = React.createClass({
 
     render: function () {
         var self = this;
-        var data = this.props.data;
-        var details = this.props.data.details;
-
-        var stats = [
-            {
-                glyph: 'eye-open',
-                label: 'Skill',
-                value: details.skill
-            },
-            {
-                glyph: 'exclamation-sign',
-                label: 'DC',
-                value: details.skillDifficulty
-            }
-        ];
+        var data = self.props.data;
+        var details = data.details;
 
         return (
             <div>

@@ -9,6 +9,7 @@ var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
+var EncounterCard = require('./Encounter/Card');
 var CompleteButton = require('./CompleteButton');
 
 
@@ -18,12 +19,25 @@ var AdventureInfoModal = React.createClass({
 
     getInitialState: function() {
         return {
+            encounters: [],
             isModalOpen: false
         };
     },
 
     componentWillMount: function() {
+        this.getEncounters();
+    },
 
+    getEncounters: function() {
+        var self = this;
+        var target = this.props.target;
+
+        if (_.isFunction(target.getEncounters)) {
+            target.getEncounters()
+                .done(function(encounters) {
+                    self.setState({encounters: encounters});
+                });
+        }
     },
 
     handleToggle: function() {
@@ -39,32 +53,52 @@ var AdventureInfoModal = React.createClass({
     },
 
     renderOverlay: function() {
-        var save = this.props.save;
-        var target = this.props.target;
-        var canComplete = this.props.canComplete;
+        var self = this;
+        var save = self.props.save;
+        var target = self.props.target;
+        var canComplete = self.props.canComplete;
 
         var completeButton = (<span />);
         if (canComplete === true) {
-            completeButton = (<CompleteButton target={target} save={save} onComplete={this.props.onComplete} />);
+            completeButton = (<CompleteButton target={target} save={save} onComplete={self.props.onComplete} onSave={self.props.onSave} />);
         }
+
+        var encounters = function() {
+            if (self.state.encounters.length > 0) {
+                return(
+                    <section className="row">
+                        <div className="col-md-12">
+                            <p className="body-header">Encounters</p>
+                            {self.state.encounters.map(function(encounter) {
+                                return (
+                                    <EncounterCard key={encounter.id} target={encounter} save={save} onSave={self.props.onSave} />
+                                    );
+                            })}
+                        </div>
+                    </section>
+                    );
+            }
+            else {
+                return (<span />);
+            }
+        };
 
         if (!this.state.isModalOpen) {
             return <span />;
         }
 
         return (
-            <Modal title={target.attrs.name} className="info-adventure" bsSize="large" onRequestHide={this.handleToggle}>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="modal-body">
-                        {this.props.info}
-                    </div>
-                    <div className="modal-footer">
-                        <ButtonToolbar>
-                            {completeButton}
-                            <Button onClick={this.handleToggle}>Close</Button>
-                        </ButtonToolbar>
-                    </div>
-                </form>
+            <Modal title={target.attrs.name} className="info-adventure" bsSize="large" onRequestHide={self.handleToggle}>
+                <div className="modal-body">
+                    {this.props.info}
+                    {encounters()}
+                </div>
+                <div className="modal-footer">
+                    <ButtonToolbar>
+                        {completeButton}
+                        <Button onClick={this.handleToggle}>Close</Button>
+                    </ButtonToolbar>
+                </div>
             </Modal>
             );
     }
