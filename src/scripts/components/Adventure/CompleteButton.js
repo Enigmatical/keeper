@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react/addons');
-var Router = require('react-router');
 
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
@@ -25,6 +24,10 @@ var CompleteAdventureButton = React.createClass({
             .done(function(checked) {
                 self.setState({checked: checked});
             });
+
+        if (_.isFunction(this.props.onComplete)) {
+            this.props.onComplete();
+        }
     },
 
     render: function () {

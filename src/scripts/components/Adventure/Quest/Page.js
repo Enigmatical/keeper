@@ -19,6 +19,7 @@ var PageHeader = require('../PageHeader');
 var Breadcrumb = require('../../Common/Breadcrumb');
 
 var Card = require('../Card');
+var Progress = require('../ProgressBar');
 var QuestInfo = require('./Info');
 
 
@@ -74,7 +75,11 @@ var QuestAdventurePage = React.createClass({
     },
 
     getInfo: function(target) {
-       return (<QuestInfo target={target} />);
+        return (<QuestInfo target={target} />);
+    },
+
+    getProgress: function(target, save) {
+        return (<Progress className="progressbar-adventure" target={target} save={save} />);
     },
 
     render: function () {
@@ -102,11 +107,11 @@ var QuestAdventurePage = React.createClass({
                     <div className="row">
                         {self.state.quests.map(function(quest) {
                             var leftButtons = [
-                                (<ButtonLink bsStyle="primary" to="adventure-tasks" params={{campaignId: campaign.id, saveId: save.id, actId: act.id, questId: quest.id}}><Glyphicon glyph="play" /> Tasks</ButtonLink>)
+                                (<ButtonLink key={'button-link'} bsStyle="primary" to="adventure-tasks" params={{campaignId: campaign.id, saveId: save.id, actId: act.id, questId: quest.id}}><Glyphicon glyph="play" /> Tasks</ButtonLink>)
                             ];
                             return (
                                 <div key={quest.id} className="col-md-12">
-                                    <Card target={quest} save={save} canComplete={true} type={<span>CR <strong>{quest.attrs.challenge}</strong></span>} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} />
+                                    <Card target={quest} save={save} canComplete={true} type={<span>CR <strong>{quest.attrs.challenge}</strong></span>} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, quest)} getProgress={self.getProgress.bind(self, quest, save)} />
                                 </div>
                                 );
                         })}

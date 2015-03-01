@@ -57,8 +57,6 @@ function SaveModel() {
             this.attrs.completed[id] = 1;
         }
 
-        console.log(this.attrs);
-
         this.save()
             .done(function() {
                 deferred.resolve(!checked);

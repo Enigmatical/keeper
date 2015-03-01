@@ -45,7 +45,7 @@ var AdventureInfoModal = React.createClass({
 
         var completeButton = (<span />);
         if (canComplete === true) {
-            completeButton = (<CompleteButton target={target} save={save} />);
+            completeButton = (<CompleteButton target={target} save={save} onComplete={this.props.onComplete} />);
         }
 
         if (!this.state.isModalOpen) {
