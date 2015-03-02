@@ -124,7 +124,7 @@ var TaskAdventurePage = React.createClass({
 
             return (
                 <div id="task-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} section="campaign" />
+                    <PageHeader campaign={campaign} save={save} section="campaign" onSave={self.getSave} />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         {self.state.tasks.map(function(task) {

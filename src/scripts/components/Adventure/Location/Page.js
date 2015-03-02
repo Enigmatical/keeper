@@ -99,7 +99,7 @@ var LocationAdventurePage = React.createClass({
 
             return (
                 <div id="location-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} section="map" />
+                    <PageHeader campaign={campaign} save={save} section="map" onSave={self.getSave} />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         {self.state.locations.map(function(location) {

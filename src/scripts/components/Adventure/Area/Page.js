@@ -148,7 +148,7 @@ var AreaAdventurePage = React.createClass({
 
             return (
                 <div id="area-adventure-page" className="page-content">
-                    <PageHeader campaign={campaign} save={save} section="map" />
+                    <PageHeader campaign={campaign} save={save} section="map" onSave={self.getSave} />
                     <Breadcrumb className="breadcrumb-adventure" crumbs={crumbs} />
                     <div className="row">
                         <div className="col-md-12">

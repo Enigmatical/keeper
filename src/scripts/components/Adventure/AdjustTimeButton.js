@@ -16,7 +16,10 @@ var AdjustTimeAdventureButton = React.createClass({
         var save = self.props.save;
         var segs = self.props.segs;
 
-        button.setAttribute('disabled', 'disabled');
+        if (!self.props.disable === false) {
+            button.setAttribute('disabled', 'disabled');
+        }
+
         save.adjustTime(segs);
 
         if (_.isFunction(this.props.onComplete)) {
@@ -30,10 +33,12 @@ var AdjustTimeAdventureButton = React.createClass({
 
     render: function () {
         var segs = this.props.segs;
-        var label = Pathfinder.getAdjustTimeLabel(segs);
+        var label = (<span><Glyphicon glyph="calendar" /> Time + {Pathfinder.getAdjustTimeLabel(segs)}</span>);
+
+        if (this.props.children) label = this.props.children;
 
         return (
-            <Button bsStyle="warning" onClick={this.handleTime}><Glyphicon glyph="calendar" /> Time +{label}</Button>
+            <Button bsStyle="warning" onClick={this.handleTime} block={this.props.block}>{label}</Button>
             );
     }
 });
