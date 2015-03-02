@@ -54,7 +54,7 @@ var MainNav = React.createClass({
                     <NavItemLink to="manage-campaigns">Campaigns</NavItemLink>
                     <NavItemLink to="manage-characters">Characters</NavItemLink>
                     <NavItemLink to="manage-foes">Foes</NavItemLink>
-                    <NavItemLink to="tools">Tools</NavItemLink>
+                    {/*<NavItemLink to="tools">Tools</NavItemLink>*/}
                 </Nav>
                 );
 
