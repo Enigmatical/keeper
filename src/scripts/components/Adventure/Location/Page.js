@@ -28,6 +28,7 @@ var LocationAdventurePage = React.createClass({
         return {
             campaign: null,
             save: null,
+            currentLocation: null,
             locations: []
         }
     },
@@ -46,7 +47,7 @@ var LocationAdventurePage = React.createClass({
                             .done(function() {
                                 self.setState({
                                     campaign: campaign,
-                                    save: save
+                                    save: save,
                                 });
                                 self.getLocations();
                             });
@@ -71,11 +72,12 @@ var LocationAdventurePage = React.createClass({
 
     getLocations: function() {
         var self = this;
+        var save = this.state.save;
         var campaign = this.state.campaign;
 
         campaign.getLocations()
             .then(function(locations) {
-                self.setState({locations: locations});
+                self.setState({locations: locations, currentLocation: save.attrs.location_id});
             });
     },
 
@@ -106,7 +108,7 @@ var LocationAdventurePage = React.createClass({
                             ];
                             return (
                                 <div key={location.id} className="col-md-12">
-                                    <Card target={location} save={save} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, location)} onSave={self.getSave} />
+                                    <Card target={location} save={save} canTravel={self.state.currentLocation !== location.id} leftButtons={leftButtons} getInfo={self.getInfo.bind(self, location)} onTravel={self.getLocations} onSave={self.getSave} />
                                 </div>
                                 );
                         })}
