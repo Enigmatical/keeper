@@ -11,6 +11,7 @@ var Label = require('react-bootstrap').Label;
 var AttrBlock = require('../Model/AttrBlock');
 
 var InfoModal = require('./InfoModal');
+var TravelModal = require('./TravelModal');
 
 require('../../../styles/ItemCard.css');
 
@@ -24,16 +25,19 @@ var AdventureCard = React.createClass({
     },
 
     componentWillMount: function() {
-        this.getComplete();
+        this.onComplete();
     },
 
-    getComplete: function() {
-        if (this.props.canComplete === true) {
-            var save = this.props.save;
-            var target = this.props.target;
+    onComplete: function() {
+        var save = this.props.save;
+        var target = this.props.target;
+        var completed;
 
-            this.setState({completed: save.isComplete(target.id)});
+        if (this.props.canComplete === true) {
+            completed = save.isComplete(target.id);
         }
+
+        this.setState({completed: completed});
     },
 
     render: function () {
@@ -41,16 +45,24 @@ var AdventureCard = React.createClass({
 
         var completeLabel;
         if (this.state.completed === true) {
-            completeLabel = (<Label className="completelabel-adventure" bsStyle="success">Complete</Label>);
+            completeLabel = (<Label className="label-adventure" bsStyle="success">Complete</Label>);
         } else if (this.state.completed === false) {
-            completeLabel = (<Label className="completelabel-adventure" bsStyle="warning">Incomplete</Label>);
+            completeLabel = (<Label className="label-adventure" bsStyle="warning">Incomplete</Label>);
+        }
+
+        var travelLabel;
+        if (this.props.canTravel === false) {
+            travelLabel = (<Label className="label-travel label-adventure" bsStyle="success">Current Location</Label>);
+        }
+        else if (this.props.canTravel === true) {
+            travelLabel = (<span />);
         }
 
         return (
             <div className="item-card adventure-card">
                 <div className="card-header">
                     <p className="pull-left">
-                        {target.attrs.name} {completeLabel}
+                        {target.attrs.name}<span>{completeLabel}</span><span>{travelLabel}</span>
                     </p>
                     <p className="pull-right">
                         <small className="text-muted">{this.props.type || target.attrs.type}</small>
@@ -62,7 +74,7 @@ var AdventureCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <InfoModal target={this.props.target} save={this.props.save} info={this.props.getInfo()} canComplete={this.props.canComplete} onComplete={this.getComplete} onSave={this.props.onSave} />
+                        <InfoModal target={this.props.target} save={this.props.save} info={this.props.getInfo()} canComplete={this.props.canComplete} canTravel={this.props.canTravel} onComplete={this.onComplete} onTravel={this.props.onTravel} onTravel={this.props.onTravel} onSave={this.props.onSave} />
                         {this.props.leftButtons}
                     </ButtonToolbar>
                     <div className="pull-right">

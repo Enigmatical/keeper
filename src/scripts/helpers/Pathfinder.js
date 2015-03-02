@@ -520,35 +520,56 @@ var Pathfinder = {
             segs = 0;
         }
 
-        var days, hours, half, dayLabel, hourLabel, halfLabel, ampmLabel;
+        var days, hours, half;
+        var dayLabel, hourLabel, halfLabel = (<span />);
 
         /*
          Days
          */
-        days = parseInt(segs/48);
+        days = parseInt(segs / 48);
         segs = segs - (days * 48);
-
-        if (days > 0) {
-            dayLabel = days + ' Day(s)';
-        }
 
         /*
          Hours
          */
-        hours = parseInt(segs/2);
+        hours = parseInt(segs / 2);
         segs = segs - (hours * 2);
 
-        if (hours > 0) {
-            hourLabel = hours + ' Hour(s)';
+        half = parseInt(segs);
+
+        if (days > 0) {
+            dayLabel = (<span>{days} <small>Day{days > 1 ? 's' : ''}</small></span>);
         }
 
-        half = parseInt(segs);
-        halfLabel = (half === 1) ? ' 30 Minutes' : '';
+        if (hours > 0) {
+            hourLabel = (<span>{days > 0 ? ' ' + hours : hours} <small>Hour{hours > 1 ? 's': ''}</small></span>);
+        }
 
-        console.log(days, hours, half);
+        if (half > 0) {
+            halfLabel = (<span>{hours > 0 ? ' 30' : '30'} <small>Mins</small></span>);
+        }
 
-        return (<span>{dayLabel} {hourLabel} {halfLabel}</span>);
-        //return (dayLabel + ', ' + hourLabel + halfLabel + ' ' + ampmLabel);
+        return (<span><span>{dayLabel}</span><span>{hourLabel}</span><span>{halfLabel}</span></span>);
+    },
+
+    getTravelDistance: function(source, dest) {
+        return Math.abs(source-dest);
+    },
+
+    getTravelTime: function(distance, speed) {
+        var maxMilesPerDay = 40;
+
+        var days = parseInt(distance/maxMilesPerDay);
+        var hours = parseInt((distance%maxMilesPerDay)/speed);
+
+        return (days * 48) + (hours * 2);
+    },
+
+    getCarriageCost: function(distance) {
+        //Rate @ 1gp per 1 hour
+        var segs = this.getTravelTime(distance, 3);
+
+        return parseInt(segs/2);
     }
 };
 

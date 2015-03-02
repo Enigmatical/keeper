@@ -15,15 +15,16 @@ var AdjustXpAdventureButton = React.createClass({
         var xp = self.props.xp;
 
         button.setAttribute('disabled', 'disabled');
-        save.adjustXp(xp);
+        save.adjustXp(xp)
+            .done(function() {
+                if (_.isFunction(self.props.onComplete)) {
+                    self.props.onComplete();
+                }
 
-        if (_.isFunction(this.props.onComplete)) {
-            this.props.onComplete();
-        }
-
-        if (_.isFunction(this.props.onSave)) {
-            this.props.onSave();
-        }
+                if (_.isFunction(self.props.onSave)) {
+                    self.props.onSave();
+                }
+            });
     },
 
     render: function () {

@@ -98,6 +98,23 @@ function SaveModel() {
 
         return deferred.promise;
     };
+
+    this.adjustLocation = function(location, coordinate, segs) {
+        if (segs === undefined) segs = 0;
+
+        var deferred = Q.defer();
+
+        this.attrs.location_id = location;
+        this.attrs.coordinate = coordinate;
+        this.attrs.segs = parseInt(this.attrs.segs) + parseInt(segs);
+
+        this.save()
+            .done(function() {
+                deferred.resolve();
+            });
+
+        return deferred.promise;
+    };
 }
 
 SaveModel.prototype = new Object(BaseModel.prototype);

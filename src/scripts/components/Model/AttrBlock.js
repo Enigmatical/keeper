@@ -17,6 +17,7 @@ var ModelAttrBlock = React.createClass({
         var name = this.props.name;
         var attr = this.props.attr;
         var glyph = this.props.glyph;
+        var cols;
 
         var glyphs = {
             type:       'info-sign',
@@ -68,9 +69,10 @@ var ModelAttrBlock = React.createClass({
                 break;
             case 'custom':
                 var header = !_.isEmpty(name) ? (<p className="body-header">{name}</p>) : '';
+                cols = this.props.cols || 12;
 
                 return (
-                    <div className="attribute-block style-custom col-md-12">
+                    <div className={"attribute-block style-custom col-md-" + cols}>
                         <div className={this.props.className}>
                             {header}
                             <Markdown className="attr-value" text={attr} />
@@ -79,8 +81,10 @@ var ModelAttrBlock = React.createClass({
                     );
                 break;
             case 'stat':
+                cols = this.props.cols || 4;
+
                 return (
-                    <div className="attribute-block style-stat col-md-3">
+                    <div className={"attribute-block style-stat col-md-" + cols}>
                         <Glyphicon glyph={glyphs[glyph]} />
                         <span className="attr-label">{name}</span>
                         <span className="attr-value">{attr}</span>
