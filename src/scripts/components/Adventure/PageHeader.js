@@ -5,6 +5,8 @@ var Link = require('react-router').Link;
 
 var Pathfinder = require('../../helpers/Pathfinder');
 
+var SaveModel = require('../../models/SaveModel');
+
 var Button = require('react-bootstrap').Button;
 var Navbar = require('react-bootstrap').Navbar;
 var Nav = require('react-bootstrap').Nav;
@@ -16,11 +18,23 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 var PageHeader = require('../Model/PageHeader');
 var AttrBlock = require('../Model/AttrBlock');
 
+var GmModal = require('./GmModal');
+var FormModal = require('../Model/FormModal');
+var SaveInputs = require('../Save/Inputs');
+
 var AdventurePageHeader = React.createClass({
     getInitialState: function() {
         return {
             location: null
         }
+    },
+
+    getInputs: function(attrs) {
+        var campaign = this.props.campaign;
+
+        return (
+            <SaveInputs campaign={campaign} attrs={attrs} />
+            );
     },
 
     render: function () {
@@ -33,8 +47,8 @@ var AdventurePageHeader = React.createClass({
         return (
             <div>
                 <PageHeader pageName={campaign.attrs.name} pageType="Adventure">
-                    <Button bsStyle="info"><Glyphicon glyph="user" /> {save.party.attrs.name}</Button>
-                    <Button bsStyle="danger"><Glyphicon glyph="flash" /> GM Actions</Button>
+                    <FormModal model={SaveModel} target={save} parent={campaign} button={{size: 'medium', style:'info', glyph: 'user', text: save.party.attrs.name}} inputs={this.getInputs.bind(this, save.attrs)} onUpdate={this.props.onSave} />
+                    <GmModal save={save} onSave={this.props.onSave} />
                 </PageHeader>
                 <div className="stats-adventure row">
                     <div className="col-md-12">

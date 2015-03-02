@@ -14,7 +14,10 @@ var AdjustXpAdventureButton = React.createClass({
         var save = self.props.save;
         var xp = self.props.xp;
 
-        button.setAttribute('disabled', 'disabled');
+        if (!self.props.disable === false) {
+            button.setAttribute('disabled', 'disabled');
+        }
+
         save.adjustXp(xp)
             .done(function() {
                 if (_.isFunction(self.props.onComplete)) {
@@ -29,9 +32,12 @@ var AdjustXpAdventureButton = React.createClass({
 
     render: function () {
         var xp = this.props.xp;
+        var label = (<span><Glyphicon glyph="star" /> Reward +{xp} XP</span>);
+
+        if (this.props.children) label = this.props.children;
 
         return (
-            <Button bsStyle="success" onClick={this.handleXp}><Glyphicon glyph="star" /> Reward +{xp} XP</Button>
+            <Button bsStyle="success" onClick={this.handleXp} block={this.props.block}>{label}</Button>
             );
     }
 });

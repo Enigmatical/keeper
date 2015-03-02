@@ -122,6 +122,8 @@ var ModelFormModal = React.createClass({
     render: function () {
         var button = this.getMode().button;
 
+        if (this.props.button) button = this.props.button;
+
         return (
             <Button bsSize={button.size} bsStyle={button.style} className={this.props.className} onClick={this.handleToggle}><Glyphicon glyph={button.glyph} />{button.text ? ' ' + button.text : ''}</Button>
             );
