@@ -27,7 +27,7 @@ var ActorAdventureCard = React.createClass({
                         {character.attrs.name}
                     </p>
                     <p className="pull-right">
-                        <small className="text-muted">{_.startCase(character.attrs.type)}</small>
+                        <small className="text-muted">{character.attrs.type}</small>
                     </p>
                 </div>
                 <div className="card-body">

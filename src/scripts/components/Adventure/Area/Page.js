@@ -111,7 +111,9 @@ var AreaAdventurePage = React.createClass({
     },
 
     getShopInfo: function(target) {
-        return (<ShopInfo target={target} />);
+        var save = this.state.save;
+
+        return (<ShopInfo target={target} save={save} onSave={this.getSave} />);
     },
 
     getBounties: function() {

@@ -362,6 +362,10 @@ var Pathfinder = {
         return this.helpers.buildOptions(this.statics.shopModifiers, true);
     },
 
+    getShopModifierDetails: function(type) {
+        return this.statics.shopModifiers[type];
+    },
+
     getSkillOptions: function() {
         var options = [];
 
