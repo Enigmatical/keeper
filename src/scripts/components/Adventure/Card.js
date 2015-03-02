@@ -74,7 +74,7 @@ var AdventureCard = React.createClass({
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">
-                        <InfoModal target={this.props.target} save={this.props.save} info={this.props.getInfo()} canComplete={this.props.canComplete} canTravel={this.props.canTravel} onComplete={this.onComplete} onTravel={this.props.onTravel} onTravel={this.props.onTravel} onSave={this.props.onSave} />
+                        <InfoModal target={this.props.target} save={this.props.save} info={this.props.getInfo()} canComplete={this.props.canComplete} canTravel={this.props.canTravel} onComplete={this.onComplete} onTravel={this.props.onTravel} onSave={this.props.onSave} />
                         {this.props.leftButtons}
                     </ButtonToolbar>
                     <div className="pull-right">
