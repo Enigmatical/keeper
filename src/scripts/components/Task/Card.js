@@ -86,7 +86,7 @@ var TaskCard = React.createClass({
                         <EncounterFormModal link={true} parent={task} campaign={campaign} onUpdate={self.getEncounters} />
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
-                        <FormModal target={task} model={this.props.model} parent={task} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <FormModal target={task} model={this.props.model} parent={quest} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={task} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
