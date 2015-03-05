@@ -209,11 +209,13 @@ BaseModel.prototype.remove = function() {
 };
 
 BaseModel.prototype.sortModels = function(array, key) {
+    console.log(array, key);
+
     var compare = function(a, b) {
         var a_val = a.attrs[key];
         var b_val = b.attrs[key];
 
-        if (_.isNumber(parseInt(a_val)) && _.isNumber(parseInt(b_val))) {
+        if (!_.isNaN(+a_val) && !_.isNaN(+b_val)) {
             a_val = parseInt(a_val);
             b_val = parseInt(b_val);
         }
