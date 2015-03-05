@@ -8,6 +8,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('../Model/FormModal');
+var CloneModal = require('../Model/CloneModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
@@ -41,6 +42,7 @@ var QuestCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={quest} model={this.props.model} parent={act} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <CloneModal target={quest} model={this.props.model} parent={act} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={quest} onUpdate={this.props.onUpdate}>
                             <p className="text-danger">
                                 This will also <strong>remove</strong> all associated:

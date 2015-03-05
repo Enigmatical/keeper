@@ -11,6 +11,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('../Model/FormModal');
+var CloneModal = require('../Model/CloneModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
@@ -83,6 +84,7 @@ var SaveCard = React.createClass({
                         </ButtonToolbar>
                         <ButtonToolbar className="pull-right">
                             <FormModal target={save} model={this.props.model} parent={campaign} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                            <CloneModal target={save} model={this.props.model} parent={campaign} onUpdate={self.props.onUpdate} />
                             <RemoveModal target={save} onUpdate={self.props.onUpdate} />
                         </ButtonToolbar>
                     </div>

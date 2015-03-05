@@ -8,6 +8,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('../Model/FormModal');
+var CloneModal = require('../Model/CloneModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
@@ -88,6 +89,7 @@ var BountyCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={bounty} model={this.props.model} parent={location} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <CloneModal target={bounty} model={this.props.model} parent={location} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={bounty} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

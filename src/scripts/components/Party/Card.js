@@ -10,6 +10,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('../Model/FormModal');
+var CloneModal = require('../Model/CloneModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
@@ -43,6 +44,7 @@ var PartyCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={party} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <CloneModal target={party} model={this.props.model} parent={Auth.User} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={party} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
