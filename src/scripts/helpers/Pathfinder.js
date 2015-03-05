@@ -399,7 +399,7 @@ var Pathfinder = {
         var lastCr = null;
 
         for(var cr in this.statics.challengeRatings) {
-            if (this.getXp(cr) >= xp) {
+            if (this.getXp(cr) > xp) {
                 return lastCr;
             }
             lastCr = cr;

@@ -160,8 +160,8 @@ var BattleCard = React.createClass({
                     <AttrBlock type="flavor" attr={battle.attrs.flavor} />
                     <AttrBlock type="details" attr={battle.attrs.details} />
                     <section className="row">
-                        <AttrBlock type="stat" name="XP" glyph="xp" attr={'+' + battle.attrs.rewardXp} />
-                        <AttrBlock type="stat" name="Coin" glyph="coin" attr={'+' + battle.attrs.rewardCoin + ' gp'} />
+                        <AttrBlock type="stat" name="XP" glyph="xp" attr={'+' + (battle.attrs.rewardXp || 0)} />
+                        <AttrBlock type="stat" name="Coin" glyph="coin" attr={'+' + (battle.attrs.rewardCoin || 0) + ' gp'} />
                     </section>
                     {battlers()}
                 </div>

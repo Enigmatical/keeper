@@ -209,8 +209,6 @@ BaseModel.prototype.remove = function() {
 };
 
 BaseModel.prototype.sortModels = function(array, key) {
-    console.log(array, key);
-
     var compare = function(a, b) {
         var a_val = a.attrs[key];
         var b_val = b.attrs[key];
