@@ -10,6 +10,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('../Model/FormModal');
+var CloneModal = require('../Model/CloneModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 var Input = require('../Model/FormInput');
@@ -163,6 +164,7 @@ var ShopCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={shop} model={self.props.model} parent={location} inputs={self.props.inputs} onUpdate={self.props.onUpdate} />
+                        <CloneModal target={shop} model={self.props.model} parent={location} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={shop} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

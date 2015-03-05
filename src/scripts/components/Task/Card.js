@@ -9,6 +9,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('../Model/FormModal');
+var CloneModal = require('../Model/CloneModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 
@@ -87,6 +88,7 @@ var TaskCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={task} model={this.props.model} parent={quest} inputs={this.props.inputs} onUpdate={this.props.onUpdate} />
+                        <CloneModal target={task} model={this.props.model} parent={quest} onUpdate={this.props.onUpdate} />
                         <RemoveModal target={task} onUpdate={this.props.onUpdate} />
                     </ButtonToolbar>
                 </div>

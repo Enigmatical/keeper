@@ -11,6 +11,7 @@ var ButtonLink = require('react-router-bootstrap').ButtonLink;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var FormModal = require('../Model/FormModal');
+var CloneModal = require('../Model/CloneModal');
 var RemoveModal = require('../Model/RemoveModal');
 var AttrBlock = require('../Model/AttrBlock');
 var Input = require('../Model/FormInput');
@@ -170,6 +171,7 @@ var BattleCard = React.createClass({
                     </ButtonToolbar>
                     <ButtonToolbar className="pull-right">
                         <FormModal target={battle} model={this.props.model} parent={Auth.User} inputs={this.props.inputs} onUpdate={self.props.onUpdate} />
+                        <CloneModal target={battle} model={this.props.model} parent={Auth.User} onUpdate={self.props.onUpdate} />
                         <RemoveModal target={battle} onUpdate={self.props.onUpdate} />
                     </ButtonToolbar>
                 </div>
