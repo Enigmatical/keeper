@@ -30,7 +30,7 @@ var ShopTavernAdventureInfo = React.createClass({
                     </div>
                 </section>
                 <section className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-3">
                         <div className="text-orange bg-orange">
                             <p className="body-header">Lodging</p>
                             <p>
@@ -39,11 +39,19 @@ var ShopTavernAdventureInfo = React.createClass({
                             <AdjustTime save={this.props.save} segs={16} onSave={this.props.onSave} />
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-3">
                         <div className="text-wetasphalt bg-wetasphalt">
                             <p className="body-header">Food &amp; Drink</p>
                             <p>
                                 Selections of <strong>Food &amp; Drink</strong> are listed in the <strong>Core Rulebook, pg 159</strong>.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="text-emerald bg-emerald">
+                            <p className="body-header">Bounty Board</p>
+                            <p>
+                                A central location in nearly every town where villagers can leave <strong>Requests</strong> for local adventurers.
                             </p>
                         </div>
                     </div>

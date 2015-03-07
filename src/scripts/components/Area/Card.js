@@ -36,6 +36,7 @@ var AreaCard = React.createClass({
 
     componentWillMount: function() {
         this.getActors();
+        this.getEncounters();
         this.getCharacterOptions();
     },
 

@@ -82,7 +82,7 @@ var EncounterCombatInputs = React.createClass({
                     type="textarea"
                     name="rewardOther"
                     placeholder="Rewards"
-                    value={details.rewardOther}
+                    defaultValue={details.rewardOther}
                 />
             </div>
             );

@@ -82,13 +82,13 @@ var EncounterSocialInputs = React.createClass({
                     type="textarea"
                     name="primary"
                     placeholder="Primary Topics"
-                    value={details.primary}
+                    defaultValue={details.primary}
                 />
                 <Input
                     type="textarea"
                     name="secondary"
                     placeholder="Secondary Topics"
-                    value={details.secondary}
+                    defaultValue={details.secondary}
                 />
             </div>
             );
