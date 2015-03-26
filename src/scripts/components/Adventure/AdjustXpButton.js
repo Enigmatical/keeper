@@ -14,7 +14,9 @@ var AdjustXpAdventureButton = React.createClass({
         var save = self.props.save;
         var xp = self.props.xp;
 
-        if (!self.props.disable === false) {
+        var disable = self.props.disable !== undefined ? self.props.disable : true;
+
+        if (disable) {
             button.setAttribute('disabled', 'disabled');
         }
 

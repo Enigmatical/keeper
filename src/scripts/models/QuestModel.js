@@ -38,12 +38,14 @@ function QuestModel() {
 
         this.getTasks()
             .done(function(tasks) {
+                var total = tasks.length;
+
                 _.each(tasks, function(task) {
-                    var total = tasks.length;
                     if (save.isComplete(task.id) === true) completed++;
-                    self.progress = completed/total;
-                    deferred.resolve(completed/total);
                 });
+
+                self.progress = completed/total;
+                deferred.resolve(self.progress);
             });
 
         return deferred.promise;
