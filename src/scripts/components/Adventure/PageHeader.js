@@ -38,8 +38,9 @@ var AdventurePageHeader = React.createClass({
     },
 
     render: function () {
-        var campaign = this.props.campaign;
-        var save = this.props.save;
+        var self = this;
+        var campaign = self.props.campaign;
+        var save = self.props.save;
         var location = save.location;
 
         var locationLink = (<span><Link to="adventure-areas" params={{campaignId: campaign.id, saveId: save.id, locationId: location.id}}>{location.attrs.name}</Link>&nbsp;&nbsp;<small className="text-muted">{location.attrs.type}</small></span>);
@@ -47,8 +48,8 @@ var AdventurePageHeader = React.createClass({
         return (
             <div>
                 <PageHeader pageName={campaign.attrs.name} pageType="Adventure">
-                    <FormModal model={SaveModel} target={save} parent={campaign} button={{size: 'medium', style:'info', glyph: 'user', text: save.party.attrs.name}} inputs={this.getInputs.bind(this, save.attrs)} onUpdate={this.props.onSave} />
-                    <GmModal save={save} onSave={this.props.onSave} />
+                    <FormModal model={SaveModel} target={save} parent={campaign} button={{size: 'medium', style:'info', glyph: 'user', text: 'Party'}} inputs={self.getInputs.bind(self, save.attrs)} onUpdate={self.props.onSave} />
+                    <GmModal save={save} onSave={self.props.onSave} />
                 </PageHeader>
                 <div className="stats-adventure row">
                     <div className="col-md-12">
@@ -61,8 +62,8 @@ var AdventurePageHeader = React.createClass({
                     <div className="col-md-12">
                         <Navbar fluid>
                             <Nav className="navbar-left">
-                                <NavItemLink to="adventure-acts" params={{campaignId: campaign.id, saveId: save.id}} active={this.props.section === 'campaign'}>Campaign</NavItemLink>
-                                <NavItemLink to="adventure-locations" params={{campaignId: campaign.id, saveId: save.id}} active={this.props.section === 'map'}>Map</NavItemLink>
+                                <NavItemLink to="adventure-acts" params={{campaignId: campaign.id, saveId: save.id}} active={self.props.section === 'campaign'}>Campaign</NavItemLink>
+                                <NavItemLink to="adventure-locations" params={{campaignId: campaign.id, saveId: save.id}} active={self.props.section === 'map'}>Map</NavItemLink>
                             </Nav>
                         </Navbar>
                     </div>

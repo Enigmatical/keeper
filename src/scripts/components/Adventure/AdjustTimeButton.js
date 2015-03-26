@@ -16,18 +16,20 @@ var AdjustTimeAdventureButton = React.createClass({
         var save = self.props.save;
         var segs = self.props.segs;
 
-        if (!self.props.disable === false) {
+        var disable = self.props.disable !== undefined ? self.props.disable : true;
+
+        if (disable) {
             button.setAttribute('disabled', 'disabled');
         }
 
         save.adjustTime(segs);
 
-        if (_.isFunction(this.props.onComplete)) {
-            this.props.onComplete();
+        if (_.isFunction(self.props.onComplete)) {
+            self.props.onComplete();
         }
 
         if (_.isFunction(this.props.onSave)) {
-            this.props.onSave();
+            self.props.onSave();
         }
     },
 

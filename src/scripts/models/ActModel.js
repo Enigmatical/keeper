@@ -33,12 +33,14 @@ function ActModel() {
 
         this.getQuests()
             .done(function(quests) {
+                var total = quests.length;
+
                 _.each(quests, function(quest) {
-                    var total = quests.length;
                     if (save.isComplete(quest.id) === true) completed++;
-                    self.progress = completed/total;
-                    deferred.resolve(completed/total);
                 });
+
+                self.progress = completed/total;
+                deferred.resolve(self.progress);
             });
 
         return deferred.promise;
