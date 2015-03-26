@@ -93,6 +93,17 @@ var EncounterCombatAdventureInfo = React.createClass({
                         </section>
                         <section className="row">
                             <div className="col-md-12">
+                                <div className="bg-orange text-wetasphalt">
+                                    <p className="body-header text-orange">Rewards</p>
+                                    <section className="row">
+                                        <AttrBlock type="stat" name="XP" glyph="xp" attr={'+' + battle.attrs.rewardXp} />
+                                        <AttrBlock type="stat" name="Coin" glyph="coin" attr={'+' + battle.attrs.rewardCoin + ' gp'} />
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+                        <section className="row">
+                            <div className="col-md-12">
                                 <p className="body-header">Bestiary</p>
                                 <TabbedArea defaultActiveKey={1}>
                                     {battlers.map(function(battler, index) {
