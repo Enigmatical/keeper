@@ -16,6 +16,7 @@ var Social = require('./Inputs/Social');
 var SkillCheck = require('./Inputs/SkillCheck');
 var Combat = require('./Inputs/Combat');
 var Mechanism = require('./Inputs/Mechanism');
+var Treasure = require('./Inputs/Treasure');
 var Other = require('./Inputs/Other');
 
 
@@ -79,6 +80,7 @@ var EncounterFormModal = React.createClass({
             {label: 'Skill Check',  value: 'skillCheck'},
             {label: 'Combat',       value: 'combat'},
             {label: 'Mechanism',    value: 'mechanism'},
+            {label: 'Treasure',     value: 'treasure'},
             {label: 'Other',        value: 'other'}
         ];
 
@@ -88,6 +90,7 @@ var EncounterFormModal = React.createClass({
             'skillCheck':   (<SkillCheck mode={mode} attrs={attrs} />),
             'combat':       (<Combat mode={mode} attrs={attrs} />),
             'mechanism':    (<Mechanism mode={mode} attrs={attrs} />),
+            'treasure':     (<Treasure mode={mode} attrs={attrs} />),
             'other':        (<Other mode={mode} attrs={attrs} />)
         };
 

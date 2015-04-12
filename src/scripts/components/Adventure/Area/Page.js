@@ -161,7 +161,7 @@ var AreaAdventurePage = React.createClass({
 
                                         return (
                                             <div key={area.id} className="col-md-12">
-                                                <Card target={area} save={save} leftButtons={leftButtons} getInfo={self.getAreaInfo.bind(self, area)} onSave={self.getSave} />
+                                                <Card target={area} save={save} leftButtons={leftButtons} getInfo={self.getAreaInfo.bind(self, area)} getSave={self.getSave} />
                                             </div>
                                             );
                                     })}
@@ -172,7 +172,7 @@ var AreaAdventurePage = React.createClass({
 
                                         return (
                                             <div key={shop.id} className="col-md-12">
-                                                <Card target={shop} save={save} type={<span><strong>{_.startCase(shop.attrs.type)}</strong> <small>{_.startCase(shop.attrs.quality)}</small></span>} leftButtons={leftButtons} getInfo={self.getShopInfo.bind(self, shop)} onSave={self.getSave} />
+                                                <Card target={shop} save={save} type={<span><strong>{_.startCase(shop.attrs.type)}</strong> <small>{_.startCase(shop.attrs.quality)}</small></span>} leftButtons={leftButtons} getInfo={self.getShopInfo.bind(self, shop)} getSave={self.getSave} />
                                             </div>
                                             );
                                     })}
@@ -184,7 +184,7 @@ var AreaAdventurePage = React.createClass({
 
                                         return (
                                             <div key={bounty.id} className="col-md-12">
-                                                <Card target={bounty} save={save} canComplete={true} type={<span><strong>{_.startCase(bounty.attrs.type)}</strong> <small>CR <strong>{bounty.attrs.challenge}</strong></small></span>} leftButtons={leftButtons} getInfo={self.getBountyInfo.bind(self, bounty)} onSave={self.getSave} />
+                                                <Card target={bounty} save={save} canComplete={true} type={<span><strong>{_.startCase(bounty.attrs.type)}</strong> <small>CR <strong>{bounty.attrs.challenge}</strong></small></span>} leftButtons={leftButtons} getInfo={self.getBountyInfo.bind(self, bounty)} getSave={self.getSave} />
                                             </div>
                                             );
                                     })}

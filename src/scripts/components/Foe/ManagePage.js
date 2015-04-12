@@ -18,6 +18,7 @@ var FoeInputs = require('./Inputs');
 
 var BattleModel = require('../../models/BattleModel');
 var BattleCard = require('../Battle/Card');
+var BattleInputs = require('../Battle/Inputs');
 
 
 var FoeManagePage = React.createClass({
@@ -74,32 +75,7 @@ var FoeManagePage = React.createClass({
 
     getBattleInputs: function(attrs) {
         return(
-            <div>
-                <Input
-                    type="text"
-                    name="name"
-                    defaultValue={attrs.name}
-                />
-
-                <Input
-                    type="text"
-                    name="type"
-                    defaultValue={attrs.type}
-                />
-
-                <Input
-                    type="textarea"
-                    name="flavor"
-                    defaultValue={attrs.flavor}
-                />
-
-                <Input
-                    type="textarea"
-                    name="details"
-                    placeholder="Behavior"
-                    defaultValue={attrs.details}
-                />
-            </div>
+            <BattleInputs attrs={attrs} />
             );
     },
 

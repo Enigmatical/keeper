@@ -29,7 +29,8 @@ var ModelAttrBlock = React.createClass({
             party:      'user',
             count:      'th-large',
             page:       'book',
-            skill:      'eye-open'
+            skill:      'eye-open',
+            treasure:   'gift'
         };
 
         switch(type) {

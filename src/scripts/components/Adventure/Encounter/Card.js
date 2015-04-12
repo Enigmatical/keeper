@@ -15,6 +15,7 @@ var SocialInfo = require('./SocialInfo');
 var SkillCheckInfo = require('./SkillCheckInfo');
 var CombatInfo = require('./CombatInfo');
 var MechanismInfo = require('./MechanismInfo');
+var TreasureInfo = require('./TreasureInfo');
 var OtherInfo = require('./OtherInfo');
 
 require('../../../../styles/ItemCard.css');
@@ -49,6 +50,11 @@ var EncounterAdventureCard = React.createClass({
                     <Glyphicon glyph="cog" />&nbsp;&nbsp;<small className="text-muted">Interact with</small> <strong>{data.details.name} ({_.startCase(data.details.mechanism)})</strong>
                 </span>
                 )},
+            treasure: function(data) { return(
+                <span>
+                    <Glyphicon glyph="gift" />&nbsp;&nbsp;<strong>{data.details.name}</strong>
+                </span>
+                )},
             other: function(data) { return(
                 <span>
                     <Glyphicon glyph="question-sign" />&nbsp;&nbsp;<strong>{data.details.name}</strong>
@@ -69,6 +75,7 @@ var EncounterAdventureCard = React.createClass({
             skillCheck:     function(data) { return(<SkillCheckInfo data={data} save={save} onSave={onSave} />); },
             combat:         function(data) { return(<CombatInfo data={data} save={save} onSave={onSave} />); },
             mechanism:      function(data) { return(<MechanismInfo data={data} save={save} onSave={onSave} />); },
+            treasure:       function(data) { return(<TreasureInfo data={data} save={save} onSave={onSave} />); },
             other:          function(data) { return(<OtherInfo data={data} save={save} onSave={onSave} />); }
         };
 

@@ -70,7 +70,6 @@ var AdventureCard = React.createClass({
                 </div>
                 <div className="card-body">
                     <AttrBlock type="flavor" attr={target.attrs.flavor} />
-                    <AttrBlock type="details" attr={target.attrs.details} />
                 </div>
                 <div className="card-footer">
                     <ButtonToolbar className="pull-left">

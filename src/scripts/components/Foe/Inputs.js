@@ -115,6 +115,7 @@ var FoeInputs = React.createClass({
                             name="page"
                             placeholder="Bestiary Page"
                             defaultValue={attrs.page}
+                            addonBefore="Page"
                         />
                     </div>
                     <div className="col-md-6">
@@ -123,6 +124,7 @@ var FoeInputs = React.createClass({
                             name="count"
                             placeholder="Pawns On Hand"
                             defaultValue={attrs.count}
+                            addonBefore="Pawns"
                         />
                     </div>
                 </div>

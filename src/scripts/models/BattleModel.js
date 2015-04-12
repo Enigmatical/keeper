@@ -21,8 +21,6 @@ function BattleModel() {
 
         name: null,
         type: null,
-        flavor: null,
-        details: null,
         challenge: null,
         rewardXp: null,
         rewardCoin: null
