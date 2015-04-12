@@ -5,6 +5,7 @@ var Markdown = require('markdown').markdown;
 var _ = require('lodash');
 
 var ButtonToolbar = require('react-bootstrap').ButtonToolbar;
+var Glyphicon = require('react-bootstrap').Glyphicon;
 
 var EncounterFormModal = require('./FormModal');
 var RemoveModal = require('../Model/RemoveModal');
@@ -18,32 +19,37 @@ var EncounterCard = React.createClass({
         var objectiveTemplates = {
             travel: function(data) { return (
                 <span>
-                    <small className="text-muted">Travel to</small> <strong>{data.details.area}</strong> <small className="text-muted">in</small> <strong>{data.details.location}</strong>
+                    <Glyphicon glyph="globe" />&nbsp;<small className="text-muted">Travel to</small> <strong>{data.details.area}</strong> <small className="text-muted">in</small> <strong>{data.details.location}</strong>
                 </span>
                 )},
             social: function(data) { return (
                 <span>
-                    <small className="text-muted">Conversation with</small> <strong>{data.details.character}</strong>
+                    <Glyphicon glyph="comment" />&nbsp;<small className="text-muted">Conversation with</small> <strong>{data.details.character}</strong>
                 </span>
                 )},
             skillCheck: function(data) { return(
                 <span>
-                    <strong>{data.details.skill}</strong> <small className="text-muted">Check,</small> <strong>DC {data.details.skillDifficulty}</strong>
+                    <Glyphicon glyph="eye-open" />&nbsp;<strong>{data.details.skill}</strong> <small className="text-muted">Check,</small> <strong>DC {data.details.skillDifficulty}</strong>
                 </span>
                 )},
             combat: function(data) { return(
                 <span>
-                    <small className="text-muted">Combat with</small> <strong>{data.details.battle}</strong>
+                    <Glyphicon glyph="warning-sign" />&nbsp;<small className="text-muted">Combat with</small> <strong>{data.details.battle}</strong>
                 </span>
                 )},
             mechanism: function(data) { return(
                 <span>
-                    <small className="text-muted">Interact with</small> <strong>{data.details.name} ({_.startCase(data.details.mechanism)})</strong>
+                    <Glyphicon glyph="cog" />&nbsp;<small className="text-muted">Interact with</small> <strong>{data.details.name} ({_.startCase(data.details.mechanism)})</strong>
+                </span>
+                )},
+            treasure: function(data) { return(
+                <span>
+                    <Glyphicon glyph="gift" />&nbsp;<strong>{data.details.name}</strong>
                 </span>
                 )},
             other: function(data) { return(
                 <span>
-                    <strong>{data.details.name}</strong>
+                    <Glyphicon glyph="question-sign" />&nbsp;<strong>{data.details.name}</strong>
                 </span>
                 )}
         };

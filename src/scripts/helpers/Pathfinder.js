@@ -157,7 +157,7 @@ var Pathfinder = {
 
         rewardModifiers: {
             none:           0,
-            npcGear:        0.25,
+            npcGear:        0.10,
             incidental:     0.5,
             standard:       1.0,
             double:         2.0,
@@ -342,6 +342,12 @@ var Pathfinder = {
             1800000,
             2550000,
             3600000
+        ],
+
+        battleTypes: [
+            'minor',
+            'major',
+            'wandering'
         ]
     },
 
@@ -381,6 +387,10 @@ var Pathfinder = {
 
     getMechanismTypeOptions: function() {
         return this.helpers.buildOptions(this.statics.mechanismTypes, true);
+    },
+
+    getBattleTypeOptions: function() {
+        return this.helpers.buildOptions(this.statics.battleTypes, true);
     },
 
     getXp: function(cr) {

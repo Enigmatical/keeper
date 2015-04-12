@@ -35,7 +35,7 @@ var CharacterCard = React.createClass({
                 <div className="card-body">
                     <AttrBlock type="flavor" attr={character.attrs.flavor} />
                     <section className="row">
-                        <AttrBlock type="custom" name="Stats & Skills" attr={character.attrs.details} />
+                        <AttrBlock type="custom" className="text-wetasphalt bg-wetasphalt" attr={character.attrs.details} />
                     </section>
                 </div>
                 <div className="card-footer">
