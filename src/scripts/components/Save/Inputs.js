@@ -81,7 +81,7 @@ var SaveInputs = React.createClass({
                             type="text"
                             name="segs"
                             ref="segs"
-                            placeholder="Segs (48 = 1 Day)"
+                            placeholder="Segs (96 = 1 Day)"
                             defaultValue={attrs.segs || 0}
                             onChange={this.handleDayTime}
                             addonBefore="Current Segs"
