@@ -84,8 +84,6 @@ var AdventureInfoModal = React.createClass({
 
         var travelModal = (<span />);
         if (canTravel === true) {
-            console.log(self.props.onTravel);
-            console.log(self.props.onSave);
             travelModal = (<TravelModal target={target} save={save} onComplete={self.props.onTravel} onSave={self.props.onSave} />);
         }
 

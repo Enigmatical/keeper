@@ -13,7 +13,7 @@ var QuestInputs = React.createClass({
         var challenge = this.refs.challenge.getDOMNode().querySelector('[name=challenge]').value;
         var quality = this.refs.quality.getDOMNode().querySelector('[name=quality]').value;
 
-        var rewardXp = Pathfinder.getXp(challenge);
+        var rewardXp = Pathfinder.getXp(challenge) * 2;
         var rewardCoin = Pathfinder.getTreasure(challenge, quality);
 
         this.refs.rewardXp.getDOMNode().querySelector('[name=rewardXp]').setAttribute('value', rewardXp);
