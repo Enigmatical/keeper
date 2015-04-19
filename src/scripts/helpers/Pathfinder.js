@@ -455,21 +455,21 @@ var Pathfinder = {
             segs = 0;
         }
 
-        var days, hours, half, dayLabel, hourLabel, halfLabel, ampmLabel;
+        var days, hours, partial, dayLabel, hourLabel, partialLabel, ampmLabel;
 
         /*
             Days
          */
-        days = parseInt(segs/48);
-        segs = segs - (days * 48);
+        days = parseInt(segs/96);
+        segs = segs - (days * 96);
         dayLabel = 'Day ' + (days + 1);
 
         /*
             Hours
          */
-        hours = parseInt(segs/2);
+        hours = parseInt(segs/4);
 
-        segs = segs - (hours * 2);
+        segs = segs - (hours * 4);
         if (hours === 0) {
             hourLabel = '12';
             ampmLabel = 'AM';
@@ -487,11 +487,10 @@ var Pathfinder = {
             ampmLabel = 'PM';
         }
 
-        half = parseInt(segs);
-        halfLabel = (half === 1) ? ':30' : ':00';
+        partial = parseInt(segs);
+        partialLabel = (partial > 0) ? ':' + (partial * 15) : ':00';
 
-        return (<span>{dayLabel}&nbsp;&nbsp;<small className="text-muted">{hourLabel + halfLabel} {ampmLabel}</small></span>);
-        //return (dayLabel + ', ' + hourLabel + halfLabel + ' ' + ampmLabel);
+        return (<span>{dayLabel}&nbsp;&nbsp;<small className="text-muted">{hourLabel + partialLabel} {ampmLabel}</small></span>);
     },
 
     getPartyLevel: function(xp, size) {
@@ -534,22 +533,22 @@ var Pathfinder = {
             segs = 0;
         }
 
-        var days, hours, half;
-        var dayLabel, hourLabel, halfLabel = (<span />);
+        var days, hours, partial;
+        var dayLabel, hourLabel, partialLabel = (<span />);
 
         /*
          Days
          */
-        days = parseInt(segs / 48);
-        segs = segs - (days * 48);
+        days = parseInt(segs / 96);
+        segs = segs - (days * 96);
 
         /*
          Hours
          */
-        hours = parseInt(segs / 2);
-        segs = segs - (hours * 2);
+        hours = parseInt(segs / 4);
+        segs = segs - (hours * 4);
 
-        half = parseInt(segs);
+        partial = parseInt(segs);
 
         if (days > 0) {
             dayLabel = (<span>{days} <small>Day{days > 1 ? 's' : ''}</small></span>);
@@ -559,11 +558,11 @@ var Pathfinder = {
             hourLabel = (<span>{days > 0 ? ' ' + hours : hours} <small>Hour{hours > 1 ? 's': ''}</small></span>);
         }
 
-        if (half > 0) {
-            halfLabel = (<span>{hours > 0 ? ' 30' : '30'} <small>Mins</small></span>);
+        if (partial > 0) {
+            partialLabel = (<span>{hours > 0 ? ' ' + (partial * 15) : (partial * 15)} <small>Mins</small></span>);
         }
 
-        return (<span><span>{dayLabel}</span><span>{hourLabel}</span><span>{halfLabel}</span></span>);
+        return (<span><span>{dayLabel}</span><span>{hourLabel}</span><span>{partialLabel}</span></span>);
     },
 
     getTravelDistance: function(source, dest) {
@@ -576,14 +575,14 @@ var Pathfinder = {
         var days = parseInt(distance/maxMilesPerDay);
         var hours = parseInt((distance%maxMilesPerDay)/speed);
 
-        return (days * 48) + (hours * 2);
+        return (days * 96) + (hours * 4);
     },
 
     getCarriageCost: function(distance) {
         //Rate @ 1gp per 1 hour
         var segs = this.getTravelTime(distance, 3);
 
-        return parseInt(segs/2);
+        return parseInt(segs/4);
     }
 };
 

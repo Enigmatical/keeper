@@ -56,22 +56,22 @@ var AdventureGmModal = React.createClass({
                         <div className="col-md-12">
                             <p className="body-header">Adjust Time</p>
                             <div className="col-md-2">
-                                <AdjustTime save={save} onSave={this.props.onSave} segs={-48} disable={false} block={true}><Glyphicon glyph="backward" /> -1 Day</AdjustTime>
+                                <AdjustTime save={save} onSave={this.props.onSave} segs={-96} disable={false} block={true}><Glyphicon glyph="backward" /> -1 Day</AdjustTime>
                             </div>
                             <div className="col-md-2">
-                                <AdjustTime save={save} onSave={this.props.onSave} segs={-2} disable={false} block={true}><Glyphicon glyph="triangle-left" /> -1 Hour</AdjustTime>
+                                <AdjustTime save={save} onSave={this.props.onSave} segs={-4} disable={false} block={true}><Glyphicon glyph="triangle-left" /> -1 Hour</AdjustTime>
                             </div>
                             <div className="col-md-2">
-                                <AdjustTime save={save} onSave={this.props.onSave} segs={-1} disable={false} block={true}><Glyphicon glyph="menu-left" /> -30 Mins</AdjustTime>
+                                <AdjustTime save={save} onSave={this.props.onSave} segs={-1} disable={false} block={true}><Glyphicon glyph="menu-left" /> -15 Mins</AdjustTime>
                             </div>
                             <div className="col-md-2">
-                                <AdjustTime save={save} onSave={this.props.onSave} segs={1} disable={false} block={true}>+30 Mins <Glyphicon glyph="menu-right" /></AdjustTime>
+                                <AdjustTime save={save} onSave={this.props.onSave} segs={1} disable={false} block={true}>+15 Mins <Glyphicon glyph="menu-right" /></AdjustTime>
                             </div>
                             <div className="col-md-2">
-                                <AdjustTime save={save} onSave={this.props.onSave} segs={2} disable={false} block={true}>+1 Hour <Glyphicon glyph="triangle-right" /></AdjustTime>
+                                <AdjustTime save={save} onSave={this.props.onSave} segs={4} disable={false} block={true}>+1 Hour <Glyphicon glyph="triangle-right" /></AdjustTime>
                             </div>
                             <div className="col-md-2">
-                                <AdjustTime save={save} onSave={this.props.onSave} segs={48} disable={false} block={true}>+1 Day <Glyphicon glyph="forward" /></AdjustTime>
+                                <AdjustTime save={save} onSave={this.props.onSave} segs={96} disable={false} block={true}>+1 Day <Glyphicon glyph="forward" /></AdjustTime>
                             </div>
                         </div>
                     </section>
